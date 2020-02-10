@@ -1,4 +1,4 @@
-# Spring Bool Template
+# Spring Boot Template
 
 Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc.
 
