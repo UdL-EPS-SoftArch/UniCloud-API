@@ -1,27 +1,29 @@
 # Spring Boot Template
 
-Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc.
+Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Additional details: [HELP.md](HELP.md)
 
-### Reference Documentation
-For further reference, please consider the following sections:
+[![Open Issues](https://img.shields.io/github/issues-raw/UdL-EPS-SoftArch/spring-template?logo=github)](https://github.com/orgs/UdL-EPS-SoftArch/projects/12)
+[![CI/CD](https://github.com/UdL-EPS-SoftArch/spring-template/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/UdL-EPS-SoftArch/spring-template/actions)
+[![CucumberReports: UdL-EPS-SoftArch](https://messages.cucumber.io/api/report-collections/faed8ca5-e474-4a1a-a72a-b8e2a2cd69f0/badge)](https://reports.cucumber.io/report-collections/faed8ca5-e474-4a1a-a72a-b8e2a2cd69f0)
+[![Heroku App Status](https://heroku-shields.herokuapp.com/springtemplate)](https://springtemplate.herokuapp.com)
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/maven-plugin/)
-* [Rest Repositories](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#howto-use-exposing-spring-data-repositories-rest-endpoint)
-* [Spring HATEOAS](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#boot-features-spring-hateoas)
-* [Spring Security](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#boot-features-security)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)
-* [Java Mail Sender](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#boot-features-email)
+## Vision
 
-### Guides
-The following guides illustrate how to use some features concretely:
+**For** ... **who** want to ...
+**the project** ... **is an** ...
+**that** allows ...
+**Unlike** other ...
 
-* [Accessing JPA Data with REST](https://spring.io/guides/gs/accessing-data-rest/)
-* [Accessing Neo4j Data with REST](https://spring.io/guides/gs/accessing-neo4j-data-rest/)
-* [Accessing MongoDB Data with REST](https://spring.io/guides/gs/accessing-mongodb-data-rest/)
-* [Building a Hypermedia-Driven RESTful Web Service](https://spring.io/guides/gs/rest-hateoas/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+## Features per Stakeholder
+
+| USER                | ADMIN                |
+|---------------------|----------------------|
+| Register            |                      |
+| Login               |                      |
+| Logout              |                      |
+|                     |                      |
+
+## Entities Model
+
+![EntityModelsDiagram](http://www.plantuml.com/plantuml/svg/5Sqn3W8X40NGtbFe0M1wgxNOJXEJZGT061SI6CZC9rvVjthbMmn1CLizNOh4EXDFhUSC3BiIQVZwlI3FzpJMs0KiyB4tUgMxMv-Rs_e7DusPR6YHtO7Rg05CBHXOQHKK5BP7JrpzEAA59Vtz0G00?v0)
 
