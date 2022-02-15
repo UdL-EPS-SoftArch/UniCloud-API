@@ -1,4 +1,4 @@
-package cat.udl.eps.softarch.demo.config;
+package cat.udl.eps.softarch.unicloud.config;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;

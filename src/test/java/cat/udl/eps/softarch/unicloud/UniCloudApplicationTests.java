@@ -1,10 +1,10 @@
-package cat.udl.eps.softarch.demo;
+package cat.udl.eps.softarch.unicloud;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class UniCloudApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,7 +1,6 @@
-package cat.udl.eps.softarch.demo.config;
+package cat.udl.eps.softarch.unicloud.config;
 
-import cat.udl.eps.softarch.demo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

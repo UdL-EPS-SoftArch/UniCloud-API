@@ -1,4 +1,4 @@
-package cat.udl.eps.softarch.demo.config;
+package cat.udl.eps.softarch.unicloud.config;
 
 import java.util.Arrays;
 

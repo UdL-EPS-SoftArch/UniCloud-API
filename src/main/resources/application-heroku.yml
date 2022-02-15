@@ -1,4 +1,4 @@
-allowed-origins: https://demo.herokuapp.com
+allowed-origins: https://unicloud.herokuapp.com
 
 logging:
     level:

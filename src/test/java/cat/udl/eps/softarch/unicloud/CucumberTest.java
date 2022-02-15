@@ -1,4 +1,4 @@
-package cat.udl.eps.softarch.demo;
+package cat.udl.eps.softarch.unicloud;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

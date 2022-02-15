@@ -1,4 +1,4 @@
-package cat.udl.eps.softarch.demo.domain;
+package cat.udl.eps.softarch.unicloud.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

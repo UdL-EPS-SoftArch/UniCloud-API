@@ -1,6 +1,6 @@
-package cat.udl.eps.softarch.demo.controller;
+package cat.udl.eps.softarch.unicloud.controller;
 
-import cat.udl.eps.softarch.demo.domain.User;
+import cat.udl.eps.softarch.unicloud.domain.User;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.rest.webmvc.PersistentEntityResource;
 import org.springframework.data.rest.webmvc.PersistentEntityResourceAssembler;
