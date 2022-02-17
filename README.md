@@ -16,12 +16,23 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Features per Stakeholder
 
-| USER                | ADMIN                |
-|---------------------|----------------------|
-| Register            |                      |
-| Login               |                      |
-| Logout              |                      |
-|                     |                      |
+| USER            | MODERATOR         |
+|-----------------|-------------------|
+| Register        | Login             |
+| Login           | Logout            |
+| Logout          | Delete Rating     |
+| Create Rating   | Create University |
+| Modify Rating   | Modify University |
+| Delete Rating   | Delete University |
+| Create Notes    | Create Degree     |
+| Modify Notes    | Modify Degree     |
+| Delete Notes    | Delete Degree     |
+| Create Exam     | Create Subject    |
+| Modify Exam     | Modify Subject    |
+| Delete Exam     | Delete Subject    |
+| Create Practice |                   |
+| Modify Practice |                   |
+| Delete Practice |                   |
 
 ## Entities Model
 
