@@ -5,15 +5,14 @@ class User{
     Email: String
 }
 
-class Admin extends User{
+class Student extends User{
 }
 
-class Student extends User{
+class Administrator extends User{
 }
 
 class University{
     Name: String
-    Acronym: String
     Country: String
     City: String
 }
@@ -54,11 +53,11 @@ class Rating{
 
 Student "1" -- "*" Resources: Manages >
 Student "1" -- "*" Rating: Manages >
-Admin "*" --left-- "*" University: Manages >
-Admin "*" --left-- "*" Degree: Manages >
-Admin "*" --left-- "*" Subject: Manages >
-Admin "*" -- "*" Resources: Deletes >
-Admin "*" -- "*" Rating: Deletes >
+Administrator "*" --left-- "*" University: Manages >
+Administrator "*" --left-- "*" Degree: Manages >
+Administrator "*" --left-- "*" Subject: Manages >
+Administrator "*" -- "*" Resources: Deletes >
+Administrator "*" -- "*" Rating: Deletes >
 Rating "*" -- "1" Resources: Belongs >
 Resources "*" -- "1-*" Subject: Belongs >
 Subject "*" -- "*" Degree: Belongs >
