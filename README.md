@@ -9,10 +9,10 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Vision
 
-**For** ... **who** want to ...
-**the project** ... **is an** ...
-**that** allows ...
-**Unlike** other ...
+**For** Students **who** want to access different educational resources to help with their College studies 
+**the project** UniCloud **is a** educational resources sharing site
+**that** allows students to search, rate, and share notes, tests or assignments
+**Unlike** other resource sharing sites, it is open-source.
 
 ## Features per Stakeholder
 
