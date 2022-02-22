@@ -9,21 +9,37 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Vision
 
-**For** ... **who** want to ...
-**the project** ... **is an** ...
-**that** allows ...
-**Unlike** other ...
+**For** Students **who** want to access different educational resources to help with their College studies 
+**the project** UniCloud **is a** educational resources sharing site
+**that** allows students to search, rate, and share notes, tests or assignments.
+**Unlike** other resource sharing sites, it is open-source.
 
 ## Features per Stakeholder
 
-| USER                | ADMIN                |
-|---------------------|----------------------|
-| Register            |                      |
-| Login               |                      |
-| Logout              |                      |
-|                     |                      |
+| USER                    | ADMINISTRATOR           |
+|-------------------------|-------------------------|
+| Register                | Login                   |
+| Login                   | Logout                  |
+| Logout                  | Delete Rating           |
+| Create Rating           | Create University       |
+| Modify Rating           | Modify University       |
+| Delete Rating           | Delete University       |
+| Create Notes            | Create Degree           |
+| Modify Notes            | Modify Degree           |
+| Delete Notes            | Delete Degree           |
+| Create Exam             | Create Subject          |
+| Modify Exam             | Modify Subject          |
+| Delete Exam             | Delete Subject          |
+| Create Practice         | Search by University    |
+| Modify Practice         | Search by Subject       |
+| Delete Practice         | Search by Degree        |
+| Search by University    | Search by Resource Name |
+| Search by Subject       |                         |
+| Search by Degree        |                         |
+| Search by Resource Name |                         |
+
 
 ## Entities Model
 
-![EntityModelsDiagram](http://www.plantuml.com/plantuml/svg/5Sqn3W8X40NGtbFe0M1wgxNOJXEJZGT061SI6CZC9rvVjthbMmn1CLizNOh4EXDFhUSC3BiIQVZwlI3FzpJMs0KiyB4tUgMxMv-Rs_e7DusPR6YHtO7Rg05CBHXOQHKK5BP7JrpzEAA59Vtz0G00?v0)
+![EntityModelsDiagram](http://www.plantuml.com/plantuml/svg/bPBFJi904CRlVOfDZoGSk78m_AdSH0Fw06ixDcDsPytEL2N6TxTqXMrP2E5MVlbztp2RcR5eBuqrMMaqitfXy3-PKghx8crXghRYaUeEFhNEb_FL0DvRZMP0vfL5GXQlnVcfMZXdG5Fscnsc47w2PvHTcBK-dRDq3OdV3HdA4SIg0ceFSA5cfSl6jAdJqBPvVOTIBW_ttA85rWMKQBNfyEE7e2Djpkop0Mup9V25nWAuzDZbqmtMJe0LV0jGbLIjq40QUGQM6oDpPgp90jqQt6XfVmSZV2SlitHsNzpFPllpKVaaL-EnoaTvd3LL3vfq3Qpk4YdqfyPeRnXua-3rxkUw6mxagdUuYRDYkaC11gGl9Jj48v2ZCnaKBS0ugZlj0ACvxl-lQFwZu0stZ58WmKbVBNepeAgnvWy0)
 
