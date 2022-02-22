@@ -23,13 +23,4 @@ public class University extends UriEntity<Long> {
     @NotBlank
     private String city;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }
