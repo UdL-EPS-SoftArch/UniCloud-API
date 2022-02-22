@@ -11,28 +11,33 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 **For** Students **who** want to access different educational resources to help with their College studies 
 **the project** UniCloud **is a** educational resources sharing site
-**that** allows students to search, rate, and share notes, tests or assignments
+**that** allows students to search, rate, and share notes, tests or assignments.
 **Unlike** other resource sharing sites, it is open-source.
 
 ## Features per Stakeholder
 
-| USER            | ADMINISTRATOR     |
-|-----------------|-------------------|
-| Register        | Login             |
-| Login           | Logout            |
-| Logout          | Delete Rating     |
-| Create Rating   | Create University |
-| Modify Rating   | Modify University |
-| Delete Rating   | Delete University |
-| Create Notes    | Create Degree     |
-| Modify Notes    | Modify Degree     |
-| Delete Notes    | Delete Degree     |
-| Create Exam     | Create Subject    |
-| Modify Exam     | Modify Subject    |
-| Delete Exam     | Delete Subject    |
-| Create Practice |                   |
-| Modify Practice |                   |
-| Delete Practice |                   |
+| USER                    | ADMINISTRATOR           |
+|-------------------------|-------------------------|
+| Register                | Login                   |
+| Login                   | Logout                  |
+| Logout                  | Delete Rating           |
+| Create Rating           | Create University       |
+| Modify Rating           | Modify University       |
+| Delete Rating           | Delete University       |
+| Create Notes            | Create Degree           |
+| Modify Notes            | Modify Degree           |
+| Delete Notes            | Delete Degree           |
+| Create Exam             | Create Subject          |
+| Modify Exam             | Modify Subject          |
+| Delete Exam             | Delete Subject          |
+| Create Practice         | Search by University    |
+| Modify Practice         | Search by Subject       |
+| Delete Practice         | Search by Degree        |
+| Search by University    | Search by Resource Name |
+| Search by Subject       |                         |
+| Search by Degree        |                         |
+| Search by Resource Name |                         |
+
 
 ## Entities Model
 
