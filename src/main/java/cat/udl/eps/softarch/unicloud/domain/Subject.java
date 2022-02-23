@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class Subject extends UriEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotBlank
     private String name;
