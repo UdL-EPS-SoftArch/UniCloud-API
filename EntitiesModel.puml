@@ -5,7 +5,7 @@ class User{
     Email: String
 }
 
-class Admin extends User{
+class Administrator extends User{
 }
 
 class Student extends User{
@@ -13,7 +13,6 @@ class Student extends User{
 
 class University{
     Name: String
-    Acronym: String
     Country: String
     City: String
 }
