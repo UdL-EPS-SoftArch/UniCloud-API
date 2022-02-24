@@ -42,9 +42,13 @@ public class CreateUniversityStepDefs {
 
     }
 
-    @And("The university count is {int}")
-    public void theUniversityCountIs(int code) {
-        Assert.assertEquals(code, universityRepository.count());
+    @And("A new university has not been created")
+    public void aNewUniversityHasNotBeenCreated() {
+        Assert.assertEquals(0, universityRepository.count());
+    }
+    @And("A new university has not been added")
+    public void aNewUniversityHasNotBeenAdded() {
+        Assert.assertEquals(1, universityRepository.count());
     }
 
     @And("A new university has been created")
