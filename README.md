@@ -16,7 +16,7 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Features per Stakeholder
 
-| USER                    | ADMINISTRATOR           |
+| STUDENT                 | ADMINISTRATOR           |
 |-------------------------|-------------------------|
 | Register                | Login                   |
 | Login                   | Logout                  |
@@ -41,5 +41,5 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Entities Model
 
-![EntityModelsDiagram](http://www.plantuml.com/plantuml/svg/5Sr1gi8m40RW_Jl5ym39x5srI1U2Gg7q034PpK0oASa_U7rrzIs_QI1qM2r_9z5OBB7ryf-1Ovo9UdZxbo3RmmRts1IiyB5LsjFDBUlcjlR4t6EcNULIcYKthrUgGPGMXK1ut5lYue_VCR6chny0?v0)
+![EntityModelsDiagram](http://www.plantuml.com/plantuml/svg/5Sr1gi8m40RW_Jl5ym39x5srI1U2Gg7q034PpK0oASa_U7rrzIs_QI1qM2r_9z5OBB7ryf-1Ovo9UdZxbo3RmmRts1IiyB5LsjFDBUlcjlR4t6EcNULIcYKthrUgGPGMXK1ut5lYue_VCR6chny0?v1)
 
