@@ -18,7 +18,6 @@ public class Rating {
         private Long id;
 
         @NotBlank
-        @Column(unique = true)
         private BigDecimal rating;
 
         @NotBlank
