@@ -16,7 +16,7 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Features per Stakeholder
 
-| USER                    | ADMINISTRATOR           |
+| STUDENT                 | ADMINISTRATOR           |
 |-------------------------|-------------------------|
 | Register                | Login                   |
 | Login                   | Logout                  |
