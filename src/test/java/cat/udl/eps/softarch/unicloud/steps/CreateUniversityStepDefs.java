@@ -25,7 +25,7 @@ public class CreateUniversityStepDefs {
 
     @When("I create a new university with name {string}, acronym {string}, country {string}, city {string}")
     public void iCreateANewUniversityWithNameAcronymCountryCity(String name, String acronym, String country, String city) throws Exception {
-        University university = new University(); //Fer-ho aixi o fer un constructor
+        University university = new University();
         university.setName(name);
         university.setAcronym(acronym);
         university.setCountry(country);
@@ -42,17 +42,17 @@ public class CreateUniversityStepDefs {
 
     }
 
-    @And("It has not been created any university yet")
-    public void itHasNotBeenCreateAnyUniversityYet() {
+    @And("A new university has not been created")
+    public void aNewUniversityHasNotBeenCreated() {
         Assert.assertEquals(0, universityRepository.count());
     }
-    @And("It has not been created any new university")
-    public void itHasNotBeenCreateAnyNewUniversity() {
+    @And("A new university has not been added")
+    public void aNewUniversityHasNotBeenAdded() {
         Assert.assertEquals(1, universityRepository.count());
     }
 
-    @And("It has been created a new university")
-    public void itHasBeenCreatedANewUniversity() throws Exception {
+    @And("A new university has been created")
+    public void aNewUniversityHasBeenCreated() throws Exception {
         id = stepDefs.result.andReturn().getResponse().getHeader("Location");
         assert id != null;
         stepDefs.result = stepDefs.mockMvc.perform(
@@ -61,5 +61,15 @@ public class CreateUniversityStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                                 .andDo(print())
                                 .andExpect(status().isOk());
+    }
+
+    @And("There is a university with name {string}, acronym {string}, country {string}, city {string}")
+    public void thereIsAUniversityWithNameAcronymCountryCity(String name, String acronym, String country, String city) {
+        University university = new University();
+        university.setName(name);
+        university.setAcronym(acronym);
+        university.setCountry(country);
+        university.setCity(city);
+        universityRepository.save(university);
     }
 }
