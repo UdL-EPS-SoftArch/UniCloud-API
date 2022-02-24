@@ -1,23 +1,18 @@
 Feature: Create a Degree
   In order to control who can create a degree
   Administrator is the only who can create a degree
-
-  Background:
+  
+  Background: 
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
-    Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
+    Given There is a registered administrator with username "admin" and password "password" and email "admin@gmail.com"
 
 
   Scenario: Allowed to create a degree as an administrator
     Given I login as "admin" with password "password"
-    When I create a degree with name "Medicina" and faculty "Facultat de medicina"
+    When I create a degree
     Then The response code is 201
-    And The degree with name "Medicina" exist
 
-  #ToDo Intent de crear un degree com a user
-
-
-  Scenario: Create new degree when not authenticated
-    Given I'm not logged in
-    When I create a degree with name "Grau Enginyeria Informatica" and faculty "EPS"
-    Then The response code is 401
-    And The degree with name "Grau Enginyeria Informatica" doesn't exist
+  Scenario: Not allowed to create a degree as a user
+    Given I login as "user" with password "password"
+    When I create a degree
+    Then The response code is 403
