@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -17,7 +18,7 @@ public class Rating {
         @Id
         private Long id;
 
-        @NotBlank
+        @NotNull
         private BigDecimal rating;
 
         @NotBlank
