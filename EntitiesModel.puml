@@ -1,15 +1,65 @@
 @startuml
-
-class User extends UriEntity implements UserDetails {
-  username : String
-  password : String
-  email : String
+class User{
+    Username: String
+    Password: String
+    Email: String
 }
 
-class UriEntity {
-  uri : String
+class Admin extends User{
 }
 
-User "1" --right-- "*" Resource : owner <
+class Student extends User{
+}
 
+class University{
+    Name: String
+    Country: String
+    City: String
+}
+
+class Degree{
+    Name: String
+    Faculty:String
+}
+
+class Subject{
+    Name: String
+    Course: BigDecimal
+    Optional: Boolean
+}
+
+class Resources{
+    Name: String
+    Description: String
+}
+
+class Notes extends Resources{
+    File: String
+}
+
+class Tests extends Resources{
+    File: String
+}
+
+class Assignments extends Resources{
+    File: String
+}
+
+class Rating{
+    Rating: BigDecimal
+    Comment: String
+}
+
+
+Student "1" -- "*" Resources: Manages >
+Student "1" -- "*" Rating: Manages >
+Admin "*" --left-- "*" University: Manages >
+Admin "*" --left-- "*" Degree: Manages >
+Admin "*" --left-- "*" Subject: Manages >
+Admin "*" -- "*" Resources: Deletes >
+Admin "*" -- "*" Rating: Deletes >
+Rating "*" -- "1" Resources: Belongs >
+Resources "*" -- "1-*" Subject: Belongs >
+Subject "*" -- "*" Degree: Belongs >
+Degree "*" -- "*" University: Belongs >
 @enduml
