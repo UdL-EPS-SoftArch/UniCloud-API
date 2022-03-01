@@ -12,7 +12,11 @@ Feature: Create a Degree
     When I create a degree with name "Medicina" and faculty "Facultat de medicina"
     Then The response code is 201
 
-  Scenario: Not allowed to create a degree as a user
-    Given I login as "user" with password "password"
+  #ToDo Intent de crear un degree com a user
+
+
+  Scenario: Create new degree when not authenticated
+    Given I'm not logged in
     When I create a degree with name "Grau Enginyeria Informatica" and faculty "EPS"
-    Then The response code is 403
+    Then The response code is 401
+    And A new university has not been created
