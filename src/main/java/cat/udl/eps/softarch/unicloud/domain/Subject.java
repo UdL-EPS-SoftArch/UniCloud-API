@@ -22,15 +22,15 @@ public class Subject extends UriEntity<Long>{
     @Column(unique = true)
     private String name;
 
-    @NotBlank
     @Min(value = 1)
     @Max(value = 5)
-    private BigDecimal course;
+    private Integer course;
 
-    @NotBlank
-    private Boolean optional;
-
+    private Boolean optional = true;
 
 }
+
+
+
 
 
