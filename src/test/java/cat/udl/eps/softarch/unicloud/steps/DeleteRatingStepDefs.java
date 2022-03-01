@@ -3,7 +3,11 @@ package cat.udl.eps.softarch.unicloud.steps;
 import cat.udl.eps.softarch.unicloud.domain.Rating;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.cucumber.java.an.E;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.springframework.http.MediaType;
 import java.math.BigDecimal;
 
@@ -15,15 +19,17 @@ public class DeleteRatingStepDefs {
     final StepDefs stepDefs;
     final RatingRepository ratingRepository;
 
-    DeleteRatingStepDefs(StepDefs stepDefs, RatingRepository universityRepository) {
+    DeleteRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository) {
         this.stepDefs = stepDefs;
-        this.ratingRepository = universityRepository;
+        this.ratingRepository = ratingRepository;
     }
 
-    @When("I remove a Rating with id {int}")
-    public void iRemoveARatingWithId(int arg0) throws Exception {
-        Rating rating = ratingRepository.findById((long) arg0).get();
-        assert rating.getId() != null;
+    @When("I delete a Rating with id {int}")
+    public void iDeleteARatingWithId(int arg0) {
+    }
 
+    @And("A rating made by student {string} does not exist")
+    public void aRatingMadeByStudentDoesNotExist(String student) {
+        Assert.assertEquals(0,ratingRepository.findbyAuthor(student).size());
     }
 }
