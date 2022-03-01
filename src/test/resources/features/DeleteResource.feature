@@ -15,8 +15,17 @@ Feature: Delete Resource
     Then The response code is 200
     And There is not a registered resource with name "name"
 
-  Scenario: Delete an own resource as a user
+  Scenario: Delete an own resource as a normal user
     Given I login as "user" with password "password"
     When I, user "user", delete a resource with name "name"
     Then The response code is 200
     And There is not a registered resource with name "name"
+
+  Scenario: Delete an external resource as a normal user
+    Given I login as "user" with password "password"
+    And There is a registered user with username "user2" and password "password" and email "user@sample.app"
+    And There is a registered resource with name "name" by the user "user2"
+    When I, user "user", delete a resource with name "name"
+    Then The response code is 403
+    And The error message is "Users can't delete other user's resources"
+    And There is a registered resource with name "name" by the user "user2"
