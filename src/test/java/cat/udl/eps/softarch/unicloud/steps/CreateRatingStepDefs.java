@@ -53,6 +53,7 @@ public class CreateRatingStepDefs {
 
     @And("A new rating has been created")
     public void aNewRatingHasBeenCreated() throws Exception {
+
         id = stepDefs.result.andReturn().getResponse().getHeader("Location");
         assert id != null;
         stepDefs.result = stepDefs.mockMvc.perform(
@@ -62,5 +63,4 @@ public class CreateRatingStepDefs {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-
 }

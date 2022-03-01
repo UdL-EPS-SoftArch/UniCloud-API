@@ -79,4 +79,6 @@ public class DeleteRatingStepDefs {
         long total_ratings = ratingRepository.count();
         assert total_ratings == 0;
     }
+
+
 }
