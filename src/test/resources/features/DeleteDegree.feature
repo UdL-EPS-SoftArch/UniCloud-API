@@ -1,18 +1,16 @@
 Feature: Delete degree
-  As a admin
-  I want to delete a degree
 
   Background:
-    Given I login as "admin" with password "password"
+    Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
     And There is a degree created with name "Disseny Grafic" and faculty "EPS"
 
 
-  Scenario: Admin deletes a degree
+  Scenario: Administrator deletes a degree by name
     Given I login as "admin" with password "password"
     When I delete a degree with name "Disseny Grafic"
     Then The response code is 204
 
-  Scenario: Admin deletes a degree
+  Scenario: Administrator deletes a degree by faculty
     Given I login as "admin" with password "password"
     When I delete a degree with faculty "EPS"
     Then The response code is 204
@@ -26,3 +24,5 @@ Feature: Delete degree
     Given I'm not logged in
     When I delete a degree with name "Disseny Grafic"
     Then The response code is 401
+
+    #ToDo Intent de eliminar un degree com a user
