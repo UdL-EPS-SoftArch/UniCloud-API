@@ -80,5 +80,10 @@ public class DeleteRatingStepDefs {
         assert total_ratings == 0;
     }
 
+    @When("I remove a Rating with id {int}")
+    public void iRemoveARatingWithId(int arg0) throws Exception {
+        Rating rating = ratingRepository.findById((long) arg0).get();
+        assert rating.getId() != null;
 
+    }
 }
