@@ -33,6 +33,7 @@ public class CreateRatingStepDefs {
         rating.setRating(new BigDecimal(arg0));
         rating.setComment(arg1);
 
+
         stepDefs.result = stepDefs.mockMvc.perform(
                 post("/ratings")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -48,8 +49,10 @@ public class CreateRatingStepDefs {
         Assert.assertEquals(0, ratingRepository.count());
     }
 
+
     @And("A new rating has been created")
     public void aNewRatingHasBeenCreated() throws Exception {
+
         id = stepDefs.result.andReturn().getResponse().getHeader("Location");
         assert id != null;
         stepDefs.result = stepDefs.mockMvc.perform(
@@ -59,5 +62,4 @@ public class CreateRatingStepDefs {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-
 }
