@@ -44,4 +44,9 @@ public class CreateDegreeStepDefs {
         degree.setFaculty(faculty);
         degreeRepository.save(degree);
     }
+
+    @And("A new university has not been created")
+    public void aNewUniversityHasNotBeenCreated() {
+        Assert.assertEquals(0, degreeRepository.count());
+    }
 }
