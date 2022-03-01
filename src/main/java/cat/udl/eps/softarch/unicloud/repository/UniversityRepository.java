@@ -9,4 +9,5 @@ public interface UniversityRepository extends PagingAndSortingRepository<Univers
     List<University> findByName(String name);
     List<University> findByCountry(String country);
     List<University> findByCity(String city);
+    List<University> findByAcronym(String acronym);
 }
