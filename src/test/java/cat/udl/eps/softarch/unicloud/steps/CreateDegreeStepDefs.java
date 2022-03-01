@@ -2,9 +2,8 @@ package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
-import io.cucumber.java.en.And;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,18 +29,13 @@ public class CreateDegreeStepDefs {
         degree.setName(name);
         degree.setFaculty(faculty);
         stepDefs.result = stepDefs.mockMvc.perform(
-                        post("/degrees")
+                        post("/degree")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(stepDefs.mapper.writeValueAsString(degree))
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
+
     }
-    @And("There is a degree created with name {string} and faculty {string}")
-    public void thereIsDegreeNameFaculty(String name, String faculty){
-        Degree degree = new Degree();
-        degree.setName(name);
-        degree.setFaculty(faculty);
-        degreeRepository.save(degree);
-    }
+
 }
