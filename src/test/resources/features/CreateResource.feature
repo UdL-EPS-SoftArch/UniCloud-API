@@ -39,7 +39,7 @@ Feature: Create Resource
     And The error message is "The file of the resource must not be blank"
     And It has not been created with name "name", description "description" and file "" by the user "user" for the subject "subject"
 
-  Scenario: Create a new resource with an already existing name
+  Scenario: Create a new resource as a normal user with an already existing name
     Given I login as "user" with password "password"
     And There is a registered subject "subject"
     And There is a registered resource with name "name"
@@ -47,3 +47,11 @@ Feature: Create Resource
     Then The response code is 409
     And The error message is "Resource name already exists"
     And There is only one resource with name "name"
+
+  Scenario: Create a new resource as a normal user for a nonexistent subject
+    Given I login as "user" with password "password"
+    And There is a registered subject "subject"
+    When I, user "user", create a resource with name "name", description "description" and file "file" for the subject "subject2"
+    Then The response code is 409
+    And The error message is "The subject does not exist"
+    And It has not been created with name "name", description "description" and file "file" by the user "user" for the subject "subject2"
