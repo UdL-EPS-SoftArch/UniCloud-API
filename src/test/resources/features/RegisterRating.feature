@@ -23,5 +23,5 @@ Feature: Add Rating
   Scenario: Add a negative rating as student when already authenticated
     Given I login as "demo" with password "password"
     When I register a new rating with rating -3 and comment "Aproved"
-    Then The response code is 401
+    Then The response code is 400
     And A new rating has not been created
