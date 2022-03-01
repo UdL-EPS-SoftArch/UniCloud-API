@@ -31,3 +31,19 @@ Feature: Create Resource
     And The error message is "The name of the resource must not be blank"
     And It has not been created with name "", description "description" and file "file" by the user "user" for the subject "subject"
 
+  Scenario: Create a new resource as a normal user with empty file
+    Given I login as "user" with password "password"
+    And There is a registered subject "subject"
+    When I, user "user", create a resource with name "name", description "description" and file "" for the subject "subject"
+    Then The response code is 400
+    And The error message is "The file of the resource must not be blank"
+    And It has not been created with name "name", description "description" and file "" by the user "user" for the subject "subject"
+
+  Scenario: Create a new resource with an already existing name
+    Given I login as "user" with password "password"
+    And There is a registered subject "subject"
+    And There is a registered resource with name "name"
+    When I, user "user", create a resource with name "name", description "description" and file "file" for the subject "subject"
+    Then The response code is 409
+    And The error message is "Resource name already exists"
+    And There is only one resource with name "name"
