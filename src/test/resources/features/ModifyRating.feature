@@ -1,0 +1,1 @@
+Feature: DELETE a Rating
