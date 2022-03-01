@@ -60,5 +60,4 @@ public class CreateRatingStepDefs {
                 .andExpect(status().isOk());
     }
 
-
 }
