@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,6 +20,13 @@ public class Rating {
         @GeneratedValue(strategy = GenerationType.AUTO)
         @Id
         private Long id;
+
+        @ManyToOne(optional = false)
+        @JsonIdentityReference(alwaysAsId = true)
+        private Student author;
+
+        @ManyToOne(optional = false)
+        private Resource resourceRated;
 
         @NotNull
         @Max(10)
