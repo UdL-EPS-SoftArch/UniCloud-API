@@ -19,4 +19,6 @@ public class DeleteRatingStepDefs {
         this.stepDefs = stepDefs;
         this.ratingRepository = universityRepository;
     }
+
+
 }
