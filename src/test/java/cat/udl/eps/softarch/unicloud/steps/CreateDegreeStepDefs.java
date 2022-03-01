@@ -4,6 +4,7 @@ import cat.udl.eps.softarch.unicloud.domain.Degree;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -42,5 +43,10 @@ public class CreateDegreeStepDefs {
         degree.setName(name);
         degree.setFaculty(faculty);
         degreeRepository.save(degree);
+    }
+
+    @And("A new university has not been created")
+    public void aNewUniversityHasNotBeenCreated() {
+        Assert.assertEquals(0, degreeRepository.count());
     }
 }
