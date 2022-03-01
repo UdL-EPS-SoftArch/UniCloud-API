@@ -15,10 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class DeleteUniversityStepDefs {
-    String newResourcesUri;
     final StepDefs stepDefs;
     final UniversityRepository universityRepository;
-    public static String id;
 
     DeleteUniversityStepDefs(StepDefs stepDefs, UniversityRepository universityRepository) {
         this.stepDefs = stepDefs;
@@ -47,7 +45,7 @@ public class DeleteUniversityStepDefs {
         assert universities.size() == 1;
     }
 
-    @Then("The University with name {string} has been removed")
+    @And("The University with name {string} has been removed")
     public void removedCheck(String name) throws Exception {
         List<University> universities = universityRepository.findByName(name);
         assert universities.size() == 0;
