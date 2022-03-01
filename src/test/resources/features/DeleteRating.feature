@@ -1,7 +1,8 @@
 Feature: DELETE a Rating
 
-  Scenario: Delete a Rating when not authenticated
-    Given I'm not logged in
-    When I remove a Rating with id 1
+  Scenario: Student authenticated deletes his/her own rating
+    Given Student is logged in as "demo" with password "password"
+    And student has never made a rating before
+    When I delete a Rating with id 26
     Then The response code is 401
-    And The Rating with  id 1 has not been removed
+    And A rating made by student "demo" does not exist
