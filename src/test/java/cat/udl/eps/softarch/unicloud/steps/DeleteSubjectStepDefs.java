@@ -2,7 +2,6 @@ package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Subject;
 import cat.udl.eps.softarch.unicloud.repository.SubjectRepository;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.http.MediaType;
@@ -11,11 +10,12 @@ import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class DeleteSubjectStepDefs {
     final StepDefs stepDefs;
     final SubjectRepository subjectRepository;
+    public static String id;
 
     DeleteSubjectStepDefs(StepDefs stepDefs, SubjectRepository subjectRepository){
         this.stepDefs = stepDefs;
@@ -40,7 +40,7 @@ public class DeleteSubjectStepDefs {
                 .andDo(print());
     }
 
-    @And("The subject with name {string} has not been removed")
+    @Then("The subject with name {string} has not been removed")
     public void notRemovedSubject(String name){
         List<Subject> subjects = subjectRepository.findByName(name);
         assert subjects.size() == 1;
