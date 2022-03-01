@@ -42,7 +42,7 @@ Feature: Create Resource
   Scenario: Create a new resource as a normal user with an already existing name
     Given I login as "user" with password "password"
     And There is a registered subject "subject"
-    And There is a registered resource with name "name"
+    And There is a registered resource with name "name" by the user "user"
     When I, user "user", create a resource with name "name", description "description" and file "file" for the subject "subject"
     Then The response code is 409
     And The error message is "Resource name already exists"
