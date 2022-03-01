@@ -12,25 +12,24 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.math.BigDecimal;
-
 public class CreateSubjectStepDefs {
 
     String newResourcesUri;
     final StepDefs stepDefs;
     final SubjectRepository subjectRepository;
+    public static String id;
 
     CreateSubjectStepDefs(StepDefs stepDefs, SubjectRepository subjectRepository){
         this.stepDefs = stepDefs;
         this.subjectRepository = subjectRepository;
     }
 
-    @When("I create a new Subject with name {string}, course {bigdecimal} and optional {boolean}")
-    public void iCreateANewSubjectWithNameCourseOptional(String name, BigDecimal course, Boolean optional) throws Exception{
+    @When("I create a new subject with name {string} and course {int} and optional {string}")
+    public void iCreateANewSubjectWithNameCourseOptional(String name, Integer course, String optional) throws Exception{
         Subject subject = new Subject();
         subject.setName(name);
         subject.setCourse(course);
-        subject.setOptional(optional);
+        subject.setOptional(Boolean.parseBoolean(optional));
 
         stepDefs.result = stepDefs.mockMvc.perform(
                 post("/subjects")
@@ -42,23 +41,35 @@ public class CreateSubjectStepDefs {
         newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
 
-    @And("It has not been created any subject yet")
-    public void itHasNotBeenCreatedAnySubjectYet(){
+    @And("A new subject has not been created")
+    public void aNewSubjectHasNotBeenCreated(){
         Assert.assertEquals(0, subjectRepository.count());
     }
 
-    @And("It has not been created any new subject")
-    public void itHasNotBeenCreatedAnyNewSubject(){
+    @And("A new subject has not been added")
+    public void aNewSubjectHasNotBeenAdded(){
         Assert.assertEquals(1, subjectRepository.count());
     }
 
-    @And("It has been created a new subject")
-    public void itHasBeenCreatedANewSubject() throws Exception{
+    @And("A new subject has been created")
+    public void aNewSubjectHasBeenCreated() throws Exception{
+        id = stepDefs.result.andReturn().getResponse().getHeader("Location");
+        assert id != null;
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get(newResourcesUri)
+                        get(id)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
                         .andDo(print())
                         .andExpect(status().isOk());
     }
+
+    @And("There is a Subject with name {string},course {int} and optional {string}")
+    public void thereIsASubjectWithNameCourseOptional(String name, Integer course, String optional){
+        Subject subject = new Subject();
+        subject.setName(name);
+        subject.setCourse(course);
+        subject.setOptional(Boolean.parseBoolean(optional));
+        subjectRepository.save(subject);
+    }
+
 }
