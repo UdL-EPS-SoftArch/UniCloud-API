@@ -4,7 +4,7 @@ Feature: Create a Degree
   
   Background: 
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
-    Given There is a registered administrator with username "admin" and password "password" and email "admin@gmail.com"
+    Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
 
 
   Scenario: Allowed to create a degree as an administrator
