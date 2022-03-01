@@ -1,8 +1,10 @@
 Feature: Modify a Degree
+  In order to control who can modify a degree
+  Administrator is the only who can modify a degree
 
   Background:
     Given I login as "admin" with password "password"
-    And There is a degree created with id "1" and name "Grau en Enginyeria Informatica" and faculty "EPS"
+    And There is a degree created with name "Grau en Enginyeria Informatica" and faculty "EPS"
 
   Scenario: Modify a Degree
     When I modify a degree with id "1" I set a name "Grau en Enginyeria Informatica" and faculty "Enginyeria"
