@@ -3,7 +3,12 @@ class User{
     Username: String
     Password: String
     Email: String
-    Administrator: Boolean
+}
+
+class Admin extends User{
+}
+
+class Student extends User{
 }
 
 class University{
@@ -46,13 +51,13 @@ class Rating{
 }
 
 
-User "1" -- "*" Resources: Manages >
-User "1" -- "*" Rating: Manages >
-User "*" --left-- "*" University: Manages >
-User "*" --left-- "*" Degree: Manages >
-User "*" --left-- "*" Subject: Manages >
-User "*" -- "*" Resources: Deletes >
-User "*" -- "*" Rating: Deletes >
+Student "1" -- "*" Resources: Manages >
+Student "1" -- "*" Rating: Manages >
+Admin "*" --left-- "*" University: Manages >
+Admin "*" --left-- "*" Degree: Manages >
+Admin "*" --left-- "*" Subject: Manages >
+Admin "*" -- "*" Resources: Deletes >
+Admin "*" -- "*" Rating: Deletes >
 Rating "*" -- "1" Resources: Belongs >
 Resources "*" -- "1-*" Subject: Belongs >
 Subject "*" -- "*" Degree: Belongs >
