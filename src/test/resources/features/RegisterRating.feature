@@ -13,3 +13,15 @@ Feature: Add Rating
     When I register a new rating with rating 7 and comment "Aproved"
     Then The response code is 401
     And A new rating has not been created
+
+  Scenario: Add rating as admin
+    Given I login as "admin" with password "password"
+    When I register a new rating with rating 7 and comment "Aproved"
+    Then The response code is 401
+    And A new rating has not been created
+
+  Scenario: Add a negative rating as student when already authenticated
+    Given I login as "demo" with password "password"
+    When I register a new rating with rating -3 and comment "Aproved"
+    Then The response code is 401
+    And A new rating has not been created
