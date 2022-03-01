@@ -1,6 +1,5 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -8,15 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
-import java.util.List;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Subject extends UriEntity<Long>{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -28,18 +27,6 @@ public class Subject extends UriEntity<Long>{
     private Integer course;
 
     private Boolean optional = true;
-
-    @ManyToMany
-    @JsonIdentityReference(alwaysAsId = true)
-    private List<Degree> degree;
-
-    @ManyToMany
-    @JsonIdentityReference(alwaysAsId = true)
-    private List<Resource> resources;
-
-    /*@ManyToMany
-    @JsonIdentityReference(alwaysAsId = true)
-    private Admin owner;*/
 
 }
 

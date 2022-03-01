@@ -3,8 +3,8 @@ Feature: Create Subject
   I want to create a Subject
 
   Background:
-    Given There is a registered student with username "student" and password "password" and email "student@local.com"
-    Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
+    Given There is a registered user with username "student" and password "password" and email "student@local.com"
+    Given There is a registered user with username "admin" and password "password" and email "admin@local.com"
 
   Scenario: Create a new subject when not authenticated
     Given I'm not logged in
