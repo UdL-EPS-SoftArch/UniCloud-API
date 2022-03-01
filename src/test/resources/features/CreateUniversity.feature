@@ -10,7 +10,7 @@ Feature: Create university
     Given I'm not logged in
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
     Then The response code is 401
-    And A new university has not been created
+    And The university count is 0
 
 #FALTA FICAR TEST USUARI STUDENT I ROLS
 
@@ -19,11 +19,11 @@ Feature: Create university
     Given I login as "admin" with password "password"
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
     Then The response code is 201
-    And A new university has been created
+    And The university count is 1
 
   Scenario: Create new university with same name as an admin
     Given I login as "admin" with password "password"
     And There is a university with name "Universitat de Lleida", acronym "UPC", country "Spain", city "Barcelona"
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Catlonia", city "Lleida"
     Then The response code is 409
-    And A new university has not been added
+    And The university count is 1
