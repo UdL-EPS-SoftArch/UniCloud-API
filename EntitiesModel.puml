@@ -13,6 +13,7 @@ class Student extends User{
 
 class University{
     Name: String
+    Acronym: String
     Country: String
     City: String
 }
