@@ -4,6 +4,10 @@ Feature: Delete User
   As a user
   I want to delete my account
 
+  Background:
+    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
+    Given There is a registered user with username "user2" and password "password" and email "user2@gmail.com"
+
   Scenario: User deletes its own account
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     And I login as "user" with password "password"
