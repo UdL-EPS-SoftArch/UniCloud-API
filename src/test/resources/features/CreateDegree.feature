@@ -11,6 +11,7 @@ Feature: Create a Degree
     Given I login as "admin" with password "password"
     When I create a degree with name "Medicina" and faculty "Facultat de medicina"
     Then The response code is 201
+    And The degree with name "Medicina" exist
 
   #ToDo Intent de crear un degree com a user
 
@@ -19,4 +20,4 @@ Feature: Create a Degree
     Given I'm not logged in
     When I create a degree with name "Grau Enginyeria Informatica" and faculty "EPS"
     Then The response code is 401
-    And A new university has not been created
+    And The degree with name "Grau Enginyeria Informatica" doesn't exist

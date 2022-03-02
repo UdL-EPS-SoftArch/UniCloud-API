@@ -9,11 +9,7 @@ Feature: Delete degree
     Given I login as "admin" with password "password"
     When I delete a degree with name "Disseny Grafic"
     Then The response code is 204
-
-  Scenario: Administrator deletes a degree by faculty
-    Given I login as "admin" with password "password"
-    When I delete a degree with faculty "EPS"
-    Then The response code is 204
+    And The degree with name "Disseny Grafic" doesn't exist
 
   Scenario: Delete a degree that does not exist
     And I login as "admin" with password "password"
@@ -24,5 +20,6 @@ Feature: Delete degree
     Given I'm not logged in
     When I delete a degree with name "Disseny Grafic"
     Then The response code is 401
+    And The degree with name "Disseny Grafic" exist
 
     #ToDo Intent de eliminar un degree com a user
