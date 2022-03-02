@@ -36,7 +36,7 @@ public class ModifyUserStepDef {
     @And("It has been updated the email of user {string} to {string}")
     public void itHasBeenUpdatedTheEmailOfUserTo(String username, String email) throws Exception {
         stepDefs.result = stepDefs.mockMvc.perform(
-                get("/reusers/{username}", username)
+                get("/users/{username}", username)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(jsonPath("$.email", is(email)));

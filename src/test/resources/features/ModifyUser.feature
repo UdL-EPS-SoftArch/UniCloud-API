@@ -4,6 +4,10 @@ Feature: Modify User
   As a User
   I want to change/edit my profile attributes
 
+  Background:
+    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
+    Given There is a registered user with username "user2" and password "password" and email "user2@gmail.com"
+
   Scenario: User updates email
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     And I login as "user" with password "password"
@@ -35,8 +39,8 @@ Feature: Modify User
 
   Scenario: User updates email of a not owned account
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
-    And There is a registered student with username "user2" and password "password" and email "user2@gmail.com"
+    And There is a registered user with username "user2" and password "password" and email "user2@gmail.com"
     And I login as "user" with password "password"
-    When I change the email of student "user2" to "new@gmail.com"
+    When I change the email of user "user2" to "new@gmail.com"
     Then The response code is 403
-    And Email of student "user2" remains "user2@gmail.com"
+    And Email of user "user2" remains "user2@gmail.com"
