@@ -3,9 +3,9 @@ Feature: Modify Subject
   I want to modify a Subject
 
   Background:
-    Given There is a registered student with username "student" and password "password" and email "student@local.com"
-    Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
-    Given There is a Subject with name "Algebra",course 1 and optional "Mandatory"
+    Given There is a registered user with username "student" and password "password" and email "student@local.com"
+    Given There is a registered user with username "admin" and password "password" and email "admin@local.com"
+    Given There is a Subject with name "Algebra",course 1 and optional "True"
 
   Scenario: Modify a Subject when not authenticated
     Given I'm not logged in
@@ -18,20 +18,14 @@ Feature: Modify Subject
     When I modify a subject with name "IA" changing field course to 2
     Then The response code is 404
 
-  Scenario: Modify course field of Subject as an admin
+  Scenario: Modify a Subject as an admin
     Given I login as "admin" with password "password"
     When I modify a subject with name "Algebra" changing field course to 2
     Then The response code is 200
     And The field course of the subject with name "Algebra" has the value 2
 
-  Scenario: Modify a optional field of Subject as an admin
+  Scenario: Modify a Subject as an admin
     Given I login as "admin" with password "password"
     When I modify a subject with name "Algebra" changing field optional to "False"
     Then The response code is 200
     And The field optional of the subject with name "Algebra" has the value "False"
-
-  Scenario: Modify a Subject as a student
-    Given I login as "student" with password "password"
-    When I modify a subject with name "Algebra" changing field course to 2
-    Then The response code is 403
-    And The field course of the subject with name "Algebra" has the value 1
