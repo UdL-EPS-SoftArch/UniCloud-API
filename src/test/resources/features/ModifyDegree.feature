@@ -6,15 +6,26 @@ Feature: Modify a Degree
     Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
     And There is a degree created with name "Grau en Enginyeria Informatica" and faculty "EPS"
 
-  Scenario: Modify a Degree
+  Scenario: Modify the faculty of a Degree
     Given I login as "admin" with password "password"
-    When I modify a degree with id "1" I set a name "Grau en Enginyeria Informatica" and faculty "Enginyeria"
+    When I modify a degree with name "Grau en Enginyeria Informatica" changing field faculty with "Enginyeria"
     Then The response code is 200
+    And The Degree with name "Grau en Enginyeria Informatica" has the faculty "Enginyeria"
 
+  Scenario: Modify the name of a Degree
+    Given I login as "admin" with password "password"
+    When I modify a degree with faculty "EPS" changing field name with "Enginyeria Informatica"
+    Then The response code is 200
+    And The Degree with faculty "EPS" has the name "Enginyeria Informatica"
 
   Scenario: Modify a Degree when not authenticated
     Given I'm not logged in
-    When I modify a degree with id "1" I set a name "Grau en Enginyeria Informatica" and faculty "Enginyeria"
+    When I modify a degree with name "Grau en Enginyeria Informatica" changing field faculty with "Enginyeria"
     Then The response code is 401
+    And The Degree with name "Grau en Enginyeria Informatica" has the faculty "EPS"
 
-  #ToDo Modify a Degree that does not exist
+
+  Scenario: Modify a Degree that does not exist
+    Given I login as "admin" with password "password"
+    When I modify a degree with name "Disseny" changing field faculty with "Enginyeria"
+    Then The response code is 404
