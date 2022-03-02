@@ -25,6 +25,6 @@ Feature: DELETE a University
 
     Scenario: Delete a non-existing University when authenticated as an admin
       Given I login as "demo" with password "password"
-      When I remove a non-existent University
+      When I remove a University with name "Universitat de Barcelona"
       Then The response code is 404
 
