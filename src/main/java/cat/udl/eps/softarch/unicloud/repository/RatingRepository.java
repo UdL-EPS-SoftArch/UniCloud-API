@@ -10,11 +10,11 @@ import java.util.List;
 
 
 public interface RatingRepository extends PagingAndSortingRepository<Rating, Long> {
-    List<Rating> findByMin(BigDecimal minRating);
-    Rating findbyId(long id);
-    List<Rating> findByMinMax (BigDecimal minRating, BigDecimal maxRating);
-    List<Rating> findbyMax (BigDecimal maxRating);
-    List<Rating> findbyAuthor (String name);
+    List<Rating> findByRatingGreaterThan(BigDecimal minRating);
+    //List<Rating> findById(long id);
+    //List<Rating> findByMinMax (BigDecimal minRating, BigDecimal maxRating);
+    //List<Rating> findbyMax (BigDecimal maxRating);
+    //List<Rating> findbyAuthor (String name);
     //List<Rating> findbyResource (Resource resource);
 
 }

@@ -25,6 +25,7 @@ public class Rating {
         @JsonIdentityReference(alwaysAsId = true)
         private Student author;
 
+
         @ManyToOne(optional = false)
         private Resource resourceRated;
 
