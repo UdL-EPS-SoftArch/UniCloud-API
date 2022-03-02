@@ -19,7 +19,11 @@ Feature: Modify university
     Then The response code is 404
 
 #FALTA FICAR TEST USUARI STUDENT I ROLS
-
+  Scenario: Modify a university as a student
+    Given I login as "student" with password "password"
+    When I modify an university with name "Universitat de Lleida" changing field acronym to "UPC"
+    Then The response code is 401
+    And The university with name "Universitat de Lleida" has the acronym "UDL"
 
   Scenario: Modify a university as an admin
     Given I login as "admin" with password "password"
