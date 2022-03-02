@@ -10,9 +10,10 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.http.MediaType;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class DeleteRatingStepDefs {
@@ -25,11 +26,16 @@ public class DeleteRatingStepDefs {
     }
 
     @When("I delete a Rating with id {int}")
-    public void iDeleteARatingWithId(int arg0) {
+    public void iDeleteARatingWithId(int arg0) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(delete("/rating/{id}",arg0).contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
     }
 
-    @And("A rating made by student {string} does not exist")
-    public void aRatingMadeByStudentDoesNotExist(String student) {
-        Assert.assertEquals(0,ratingRepository.findbyAuthor(student).size());
+    @And("The rating with id {int} does not exist")
+    public void theRatingWithIdDoesNotExist(int arg0) {
+        boolean existsrating = ratingRepository.existsById((long)arg0);
+        assert !existsrating;
     }
 }
