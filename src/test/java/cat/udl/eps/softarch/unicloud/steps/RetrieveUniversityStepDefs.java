@@ -1,16 +1,10 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
-import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 import org.springframework.http.MediaType;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class RetrieveUniversityStepDefs {
     final UniversityRepository universityRepository;
@@ -22,17 +16,30 @@ public class RetrieveUniversityStepDefs {
     }
 
     @When("I list all the existing universities in the app")
-    public void iListAllTheExistingUniversitiesInTheApp() {
+    public void iListAllTheExistingUniversitiesInTheApp() throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/universities")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                                .andDo(print());
     }
 
     @When("I list the university with id {string}")
-    public void iListTheUniversityWithId(String id) {
-
+    public void iListTheUniversityWithId(String id) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/universities/" + id)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                                .andDo(print());
     }
 
     @When("I list the university with name {string}")
-    public void iListTheUniversityWithName(String name) {
-
+    public void iListTheUniversityWithName(String name) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/universities/search/findByName?name={name}", name)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                                .andDo(print());
     }
 
     @When("I list the university containing name {string}")
