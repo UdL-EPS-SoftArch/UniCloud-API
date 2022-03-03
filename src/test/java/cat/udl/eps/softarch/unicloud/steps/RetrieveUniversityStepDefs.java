@@ -1,10 +1,14 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.springframework.http.MediaType;
+
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 public class RetrieveUniversityStepDefs {
     final UniversityRepository universityRepository;
@@ -76,5 +80,10 @@ public class RetrieveUniversityStepDefs {
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
+    }
+
+    @And("The number of returned universities are {int}")
+    public void theNumberOfReturnedUniversitiesAre(int num) throws Exception {
+        stepDefs.result.andExpect(jsonPath("$._embedded.universities", hasSize(num)));
     }
 }
