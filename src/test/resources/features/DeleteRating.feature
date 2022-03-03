@@ -19,5 +19,3 @@ Feature: DELETE a Rating
     Then The response code is 401
     And The rating with id 26 was not deleted
 
-  Scenario:
-
