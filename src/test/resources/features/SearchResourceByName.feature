@@ -12,13 +12,13 @@ Feature: Search Resource by name
     Given I login as "user" with password "password"
     When I search a resource by its exact name "name"
     Then The response code is 200
-    And 1 resources has been retrieved
+    And 1 resources have been retrieved
 
   Scenario: Search for resources containing a name
     Given I login as "user" with password "password"
     When I search for resources containing the name "name"
     Then The response code is 200
-    And 2 resources has been retrieved
+    And 2 resources have been retrieved
 
   Scenario: Search a resource by the exact name and not finding any result
     Given I login as "user" with password "password"
