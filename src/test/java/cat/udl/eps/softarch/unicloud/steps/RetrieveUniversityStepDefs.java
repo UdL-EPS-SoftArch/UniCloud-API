@@ -45,16 +45,29 @@ public class RetrieveUniversityStepDefs {
     }
 
     @When("I list the university with acronym {string}")
-    public void iListTheUniversityWithAcronym(String arg0) {
-
+    public void iListTheUniversityWithAcronym(String acronym) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/datasets/search/findByAcronym?acronym={acronym}", acronym)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
     }
 
     @When("I list the university with city {string}")
-    public void iListTheUniversityWithCity(String arg0) {
-
+    public void iListTheUniversityWithCity(String city) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/datasets/search/findByCity?city={city}", city)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
     }
 
     @When("I list the university with country {string}")
-    public void iListTheUniversityWithCountry(String arg0) {
+    public void iListTheUniversityWithCountry(String country) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/datasets/search/findByCountry?country={country}", country)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
     }
 }
