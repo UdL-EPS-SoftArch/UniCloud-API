@@ -19,12 +19,9 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-public class RegisterStepDefs {
+public class RegisterUserStepDefs {
 
-  @Autowired
   private StepDefs stepDefs;
-
-  @Autowired
   private UserRepository userRepository;
 
   @Given("^There is no registered user with username \"([^\"]*)\"$")
