@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class DeleteRatingStepDefs {
+    String newResourceUri;
     final StepDefs stepDefs;
     final RatingRepository ratingRepository;
 
@@ -41,9 +42,38 @@ public class DeleteRatingStepDefs {
 
     @And("The rating with id {int} was deleted")
     public void theRatingWithIdWasDeleted(int arg0) {
+
     }
 
     @And("The rating with id {int} was not deleted")
     public void theRatingWithIdWasNotDeleted(int arg0) {
+        boolean existsrating = ratingRepository.existsById((long)arg0);
+        assert !existsrating;
+    }
+
+    @When("I delete the last created rating")
+    public void iDeleteTheLastCreatedRating() throws Throwable {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        delete(newResourceUri)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @Given("I register rating with rating {int} and comment {string}")
+    public void iRegisterRatingWithRatingAndComment(int arg0, String arg1) throws Exception{
+        Rating rating = new Rating();
+        rating.setRating(new BigDecimal(arg0));
+        rating.setComment(arg1);
+
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/ratings")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(stepDefs.mapper.writeValueAsString(rating))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+        newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
 }

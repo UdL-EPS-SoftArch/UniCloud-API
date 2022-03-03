@@ -4,6 +4,7 @@ import cat.udl.eps.softarch.unicloud.domain.Rating;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.http.MediaType;
@@ -52,7 +53,6 @@ public class CreateRatingStepDefs {
 
     @And("A new rating has been created")
     public void aNewRatingHasBeenCreated() throws Exception {
-
         id = stepDefs.result.andReturn().getResponse().getHeader("Location");
         assert id != null;
         stepDefs.result = stepDefs.mockMvc.perform(
