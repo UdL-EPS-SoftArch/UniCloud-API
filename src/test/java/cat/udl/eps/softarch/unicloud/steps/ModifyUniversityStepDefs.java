@@ -12,12 +12,12 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-public class ModifyUniversityStepsDefs {
+public class ModifyUniversityStepDefs {
 
     final UniversityRepository universityRepository;
     final StepDefs stepDefs;
 
-    public ModifyUniversityStepsDefs(UniversityRepository universityRepository, StepDefs stepDefs) {
+    public ModifyUniversityStepDefs(UniversityRepository universityRepository, StepDefs stepDefs) {
         this.universityRepository = universityRepository;
         this.stepDefs = stepDefs;
     }
