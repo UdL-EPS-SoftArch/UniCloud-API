@@ -39,10 +39,7 @@ public class DeleteRatingStepDefs {
         assert !existsrating;
     }
 
-    @And("The rating with id {int} was deleted")
-    public void theRatingWithIdWasDeleted(int arg0) {
 
-    }
 
     @And("The rating with id {int} was not deleted")
     public void theRatingWithIdWasNotDeleted(int arg0) {
@@ -74,5 +71,11 @@ public class DeleteRatingStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
+    }
+
+    @And("The rating with was deleted")
+    public void theRatingWithWasDeleted() {
+        long total_ratings = ratingRepository.count();
+        assert total_ratings == 0;
     }
 }
