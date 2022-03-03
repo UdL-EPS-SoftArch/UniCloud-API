@@ -4,8 +4,9 @@ Feature: Search Resource by name
 
   Background:
     Given There is a registered user with username "user" and password "password" and email "user@sample.app"
-    Given There is a registered resource with name "name" by the user "user", with description "description", file "file" and for the subject "subject"
-    Given There is a registered resource with name "name2" by the user "user", with description "description", file "file" and for the subject "subject"
+    And There is a registered subject "subject" for the degree "degree" in the university "university"
+    And There is a registered resource with name "name" by the user "user", with description "description", file "file" and for the subject "subject"
+    And There is a registered resource with name "name2" by the user "user", with description "description", file "file" and for the subject "subject"
 
   Scenario: Search a resource by the exact name
     Given I login as "user" with password "password"

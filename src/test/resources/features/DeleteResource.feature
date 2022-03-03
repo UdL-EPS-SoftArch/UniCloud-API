@@ -6,9 +6,9 @@ Feature: Delete Resource
   
   Background:
     Given There is a registered user with username "user" and password "password" and email "user@sample.app"
-    Given There is a registered administrator with username "admin" and password "password" and email "admin@sample.app"
-    Given There is a registered subject "subject"
-    Given There is a registered resource with name "name" by the user "user", with description "description", file "file" and for the subject "subject"
+    And There is a registered administrator with username "admin" and password "password" and email "admin@sample.app"
+    And There is a registered subject "subject" for the degree "degree" in the university "university"
+    And There is a registered resource with name "name" by the user "user", with description "description", file "file" and for the subject "subject"
 
   Scenario: Delete a resource as an admin 
     Given I login as "admin" with password "password"
