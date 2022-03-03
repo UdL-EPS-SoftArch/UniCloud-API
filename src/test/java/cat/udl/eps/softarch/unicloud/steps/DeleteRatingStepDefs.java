@@ -86,4 +86,10 @@ public class DeleteRatingStepDefs {
         assert rating.getId() != null;
 
     }
+
+    @And("The rating with was deleted")
+    public void theRatingWithWasDeleted() {
+        long total_ratings = ratingRepository.count();
+        assert total_ratings == 0;
+    }
 }
