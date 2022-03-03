@@ -1,6 +1,6 @@
 Feature: DELETE a Rating
 
-  Scenario: Student authenticated deletes his/her own rating without having rated anything before
+  Scenario: Student authenticated deletes a rating
     Given I login as "demo" with password "password"
     When I delete a Rating with id 26
     Then The response code is 404
@@ -11,8 +11,7 @@ Feature: DELETE a Rating
     Given I register rating with rating 8 and comment "Good job"
     When I delete the last created rating
     Then The response code is 204
-    And The rating with id 28 was deleted
-
+    And The rating with was deleted
 
   Scenario: Delete rating when not authenticated
     Given I'm not logged in
