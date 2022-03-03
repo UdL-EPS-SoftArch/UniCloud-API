@@ -22,10 +22,11 @@ public class ModifyUniversityStepDefs {
         this.stepDefs = stepDefs;
     }
 
-    @When("I modify an university with name {string} changing field {string} to {string}")
-    public void iModifyAnUniversityWithNameChangingFieldTo(String name,String field, String value) throws Exception {
+
+    @When("I modify an university with name {string} changing field acronym to {string}")
+    public void iModifyAnUniversityWithNameChangingFieldTo(String name, String acronym) throws Exception {
         JSONObject modifyData = new JSONObject();
-        modifyData.put(field, value);
+        modifyData.put("acronym", acronym);
 
         List<University> universities = universityRepository.findByName(name);
         String id = universities.size() > 0 ? universities.get(0).getId().toString():"666";
@@ -42,23 +43,6 @@ public class ModifyUniversityStepDefs {
     public void theUniversityWithNameHasTheAcronym(String name, String acronym) {
         University university = universityRepository.findByName(name).get(0);
         assert university.getAcronym().equals(acronym);
-    }
-
-    @And("The university with name {string} has the country {string}")
-    public void theUniversityWithNameHasTheCountry(String name, String country) {
-        University university = universityRepository.findByName(name).get(0);
-        assert university.getCountry().equals(country);
-    }
-
-    @And("The university with name {string} has the city {string}")
-    public void theUniversityWithNameHasTheCity(String name, String city) {
-        University university = universityRepository.findByName(name).get(0);
-        assert university.getCity().equals(city);
-    }
-
-    @And("A university with name {string} exists")
-    public void aUniversityWithNameExists(String name){
-        assert universityRepository.findByName(name).size() == 1;
     }
 
 
