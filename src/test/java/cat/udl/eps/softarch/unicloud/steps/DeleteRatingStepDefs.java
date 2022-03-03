@@ -38,4 +38,12 @@ public class DeleteRatingStepDefs {
         boolean existsrating = ratingRepository.existsById((long)arg0);
         assert !existsrating;
     }
+
+    @And("The rating with id {int} was deleted")
+    public void theRatingWithIdWasDeleted(int arg0) {
+    }
+
+    @And("The rating with id {int} was not deleted")
+    public void theRatingWithIdWasNotDeleted(int arg0) {
+    }
 }
