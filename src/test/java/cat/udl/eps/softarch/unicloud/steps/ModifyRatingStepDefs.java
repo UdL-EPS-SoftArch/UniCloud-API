@@ -40,9 +40,6 @@ public class ModifyRatingStepDefs {
     }
 
 
-    @And("The rating with id {int} was not modified")
-    public void theRatingWithIdWasNotModified(int arg0) {Assert.assertEquals(0, ratingRepository.count());}
-
     @When("I modify the last rating created changing the comment to {string}")
     public void iModifyTheLastRatingCreatedChangingTheCommentTo(String arg0) throws Exception {
         JSONObject modifyData = new JSONObject();
