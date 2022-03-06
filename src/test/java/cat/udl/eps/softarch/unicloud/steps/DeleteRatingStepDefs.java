@@ -87,8 +87,8 @@ public class DeleteRatingStepDefs {
 
     }
 
-    @And("The rating with was deleted")
-    public void theRatingWithWasDeleted() {
+    @And("The rating was deleted")
+    public void theRatingWasDeleted() {
         long total_ratings = ratingRepository.count();
         assert total_ratings == 0;
     }
