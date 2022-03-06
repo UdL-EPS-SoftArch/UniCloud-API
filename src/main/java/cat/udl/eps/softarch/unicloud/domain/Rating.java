@@ -37,4 +37,5 @@ public class Rating {
         @NotBlank
         private String comment;
 
+
 }
