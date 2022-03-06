@@ -73,8 +73,8 @@ public class DeleteRatingStepDefs {
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
 
-    @And("The rating with was deleted")
-    public void theRatingWithWasDeleted() {
+    @And("The rating was deleted")
+    public void theRatingWasDeleted() {
         long total_ratings = ratingRepository.count();
         assert total_ratings == 0;
     }
