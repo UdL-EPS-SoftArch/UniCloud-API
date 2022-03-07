@@ -23,6 +23,12 @@ public class RegisterUserStepDefs {
   private StepDefs stepDefs;
   private UserRepository userRepository;
 
+  public RegisterUserStepDefs(StepDefs stepDefs, UserRepository userRepository) {
+    this.stepDefs = stepDefs;
+    this.userRepository = userRepository;
+  }
+
+
   @Given("^There is no registered user with username \"([^\"]*)\"$")
   public void thereIsNoRegisteredUserWithUsername(String user) {
     Assert.assertFalse("User \""
