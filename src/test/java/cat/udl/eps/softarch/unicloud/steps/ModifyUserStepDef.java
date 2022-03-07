@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.print.attribute.standard.Media;
+
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -26,17 +28,6 @@ public class ModifyUserStepDef {
         this.userRepository = userRepository;
     }
 
-    @Given("There is a registered user with username {string} and password {string} and email {string}")
-    public void thereIsARegisteredUserWithUsernameAndPasswordAndEmail(String username, String email, String password) {
-        if(!userRepository.existsById(username)) {
-            User user = new User();
-            user.setUsername(username);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.encodePassword();
-            userRepository.save(user);
-        }
-    }
 
     @When("I change the email of user {string} to {string}")
     public void iChangeTheEmailOfUserTo(String username, String email) throws Exception {
@@ -77,19 +68,29 @@ public class ModifyUserStepDef {
     }
 
     @When("I change the username of user {string} to {string}")
-    public void iChangeTheUsernameOfUserTo(String arg0, String arg1) throws Exception{
+    public void iChangeTheUsernameOfUserTo(String username, String name) throws Exception{
+        JSONObject newName = new JSONObject();
+        newName.put("name", name);
+        stepDefs.result = stepDefs.mockMvc
+                .perform(patch("/users/{username}", username)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(newName.toString())
+                .with(AuthenticationStepDefs.authenticate()))
+        .andDo(print());
     }
 
     @And("The username of user {string} has been updated to {string}")
-    public void theUsernameOfUserHasBeenUpdatedTo(String arg0, String arg1) throws Exception {
+    public void theUsernameOfUserHasBeenUpdatedTo(String username, String name) throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                get("/users/{username}", username)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print())
+                .andExpect(jsonPath("$.user",is(name)));
     }
 
     @And("Email of user {string} remains {string}")
     public void emailOfUserRemains(String arg0, String arg1) throws Exception {
-    }
-
-    @And("I am not logged in")
-    public void iAmNotLoggedIn() throws Exception {
     }
 
     @When("I modify user {string} password from {string} to {string}")
