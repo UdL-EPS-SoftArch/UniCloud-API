@@ -43,6 +43,6 @@ Feature: Modify User
     # Password update scenarios
   Scenario: User modifies password without being logged in
     Given I'm not logged in
-    When I modify user "user" password from "password" to "newpassword"
-    Then The response code is 404
+    When I change the password of user "user" to "password"
+    Then The response code is 401
 
