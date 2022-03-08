@@ -4,7 +4,7 @@ Feature: Create Rating
 
   Background:
     Given There is a registered user with username "student" and password "password" and email "student@local.com"
-    Given There is a registered user with username "admin" and password "password" and email "admin@local.com"
+    Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
 
   Scenario: Add rating as student when already authenticated
     Given I login as "student" with password "password"
@@ -22,11 +22,11 @@ Feature: Create Rating
   Scenario: Add rating as admin
     Given I login as "admin" with password "password"
     When I register a new rating with rating 7 and comment "Aproved"
-    Then The response code is 401
+    Then The response code is 403
     And A new rating has not been created
 
   Scenario: Add a negative rating as student when already authenticated
     Given I login as "student" with password "password"
     When I register a new rating with rating -3 and comment "Aproved"
-    Then The response code is 400
+    Then The response code is 403
     And A new rating has not been created
