@@ -1,6 +1,7 @@
 package cat.udl.eps.softarch.unicloud.handler;
 
 import cat.udl.eps.softarch.unicloud.domain.User;
+import cat.udl.eps.softarch.unicloud.exception.ForbiddenException;
 import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,11 @@ import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.HandleBeforeLinkSave;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
 
 @Component
 @RepositoryEventHandler
@@ -37,7 +42,15 @@ public class UserEventHandler {
 
     @HandleBeforeDelete
     public void handleUserPreDelete(User player) {
+
         logger.info("Before deleting: {}", player.toString());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Collection<? extends GrantedAuthority> userAuthority = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        boolean sameId = user.getId().equals(player.getId());
+        boolean rolePlayerisAdmin = userAuthority.stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
+        if (!sameId & !rolePlayerisAdmin){
+            throw new ForbiddenException();
+        }
     }
 
     @HandleBeforeLinkSave
