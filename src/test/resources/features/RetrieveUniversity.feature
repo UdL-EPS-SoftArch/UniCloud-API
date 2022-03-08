@@ -44,8 +44,8 @@ Feature: Retrieve University
   Scenario: List a existing university by id as a student
     Given I login as "student" with password "password"
     When I list the university with id "1"
-    Then The response code is 404
-    And The number of returned universities are 1
+    Then The response code is 200
+    And It returns the university with name "Universitat de Lleida"
 
   Scenario: List a non existing university by id as a student
     Given I login as "student" with password "password"
@@ -54,9 +54,9 @@ Feature: Retrieve University
 
   Scenario: List a existing university by id as a admin
     Given I login as "admin" with password "password"
-    When I list the university with id "1"
+    When I list the university with id "2"
     Then The response code is 200
-    And The number of returned universities are 1
+    And It returns the university with name "Universitat de Girona"
 
   Scenario: List a non existing university by id as an admin
     Given I login as "admin" with password "password"
@@ -84,7 +84,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by name as a student
     Given I login as "student" with password "password"
     When I list the university with name "Universitat de Pamplona"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   Scenario: List a existing university by name as a admin
     Given I login as "admin" with password "password"
@@ -95,7 +96,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by name as an admin
     Given I login as "admin" with password "password"
     When I list the university with name "Universitat de Pamplona"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   #------------------------NAME CONTAINGING----------
 
@@ -107,7 +109,8 @@ Feature: Retrieve University
   Scenario: List a non existing university containing name when not authenticated
     Given I'm not logged in
     When I list the university containing name "Escola"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   Scenario: List a existing university containing name as a student
     Given I login as "student" with password "password"
@@ -118,7 +121,8 @@ Feature: Retrieve University
   Scenario: List a non existing university containing name as a student
     Given I login as "student" with password "password"
     When I list the university containing name "Escola"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   Scenario: List a existing university containing name as a admin
     Given I login as "admin" with password "password"
@@ -129,7 +133,8 @@ Feature: Retrieve University
   Scenario: List a non existing university containing name as an admin
     Given I login as "admin" with password "password"
     When I list the university containing name "Escola"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   #-------------------------ACRONYM------------------------------
 
@@ -152,7 +157,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by acronym as a student
     Given I login as "student" with password "password"
     When I list the university with acronym "UMA"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   Scenario: List a existing university by acronym as a admin
     Given I login as "admin" with password "password"
@@ -163,7 +169,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by name as an admin
     Given I login as "admin" with password "password"
     When I list the university with acronym "UAB"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   #---------------------------CITY----------------------------
 
@@ -186,7 +193,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by city as a student
     Given I login as "student" with password "password"
     When I list the university with city "Sevilla"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   Scenario: List a existing university by city as a admin
     Given I login as "admin" with password "password"
@@ -197,7 +205,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by city as an admin
     Given I login as "admin" with password "password"
     When I list the university with city "Pamplona"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   #---------------------------COUNTRY----------------------------
 
@@ -220,7 +229,8 @@ Feature: Retrieve University
   Scenario: List a non existing university by country as a student
     Given I login as "student" with password "password"
     When I list the university with country "Holland"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
 
   Scenario: List a existing university by country as a admin
     Given I login as "admin" with password "password"
@@ -231,4 +241,5 @@ Feature: Retrieve University
   Scenario: List a non existing university by country as an admin
     Given I login as "admin" with password "password"
     When I list the university with country "United States of America"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned universities are 0
