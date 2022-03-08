@@ -1,11 +1,9 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,7 +46,7 @@ public class User extends UriEntity<String> implements UserDetails {
 	}
 
 	@Override
-	public String getId() { return username; }
+	public String getId() { return this.username; }
 
 	@Override
 	@JsonValue(value = false)
