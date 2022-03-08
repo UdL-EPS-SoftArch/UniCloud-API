@@ -3,9 +3,10 @@ package cat.udl.eps.softarch.unicloud.steps;
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import io.cucumber.java.zh_cn.而且;
 import org.springframework.http.MediaType;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,7 +50,7 @@ public class RetrieveUniversityStepDefs {
     @When("I list the university containing name {string}")
     public void iListTheUniversityContainingName(String name) throws Exception{
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/datasets/search/findByNameContaining?name={name}", name)
+                        get("/universities/search/findByNameContaining?name={name}", name)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -58,7 +59,7 @@ public class RetrieveUniversityStepDefs {
     @When("I list the university with acronym {string}")
     public void iListTheUniversityWithAcronym(String acronym) throws Exception{
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/datasets/search/findByAcronym?acronym={acronym}", acronym)
+                        get("/universities/search/findByAcronym?acronym={acronym}", acronym)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -67,7 +68,7 @@ public class RetrieveUniversityStepDefs {
     @When("I list the university with city {string}")
     public void iListTheUniversityWithCity(String city) throws Exception{
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/datasets/search/findByCity?city={city}", city)
+                        get("/universities/search/findByCity?city={city}", city)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -76,7 +77,7 @@ public class RetrieveUniversityStepDefs {
     @When("I list the university with country {string}")
     public void iListTheUniversityWithCountry(String country) throws Exception{
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/datasets/search/findByCountry?country={country}", country)
+                        get("/universities/search/findByCountry?country={country}", country)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -85,5 +86,10 @@ public class RetrieveUniversityStepDefs {
     @And("The number of returned universities are {int}")
     public void theNumberOfReturnedUniversitiesAre(int num) throws Exception {
         stepDefs.result.andExpect(jsonPath("$._embedded.universities", hasSize(num)));
+    }
+
+    @And("It returns the university with name {string}")
+    public void itReturnsTheUniversityWithName(String name) throws Exception {
+        stepDefs.result.andExpect(jsonPath("$.name", equalTo(name)));
     }
 }
