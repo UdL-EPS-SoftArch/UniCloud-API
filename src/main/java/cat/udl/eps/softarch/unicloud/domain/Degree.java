@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,6 +24,9 @@ public class Degree extends UriEntity<Long> {
     @NotBlank
     @Column(nullable = false)
     private String faculty;
+
+    /*@ManyToMany(mappedBy = "degrees")
+    private List<University> universities;*/
 
     @Override
     public Long getId() {
