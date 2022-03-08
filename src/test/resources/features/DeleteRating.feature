@@ -2,7 +2,7 @@ Feature: DELETE a Rating
 
   Background:
     Given There is a registered user with username "student" and password "password" and email "student@local.com"
-    Given There is a registered user with username "admin" and password "password" and email "admin@local.com"
+    Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
 
   Scenario: Student authenticated deletes a rating
     Given I login as "student" with password "password"
