@@ -3,7 +3,7 @@ Feature: Create Rating
   I want to register a new rating
 
   Background:
-    Given There is a registered user with username "student" and password "password" and email "student@local.com"
+    Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
 
   Scenario: Add rating as student when already authenticated
@@ -28,5 +28,5 @@ Feature: Create Rating
   Scenario: Add a negative rating as student when already authenticated
     Given I login as "student" with password "password"
     When I register a new rating with rating -3 and comment "Aproved"
-    Then The response code is 403
+    Then The response code is 400
     And A new rating has not been created
