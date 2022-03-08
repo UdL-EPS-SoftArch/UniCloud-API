@@ -31,8 +31,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
                     .antMatchers(HttpMethod.POST, "/users/*").denyAll()
                     .antMatchers(HttpMethod.POST, "/ratings").hasRole("STUDENT")
                     .antMatchers(HttpMethod.PATCH, "/ratings").hasRole("STUDENT")
-                    .antMatchers(HttpMethod.PATCH, "/ratings").denyAll()
-                    .antMatchers(HttpMethod.POST, "/ratings").denyAll()
                     .antMatchers(HttpMethod.POST, "/**/*").authenticated()
                     .antMatchers(HttpMethod.PUT, "/**/*").authenticated()
                     .antMatchers(HttpMethod.PATCH, "/**/*").authenticated()
