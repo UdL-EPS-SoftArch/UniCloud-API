@@ -27,7 +27,6 @@ Feature: Modify User
     When I change the email of user "user" to "newemailaaa"
     Then The response code is 400
     And The error message is "must be a well-formed email address"
-    And Email of user "user" remains "user@gmail.com"
 
   Scenario: User modifies email of a user that does not exist
     Given I login as "user" with password "password"
