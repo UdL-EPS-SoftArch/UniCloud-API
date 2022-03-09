@@ -39,7 +39,7 @@ public class ModifyDegreeStepDefs {
                                 .content(stepDefs.mapper.writeValueAsString(degree))
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
-                .andDo(print());
+                                .andDo(print());
     }
 
     @And("The Degree with name {string} has the faculty {string}")
@@ -64,7 +64,7 @@ public class ModifyDegreeStepDefs {
                                 .content(stepDefs.mapper.writeValueAsString(degree))
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
-                .andDo(print());
+                                .andDo(print());
     }
 
     @And("The Degree with faculty {string} has the name {string}")
