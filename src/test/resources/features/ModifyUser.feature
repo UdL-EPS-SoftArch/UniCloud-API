@@ -19,7 +19,7 @@ Feature: Modify User
     Given I login as "user" with password "password"
     When I change the password of user "user" to "differentpassword"
     Then The response code is 204
-    And The password of user "user" has been updated to "differentpassword"
+    And I can login with username "user" and password "differentpassword"
 
     # Email update scenarios
   Scenario: User modifies email to an invalid one
