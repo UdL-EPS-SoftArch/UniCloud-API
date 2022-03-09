@@ -11,4 +11,7 @@ public interface AssignmentRepository extends PagingAndSortingRepository<Assignm
 
     List<Assignment> findByName(@Param("name") String name);
     List<Assignment> findByNameContaining(@Param("name") String name);
+
+    List<Assignment> findBySubjects(@Param("subject_name") String subject_name);
+    List<Assignment> findBySubjectsContaining(@Param("subject_name") String subject_name);
 }

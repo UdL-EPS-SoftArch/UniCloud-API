@@ -10,4 +10,7 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
 
     List<Resource> findByName(@Param("name") String name);
     List<Resource> findByNameContaining(@Param("name") String name);
+
+    List<Resource> findBySubjects(@Param("subject_name") String subject_name);
+    List<Resource> findBySubjectsContaining(@Param("subject_name") String subject_name);
 }
