@@ -13,14 +13,14 @@ Feature: MODIFY a Rating
     # Modificar els permissos del WebSecurityConfig per al admin
   Scenario: Modify rating as admin
     Given I login as "student" with password "password"
-    Given I add a new rating with rating 8 and comment "Good job"
-    Given I login as "admin" with password "password"
+    And I add a new rating with rating 8 and comment "Good job"
+    And I login as "admin" with password "password"
     When I modify the last rating created changing the comment to "Sorry, was a bad job"
     Then The response code is 403
 
   Scenario: Modify rating as student
     Given I login as "student" with password "password"
-    Given I add a new rating with rating 5 and comment "Just approved"
+    And I add a new rating with rating 5 and comment "Just approved"
     When I modify the last rating created changing the comment to "Just approved but you did an excelent work"
     Then The response code is 200
 

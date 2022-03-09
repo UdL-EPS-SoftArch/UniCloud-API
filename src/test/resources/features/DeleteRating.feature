@@ -12,7 +12,7 @@ Feature: DELETE a Rating
 
   Scenario: Delete rating as student
     Given I login as "student" with password "password"
-    Given I register rating with rating 8 and comment "Good job"
+    And I register rating with rating 8 and comment "Good job"
     When I delete the last created rating
     Then The response code is 204
     And The rating was deleted
@@ -20,8 +20,8 @@ Feature: DELETE a Rating
     # Modificar els permissos del WebSecurityConfig per al admin
   Scenario: Delete rating as admin
     Given I login as "student" with password "password"
-    Given I register rating with rating 8 and comment "Good job"
-    Given I login as "admin" with password "password"
+    And I register rating with rating 8 and comment "Good job"
+    And I login as "admin" with password "password"
     When I delete the last created rating
     Then The response code is 204
 
