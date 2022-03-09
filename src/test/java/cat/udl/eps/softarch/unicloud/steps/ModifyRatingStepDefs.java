@@ -33,7 +33,7 @@ public class ModifyRatingStepDefs {
         Rating rating = new Rating();
         rating.setRating(new BigDecimal(arg0));
 
-        stepDefs.result = stepDefs.mockMvc.perform(delete("/rating/{id}",arg0).contentType(MediaType.APPLICATION_JSON)
+        stepDefs.result = stepDefs.mockMvc.perform(delete("/ratings/{id}",arg0).contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
