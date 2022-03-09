@@ -63,10 +63,6 @@ public class ModifyUserStepDef {
     }
 
     @And("The password of user {string} has been updated to {string}")
-    public void thePasswordOfUserHasBeenUpdatedTo(String arg0, String arg1) throws Exception {
-    }
-
-    @And("Email of user {string} remains {string}")
-    public void emailOfUserRemains(String arg0, String arg1) throws Exception {
+    public void thePasswordOfUserHasBeenUpdatedTo(String username, String newpassword) throws Exception {
     }
 }
