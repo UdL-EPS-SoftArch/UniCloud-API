@@ -1,7 +1,7 @@
 Feature: MODIFY a Rating
 
   Background:
-    Given There is a registered user with username "student" and password "password" and email "student@local.com"
+    Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
 
   Scenario: Student authenticated modify his/her own rating without having rated anything before
@@ -12,8 +12,9 @@ Feature: MODIFY a Rating
 
     # Modificar els permissos del WebSecurityConfig per al admin
   Scenario: Modify rating as admin
-    Given I login as "admin" with password "password"
+    Given I login as "student" with password "password"
     Given I add a new rating with rating 8 and comment "Good job"
+    Given I login as "admin" with password "password"
     When I modify the last rating created changing the comment to "Sorry, was a bad job"
     Then The response code is 403
 
