@@ -17,7 +17,7 @@ Feature: Create university
   Scenario: Create new university as a student
     Given I login as "student" with password "password"
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
-    Then The response code is 401
+    Then The response code is 403
     And The university count is 0
 
 
@@ -34,3 +34,23 @@ Feature: Create university
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Catalonia", city "Lleida"
     Then The response code is 409
     And The university count is 1
+
+  Scenario: Create new university with blank name as an admin
+    Given I login as "admin" with password "password"
+    When I create a new university with name "", acronym "UDL", country "Catalonia", city "Lleida"
+    Then The response code is 400
+
+  Scenario: Create new university with blank acronym as an admin
+    Given I login as "admin" with password "password"
+    When I create a new university with name "Universitat de Lleida", acronym "", country "Catalonia", city "Lleida"
+    Then The response code is 400
+
+  Scenario: Create new university with blank country as an admin
+    Given I login as "admin" with password "password"
+    When I create a new university with name "Universitat de Lleida", acronym "UDL", country "", city "Lleida"
+    Then The response code is 400
+
+  Scenario: Create new university with blank city as an admin
+    Given I login as "admin" with password "password"
+    When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Catalonia", city ""
+    Then The response code is 400
