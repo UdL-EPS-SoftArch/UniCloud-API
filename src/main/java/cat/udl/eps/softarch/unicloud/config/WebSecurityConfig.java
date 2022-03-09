@@ -33,6 +33,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
                     .antMatchers(HttpMethod.PUT, "/universities/*").hasRole("ADMIN")
                     .antMatchers(HttpMethod.PATCH, "/universities/*").hasRole("ADMIN")
                     .antMatchers(HttpMethod.DELETE, "/universities/*").hasRole("ADMIN")
+                    .antMatchers(HttpMethod.POST, "/ratings").hasRole("STUDENT")
+                    .antMatchers(HttpMethod.PATCH, "/ratings/*").hasRole("STUDENT")
                     .antMatchers(HttpMethod.POST, "/**/*").authenticated()
                     .antMatchers(HttpMethod.PUT, "/**/*").authenticated()
                     .antMatchers(HttpMethod.PATCH, "/**/*").authenticated()
