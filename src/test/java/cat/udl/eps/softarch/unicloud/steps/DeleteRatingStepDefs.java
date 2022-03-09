@@ -71,6 +71,7 @@ public class DeleteRatingStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
+
     }
 
     @And("The rating was deleted")
