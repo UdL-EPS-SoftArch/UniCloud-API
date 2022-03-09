@@ -3,16 +3,14 @@ Feature: Create university
   I want to create a university
 
   Background:
-    Given There is a registered user with username "student" and password "password" and email "student@local.com"
-    Given There is a registered user with username "admin" and password "password" and email "admin@local.com"
+    Given There is a registered student with username "student" and password "password" and email "student@local.com"
+    Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
 
   Scenario: Create new university when not authenticated
     Given I'm not logged in
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
     Then The response code is 401
     And The university count is 0
-
-#FALTA FICAR TEST USUARI STUDENT I ROLS
 
   Scenario: Create new university as a student
     Given I login as "student" with password "password"
