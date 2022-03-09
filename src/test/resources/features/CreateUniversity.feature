@@ -21,7 +21,7 @@ Feature: Create university
   Scenario: Create new university as a student
     Given I login as "student" with password "password"
     When I create a new university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
-    Then The response code is 401
+    Then The response code is 403
     And The university count is 0
 
 
