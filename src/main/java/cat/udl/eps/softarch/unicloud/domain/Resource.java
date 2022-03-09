@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -25,15 +26,14 @@ public class Resource extends UriEntity<Long> {
     @Length(max = 2000)
     private String description;
 
-    @ManyToOne
+    @NotNull
+    @ManyToOne()
     @JsonIdentityReference(alwaysAsId = true)
     private Student owner;
 
+    @NotNull
     @ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
     private List<Subject> subjects;
 
-    @OneToMany
-    @JsonIdentityReference(alwaysAsId = true)
-    private List<Rating> ratings;
 }
