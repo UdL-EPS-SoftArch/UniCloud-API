@@ -66,23 +66,6 @@ public class ModifyUserStepDef {
     public void thePasswordOfUserHasBeenUpdatedTo(String arg0, String arg1) throws Exception {
     }
 
-    @When("I change the username of user {string} to {string}")
-    public void iChangeTheUsernameOfUserTo(String username, String name) throws Exception{
-        JSONObject newName = new JSONObject();
-        newName.put("name", name);
-        stepDefs.result = stepDefs.mockMvc
-                .perform(patch("/users/{username}", username)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(newName.toString())
-                .with(AuthenticationStepDefs.authenticate()))
-        .andDo(print());
-    }
-
-    @And("The username of user {string} has been updated to {string}")
-    public void theUsernameOfUserHasBeenUpdatedTo(String username, String name) throws Exception {
-        assert username.equals(name);
-    }
-
     @And("Email of user {string} remains {string}")
     public void emailOfUserRemains(String arg0, String arg1) throws Exception {
     }
