@@ -61,8 +61,4 @@ public class ModifyUserStepDef {
                         .with(AuthenticationStepDefs.authenticate())
         ).andDo(print());
     }
-
-    @And("The password of user {string} has been updated to {string}")
-    public void thePasswordOfUserHasBeenUpdatedTo(String username, String newpassword) throws Exception {
-    }
 }
