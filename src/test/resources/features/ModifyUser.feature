@@ -21,12 +21,6 @@ Feature: Modify User
     Then The response code is 204
     And The password of user "user" has been updated to "differentpassword"
 
-  Scenario: User modifies username
-    Given I login as "user" with password "password"
-    When I change the username of user "user" to "newuser"
-    Then The response code is 204
-    And The username of user "user" has been updated to "newuser"
-
     # Email update scenarios
   Scenario: User modifies email to an invalid one
     Given I login as "user" with password "password"
