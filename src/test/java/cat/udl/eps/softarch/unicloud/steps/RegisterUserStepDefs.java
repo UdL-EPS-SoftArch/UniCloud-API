@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import cat.udl.eps.softarch.unicloud.domain.Admin;
+import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import io.cucumber.java.en.And;
@@ -14,16 +16,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-public class RegisterStepDefs {
+public class RegisterUserStepDefs {
 
-  @Autowired
   private StepDefs stepDefs;
-
-  @Autowired
   private UserRepository userRepository;
+
+  public RegisterUserStepDefs(StepDefs stepDefs, UserRepository userRepository) {
+    this.stepDefs = stepDefs;
+    this.userRepository = userRepository;
+  }
+
 
   @Given("^There is no registered user with username \"([^\"]*)\"$")
   public void thereIsNoRegisteredUserWithUsername(String user) {
@@ -41,6 +45,18 @@ public class RegisterStepDefs {
       user.setPassword(password);
       user.encodePassword();
       userRepository.save(user);
+    }
+  }
+
+  @Given("There is a registered admin with username {string} and password {string} and email {string}")
+  public void thereIsARegisteredAdminWithUsernameAndPasswordAndEmail(String username, String password, String email) {
+    if (!userRepository.existsById(username)) {
+      User admin = new Admin();
+      admin.setEmail(email);
+      admin.setUsername(username);
+      admin.setPassword(password);
+      admin.encodePassword();
+      userRepository.save(admin);
     }
   }
 
@@ -105,5 +121,17 @@ public class RegisterStepDefs {
                     .accept(MediaType.APPLICATION_JSON)
                     .with(AuthenticationStepDefs.authenticate()))
             .andExpect(status().isNotFound());
+  }
+
+  @Given("There is a registered student with username {string} and password {string} and email {string}")
+  public void thereIsARegisteredStudentWithUsernameAndPasswordAndEmail(String username, String password, String email) {
+    if (!userRepository.existsById(username)) {
+      User student = new Student();
+      student.setEmail(email);
+      student.setUsername(username);
+      student.setPassword(password);
+      student.encodePassword();
+      userRepository.save(student);
+    }
   }
 }
