@@ -2,10 +2,10 @@ package cat.udl.eps.softarch.unicloud.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import net.bytebuddy.asm.Advice;
+import org.hibernate.validator.constraints.UniqueElements;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -17,7 +17,10 @@ public class University extends UriEntity<Long> {
     @Id
     private Long id;
     @NotBlank
+    @Column(unique = true)
     private String name;
+    @NotBlank
+    private String acronym;
     @NotBlank
     private String country;
     @NotBlank
