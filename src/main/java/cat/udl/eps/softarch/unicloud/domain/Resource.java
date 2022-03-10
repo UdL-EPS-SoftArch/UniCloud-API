@@ -26,12 +26,12 @@ public class Resource extends UriEntity<Long> {
     @Length(max = 2000)
     private String description;
 
-    @NotNull
+    @NotBlank
     @ManyToOne()
     @JsonIdentityReference(alwaysAsId = true)
     private Student owner;
 
-    @NotNull
+    @NotBlank
     @ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
     private List<Subject> subjects;
