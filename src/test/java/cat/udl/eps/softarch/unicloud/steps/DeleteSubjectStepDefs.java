@@ -10,12 +10,11 @@ import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 public class DeleteSubjectStepDefs {
     final StepDefs stepDefs;
     final SubjectRepository subjectRepository;
-    public static String id;
 
     DeleteSubjectStepDefs(StepDefs stepDefs, SubjectRepository subjectRepository){
         this.stepDefs = stepDefs;
