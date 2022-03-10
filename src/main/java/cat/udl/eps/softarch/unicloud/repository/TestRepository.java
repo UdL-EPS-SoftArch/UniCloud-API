@@ -15,6 +15,6 @@ public interface TestRepository extends PagingAndSortingRepository<Test, Long> {
     List<Test> findByName(@Param("name") String name);
     List<Test> findByNameContaining(@Param("name") String name);
 
-    List<Test> findBySubjects(@Param("subject_name") Subject subject_name);
-    List<Test> findBySubjectsContaining(@Param("subject_name") Subject subject_name);
+    List<Test> findBySubjectsName(@Param("subject") String subject);
+    List<Test> findBySubjectsNameContaining(@Param("subject") String subject);
 }

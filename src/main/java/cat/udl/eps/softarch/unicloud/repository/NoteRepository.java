@@ -16,6 +16,6 @@ public interface NoteRepository extends PagingAndSortingRepository<Note, Long> {
     List<Note> findByName(@Param("name") String name);
     List<Note> findByNameContaining(@Param("name") String name);
 
-    List<Note> findBySubjects(@Param("subject_name") Subject subject_name);
-    List<Note> findBySubjectsContaining(@Param("subject_name") Subject subject_name);
+    List<Note> findBySubjectsName(@Param("subject") String subject);
+    List<Note> findBySubjectsNameContaining(@Param("subject") String subject);
 }
