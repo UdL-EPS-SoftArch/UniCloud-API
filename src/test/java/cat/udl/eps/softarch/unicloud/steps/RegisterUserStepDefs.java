@@ -16,16 +16,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-public class RegisterStepDefs {
+public class RegisterUserStepDefs {
 
-  @Autowired
   private StepDefs stepDefs;
-
-  @Autowired
   private UserRepository userRepository;
+
+  public RegisterUserStepDefs(StepDefs stepDefs, UserRepository userRepository) {
+    this.stepDefs = stepDefs;
+    this.userRepository = userRepository;
+  }
+
 
   @Given("^There is no registered user with username \"([^\"]*)\"$")
   public void thereIsNoRegisteredUserWithUsername(String user) {
