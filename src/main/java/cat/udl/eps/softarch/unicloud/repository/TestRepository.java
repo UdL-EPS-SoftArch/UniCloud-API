@@ -20,4 +20,7 @@ public interface TestRepository extends PagingAndSortingRepository<Test, Long> {
 
     List<Test> findBySubjectsDegreeName(@Param("degree") String degree);
     List<Test> findBySubjectsDegreeNameContaining(@Param("degree") String degree);
+
+    List<Test> findBySubjectsDegreeUniversityName(@Param("university") String university);
+    List<Test> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);
 }
