@@ -13,8 +13,7 @@ Feature: Delete User
     And I login as "user" with password "password"
     When I delete the user with username "user"
     Then The response code is 204
-    And I login as "user" with password "password"
-    And It does not exist a user with username "user"
+    And I cannot login with username "user" and password "<password>"
 
   Scenario: User deletes a not owned account
     And I login as "user2" with password "password2"
@@ -32,5 +31,4 @@ Feature: Delete User
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     When I delete the user with username "user"
     Then The response code is 401
-    And I login as "user" with password "password"
-    And It has not been deleted a user with username "user"
+    And I can login with username "user" and password "password"
