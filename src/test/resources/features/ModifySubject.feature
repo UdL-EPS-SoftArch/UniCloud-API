@@ -3,8 +3,8 @@ Feature: Modify Subject
   I want to modify a Subject
 
   Background:
-    Given There is a registered user with username "student" and password "password" and email "student@local.com"
-    Given There is a registered user with username "admin" and password "password" and email "admin@local.com"
+    Given There is a registered student with username "student" and password "password" and email "student@local.com"
+    Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
     Given There is a Subject with name "Algebra",course 1 and optional "True"
 
   Scenario: Modify a Subject when not authenticated

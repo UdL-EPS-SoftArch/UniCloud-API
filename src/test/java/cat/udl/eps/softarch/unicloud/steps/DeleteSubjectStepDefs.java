@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Subject;
 import cat.udl.eps.softarch.unicloud.repository.SubjectRepository;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.http.MediaType;
@@ -39,7 +40,7 @@ public class DeleteSubjectStepDefs {
                 .andDo(print());
     }
 
-    @Then("The subject with name {string} has not been removed")
+    @And("The subject with name {string} has not been removed")
     public void notRemovedSubject(String name){
         List<Subject> subjects = subjectRepository.findByName(name);
         assert subjects.size() == 1;
