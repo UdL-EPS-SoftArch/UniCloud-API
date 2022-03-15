@@ -8,7 +8,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-
+import java.util.List;
 
 @Entity
 @Data
@@ -28,6 +28,8 @@ public class Subject extends UriEntity<Long>{
 
     private Boolean optional = true;
 
+    /*@ManyToMany(mappedBy = "subjects")
+    private List<Degree> degrees;*/
 }
 
 
