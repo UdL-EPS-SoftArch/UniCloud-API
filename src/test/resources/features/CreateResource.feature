@@ -5,53 +5,45 @@ Feature: Create Resource
   I can't create a resource
 
   Background:
-    Given There is a registered user with username "user" and password "password" and email "user@sample.app"
-    And There is a registered administrator with username "admin" and password "password" and email "admin@sample.app"
+    Given There is a registered student with username "student" and password "password" and email "student@sample.app"
+    And There is a registered admin with username "admin" and password "password" and email "admin@sample.app"
+    And There is a university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
+    And There is a degree with name "Enginyeria informàtica", faculty "EPS", and university id "1"
+    And There is a subject with name "Estructura de dades", course "2", optional "false", and degree id "1"
 
-  Scenario: Create a new resource as a normal user
-    Given I login as "user" with password "password"
-    And There is a registered subject "subject" for the degree "degree" in the university "university"
-    When I, user "user", create a resource with name "name", description "description" and file "file" for the subject "subject"
+  Scenario: Create a new resource as a student
+    Given I login as "student" with password "password"
+    When I create a resource with name "name", description "description" and file "file" for the subject id "1"
     Then The response code is 201
-    And It has been created with name "name", description "description" and file "file" by the user "user" for the subject "subject"
+    And The resource count is 1
+    And A new resource has been created
 
-  Scenario: Create a new resource as an admin user
+  Scenario: Create a new resource as an admin
     Given I login as "admin" with password "password"
-    And There is a registered subject "subject" for the degree "degree" in the university "university"
-    When I, user "admin", create a resource with name "name", description "description" and file "file" for the subject "subject"
+    When I create a resource with name "name", description "description" and file "file" for the subject id "1"
     Then The response code is 403
-    And The error message is "Admin users can't create new resources"
-    And It has not been created with name "name", description "description" and file "file" by the user "user" for the subject "subject"
+    And The resource count is 1
 
-  Scenario: Create a new resource as a normal user with empty name
-    Given I login as "user" with password "password"
-    And There is a registered subject "subject" for the degree "degree" in the university "university"
-    When I, user "user", create a resource with name "", description "description" and file "file" for the subject "subject"
+  Scenario: Create a new resource as a student with empty name
+    Given I login as "student" with password "password"
+    When I create a resource with name "", description "description" and file "file" for the subject "subject"
     Then The response code is 400
-    And The error message is "The name of the resource must not be blank"
-    And It has not been created with name "", description "description" and file "file" by the user "user" for the subject "subject"
 
-  Scenario: Create a new resource as a normal user with empty file
-    Given I login as "user" with password "password"
-    And There is a registered subject "subject" for the degree "degree" in the university "university"
-    When I, user "user", create a resource with name "name", description "description" and file "" for the subject "subject"
+  Scenario: Create a new resource as a student with empty file
+    Given I login as "student" with password "password"
+    When I create a resource with name "name", description "description" and file "" for the subject "subject"
     Then The response code is 400
-    And The error message is "The file of the resource must not be blank"
-    And It has not been created with name "name", description "description" and file "" by the user "user" for the subject "subject"
 
-  Scenario: Create a new resource as a normal user with an already existing name
-    Given I login as "user" with password "password"
-    And There is a registered subject "subject" for the degree "degree" in the university "university"
+  Scenario: Create a new resource as a student with an already existing name
+    Given I login as "student" with password "password"
     And There is a registered resource with name "name" by the user "user", with description "description", file "file" and for the subject "subject"
-    When I, user "user", create a resource with name "name", description "description" and file "file" for the subject "subject"
+    When I create a resource with name "name", description "description" and file "file" for the subject "subject"
     Then The response code is 409
-    And The error message is "Resource name already exists"
-    And There is only one resource with name "name"
+    And The resource count is 1
 
-  Scenario: Create a new resource as a normal user for a nonexistent subject
-    Given I login as "user" with password "password"
+  Scenario: Create a new resource as a student with a non-existent subject
+    Given I login as "student" with password "password"
     And There is a registered subject "subject" for the degree "degree" in the university "university"
-    When I, user "user", create a resource with name "name", description "description" and file "file" for the subject "subject2"
-    Then The response code is 409
-    And The error message is "The subject does not exist"
-    And It has not been created with name "name", description "description" and file "file" by the user "user" for the subject "subject2"
+    When I create a resource with name "name", description "description" and file "file" for the subject "subject2"
+    Then The response code is 400
+    And The resource count is 1
