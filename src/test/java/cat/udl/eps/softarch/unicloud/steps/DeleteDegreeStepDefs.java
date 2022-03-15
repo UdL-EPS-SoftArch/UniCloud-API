@@ -27,10 +27,10 @@ public class DeleteDegreeStepDefs {
         Degree degree = degreeRepository.findByName(name).get(0);
         assert degree.getId() != null;
         stepDefs.result = stepDefs.mockMvc.perform(
-                delete("/degrees/" + degree.getId().toString())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .with(AuthenticationStepDefs.authenticate()))
+                        delete("/degrees/" + degree.getId().toString())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
     }
 
