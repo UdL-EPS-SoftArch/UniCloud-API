@@ -18,7 +18,6 @@ Feature: Create Rating
     Then The response code is 401
     And A new rating has not been created
 
-    # Modificar els permissos del WebSecurityConfig per al admin
   Scenario: Add rating as admin
     Given I login as "admin" with password "password"
     When I register a new rating with rating 7 and comment "Aproved"

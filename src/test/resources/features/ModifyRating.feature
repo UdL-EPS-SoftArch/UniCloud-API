@@ -10,7 +10,6 @@ Feature: MODIFY a Rating
     Then The response code is 404
     And The rating with id 26 does not exist
 
-    # Modificar els permissos del WebSecurityConfig per al admin
   Scenario: Modify rating as admin
     Given I login as "student" with password "password"
     And I add a new rating with rating 8 and comment "Good job"
@@ -18,10 +17,16 @@ Feature: MODIFY a Rating
     When I modify the last rating created changing the comment to "Sorry, was a bad job"
     Then The response code is 403
 
-  Scenario: Modify rating as student
+  Scenario: Modify rating comment as student
     Given I login as "student" with password "password"
     And I add a new rating with rating 5 and comment "Just approved"
     When I modify the last rating created changing the comment to "Just approved but you did an excelent work"
+    Then The response code is 200
+
+  Scenario: Modify rating number as student
+    Given I login as "student" with password "password"
+    And I add a new rating with rating 4 and comment "You lose the exam"
+    When I modify the last rating created changing the rating to 5
     Then The response code is 200
 
   Scenario: Modify rating when not authenticated
@@ -30,6 +35,6 @@ Feature: MODIFY a Rating
     Then The response code is 401
 
   Scenario: Student authenticated modify his/her own rating
-    Given I login as "demo" with password "password"
+    Given I login as "student" with password "password"
     When I modify a Rating with id 26
     Then The response code is 404
