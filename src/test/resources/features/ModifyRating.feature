@@ -38,3 +38,9 @@ Feature: MODIFY a Rating
     Given I login as "student" with password "password"
     When I modify a Rating with id 26
     Then The response code is 404
+
+    ###nou
+  #Scenario: Student authenticated modify a rating from another author
+   # Given I login as "demo" with password "password"
+    #When I modify a Rating with id 26 created by author "paco"
+    #Then The response code is 403

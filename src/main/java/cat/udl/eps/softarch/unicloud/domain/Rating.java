@@ -27,6 +27,7 @@ public class Rating {
 
 
         @ManyToOne
+        @JsonIdentityReference(alwaysAsId = true)
         private Resource resourceRated;
 
         @NotNull

@@ -1,11 +1,15 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Rating;
+import cat.udl.eps.softarch.unicloud.domain.Resource;
+import cat.udl.eps.softarch.unicloud.domain.Student;
+import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import net.minidev.json.JSONObject;
 import org.junit.Assert;
 import org.springframework.http.MediaType;
 
@@ -43,6 +47,13 @@ public class CreateRatingStepDefs {
                         .with(AuthenticationStepDefs.authenticate()))
                         .andDo(print());
         newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
+        /*
+        JSONObject response = new JSONObject(stepDefs.result.andReturn().getResponse().getContentAsString());
+        String providedByHref = response.getJSONObject("_links").getJSONObject("providedBy").getString("href");
+
+        PER AVERIGUAR QUE FALLA
+         */
+
     }
 
     @And("A new rating has not been created")
@@ -62,5 +73,6 @@ public class CreateRatingStepDefs {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
 
 }

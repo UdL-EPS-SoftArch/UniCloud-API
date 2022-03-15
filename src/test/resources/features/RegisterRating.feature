@@ -29,3 +29,6 @@ Feature: Create Rating
     When I register a new rating with rating -3 and comment "Aproved"
     Then The response code is 400
     And A new rating has not been created
+
+
+

@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.unicloud.config;
 
+import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
