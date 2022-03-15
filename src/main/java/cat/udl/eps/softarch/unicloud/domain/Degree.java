@@ -1,6 +1,7 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,8 +26,9 @@ public class Degree extends UriEntity<Long> {
     @Column(nullable = false)
     private String faculty;
 
-    /*@ManyToMany(mappedBy = "degrees")
-    private List<University> universities;*/
+    @ManyToOne()
+    @JsonIdentityReference(alwaysAsId = true)
+    private University university;
 
     @Override
     public Long getId() {

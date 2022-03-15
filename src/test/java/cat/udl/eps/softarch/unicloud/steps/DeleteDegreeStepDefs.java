@@ -1,6 +1,7 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
+import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -22,27 +23,22 @@ public class DeleteDegreeStepDefs {
         this.degreeRepository = degreeRepository;
     }
 
-    @When("I delete a degree with name {string}")
-    public void iDeleteDegreeName(String name) throws Exception{
-        Degree degree = degreeRepository.findByName(name).get(0);
+    @When("I delete a degree with name {string} and university {string}")
+    public void iDeleteDegreeName(String name, String uniName) throws Exception{
+        List<Degree> degreeList = degreeRepository.findByName(name);
+        Degree degree = new Degree();
+        for(Degree degree1: degreeList){
+            if (degree1.getUniversity().getName().equals(uniName)) {
+                degree = degree1;
+                break;
+            }
+        }
         assert degree.getId() != null;
         stepDefs.result = stepDefs.mockMvc.perform(
                 delete("/degrees/" + degree.getId().toString())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
-                .andDo(print());
-    }
-
-    @When("I delete a degree with faculty {string}")
-    public void iDeleteDegreeFaculty(String faculty) throws Exception{
-        Degree degree = degreeRepository.findByFaculty(faculty).get(0);
-        assert degree.getId() != null;
-        stepDefs.result = stepDefs.mockMvc.perform(
-                        delete("/degrees/" + degree.getId().toString())
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON)
-                                .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
     }
 
@@ -55,15 +51,29 @@ public class DeleteDegreeStepDefs {
     }
 
 
-    @And("The degree with name {string} doesn't exist")
-    public void theDegreeWithNameDoesnTExist(String name) {
+    @And("The degree with name {string} and university {string} doesn't exist")
+    public void theDegreeWithNameDoesnTExist(String name, String uniName) {
         List<Degree> degreeList = degreeRepository.findByName(name);
-        assert degreeList.isEmpty();
+        Degree degree = null;
+        for(Degree degree1: degreeList){
+            if (degree1.getName().equals(uniName)) {
+                degree = degree1;
+                break;
+            }
+        }
+        assert degree == null;
     }
 
-    @And("The degree with name {string} exist")
-    public void theDegreeWithNameExist(String name) {
+    @And("The degree with name {string} and university {string} exists")
+    public void theDegreeWithNameExist(String name, String uniName) {
         List<Degree> degreeList = degreeRepository.findByName(name);
-        assert !degreeList.isEmpty();
+        Degree degree = null;
+        for(Degree degree1: degreeList){
+            if (degree1.getName().equals(uniName)) {
+                degree = degree1;
+                break;
+            }
+        }
+        assert degree != null;
     }
 }
