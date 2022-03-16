@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.unicloud.handler;
 
 
 import cat.udl.eps.softarch.unicloud.domain.Rating;
+import cat.udl.eps.softarch.unicloud.domain.Resource;
 import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
@@ -32,7 +33,6 @@ public class RatingEventHandler {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
-        //Resource resource;
         rating.setAuthor(currentUser);
 
 

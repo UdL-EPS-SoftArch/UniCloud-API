@@ -23,17 +23,20 @@ public class ModifyRatingStepDefs {
     final RatingRepository ratingRepository;
     public static String id;
 
-    ModifyRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository){
+
+    ModifyRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository) {
         this.stepDefs = stepDefs;
         this.ratingRepository = ratingRepository;
     }
+
+
 
     @When("I modify a Rating with id {int}")
     public void iModifyARatingWithId(int id) throws Exception {
         Rating rating = new Rating();
         rating.setRating(new BigDecimal(id));
 
-        stepDefs.result = stepDefs.mockMvc.perform(patch("/rating/{id}",id).contentType(MediaType.APPLICATION_JSON)
+        stepDefs.result = stepDefs.mockMvc.perform(patch("/rating/{id}", id).contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -82,5 +85,7 @@ public class ModifyRatingStepDefs {
                 .andDo(print());
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
+
+
 
 }

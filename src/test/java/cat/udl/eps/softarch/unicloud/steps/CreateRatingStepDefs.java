@@ -9,12 +9,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import net.minidev.json.JSONObject;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
 
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -47,12 +49,6 @@ public class CreateRatingStepDefs {
                         .with(AuthenticationStepDefs.authenticate()))
                         .andDo(print());
         newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
-        /*
-        JSONObject response = new JSONObject(stepDefs.result.andReturn().getResponse().getContentAsString());
-        String providedByHref = response.getJSONObject("_links").getJSONObject("providedBy").getString("href");
-
-        PER AVERIGUAR QUE FALLA
-         */
 
     }
 
@@ -62,17 +58,30 @@ public class CreateRatingStepDefs {
     }
 
 
-    @And("A new rating has been created")
-    public void aNewRatingHasBeenCreated() throws Exception {
+
+    @And("A new rating has been created as {string}")
+    public void aNewRatingHasBeenCreatedAs(String author) throws Throwable {
         id = stepDefs.result.andReturn().getResponse().getHeader("Location");
         assert id != null;
         stepDefs.result = stepDefs.mockMvc.perform(
-                get(id)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .with(AuthenticationStepDefs.authenticate()))
+                        get(id)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print())
                 .andExpect(status().isOk());
+
+        JSONObject response = new JSONObject(stepDefs.result.andReturn().getResponse().getContentAsString());
+        String authorByHref = response.getJSONObject("_links").getJSONObject("author").getString("href");
+
+        assertProvidedByEqualsToExpectedUser(authorByHref, author);
     }
 
-
+    public void assertProvidedByEqualsToExpectedUser(String authorByHref, String author) throws Throwable{
+        stepDefs.mockMvc.perform(
+                        get(authorByHref)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print())
+                .andExpect(jsonPath("$.id", is(author)));
+    }
 }

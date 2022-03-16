@@ -5,12 +5,14 @@ Feature: Create Rating
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
+   # Given There is a registered resource with
 
   Scenario: Add rating as student when already authenticated
     Given I login as "student" with password "password"
     When I register a new rating with rating 7 and comment "Aproved"
+  #referenced to resource with id 5
     Then The response code is 201
-    And A new rating has been created
+    And A new rating has been created as "student"
 
   Scenario: Add rating when not authenticated
     Given I'm not logged in

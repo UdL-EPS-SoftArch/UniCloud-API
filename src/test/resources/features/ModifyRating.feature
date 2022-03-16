@@ -3,6 +3,7 @@ Feature: MODIFY a Rating
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
+    #Given There is a registered resource with id 5
 
   Scenario: Student authenticated modify his/her own rating without having rated anything before
     Given I login as "student" with password "password"
@@ -26,6 +27,7 @@ Feature: MODIFY a Rating
   Scenario: Modify rating number as student
     Given I login as "student" with password "password"
     And I add a new rating with rating 4 and comment "You lose the exam"
+    And A new rating has been created as "student"
     When I modify the last rating created changing the rating to 5
     Then The response code is 200
 
