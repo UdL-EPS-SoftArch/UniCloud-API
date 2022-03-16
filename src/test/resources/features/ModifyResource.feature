@@ -14,7 +14,7 @@ Feature: Modify Resource
 
   Scenario: Modify a resource as an admin user
     Given I login as "admin" with password "password"
-    When I modify the resource with name "Exàmen Parcial 1 and the new name "Parcial 1"
+    When I modify the resource with name "Exàmen Parcial 1" and the new name "Parcial 1"
     Then The response code is 403
     And There is a registered resource with name "Exàmen Parcial 1" by the user "student", with description "Primer parcial", file "Activitat 1 ..." for the subject "Estructura de dades"
 
@@ -22,7 +22,7 @@ Feature: Modify Resource
     Given I login as "student" with password "password"
     When I modify the resource with name "Exàmen Parcial 1" and the new name "Parcial 1"
     Then The response code is 204
-    And A resource named "Exàmen Parcial 1" does not exist, but a resource named "Parcial 1" does
+    And A resource named "Exàmen Parcial 1" does not exist but a resource named "Parcial 1" does
 
   Scenario: Modify an own resource as normal user changing its description
     Given I login as "student" with password "password"
@@ -39,13 +39,13 @@ Feature: Modify Resource
   Scenario: Modify an external resource as normal user
     Given I login as "student" with password "password"
     And There is a registered user with username "student2" and password "password" and email "student@sample.app"
-    And There is a registered resource with name "Exàmen Parcial 2" by the user "student2", with description "Segon parcial", file "Activitat 1 ..." and for the subject "Estructura de dades"
-    When I modify the resource with name "Exàmen Parcial 2 and the new name "Parcial 2"
+    And There is a registered resource with name "Exàmen Parcial 2" by the user "student2", with description "Segon parcial", file "Activitat 1 ..." for the subject "Estructura de dades"
+    When I modify the resource with name "Exàmen Parcial 2" and the new name "Parcial 2"
     Then The response code is 403
   
   Scenario: Modify an own resource as normal user changing its name by an already existing name
     Given I login as "student" with password "password"
-    And There is a registered resource with name "Exàmen Parcial 2" by the user "student2", with description "Segon parcial", file "Activitat 1 ..." and for the subject "Estructura de dades"
+    And There is a registered resource with name "Exàmen Parcial 2" by the user "student2", with description "Segon parcial", file "Activitat 1 ..." for the subject "Estructura de dades"
     When I modify the resource with name "Exàmen Parcial 2" and the new name "Exàmen Parcial 1"
     Then The response code is 409
     And There is only one resource with name "Exàmen Parcial 1"
