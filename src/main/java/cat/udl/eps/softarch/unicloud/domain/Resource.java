@@ -27,6 +27,12 @@ public class Resource extends UriEntity<Long> {
     private String description;
 
     @NotBlank
+    private String file;
+
+    @NotBlank
+    private ResourceType resourceType;
+
+    @NotBlank
     @ManyToOne()
     @JsonIdentityReference(alwaysAsId = true)
     private Student owner;
@@ -35,5 +41,11 @@ public class Resource extends UriEntity<Long> {
     @ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
     private List<Subject> subjects;
+
+    private enum ResourceType {
+        ASSIGNMENT,
+        TEST,
+        NOTE
+    }
 
 }

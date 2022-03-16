@@ -1,8 +1,5 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
-import cat.udl.eps.softarch.unicloud.domain.Note;
-import cat.udl.eps.softarch.unicloud.domain.Resource;
-import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -45,8 +42,6 @@ public class CreateResourceStepDefs {
 
     @When("I create a Note with name {string}, description {string} and file with title {string} for the subject id {int}")
     public void iCreateAResourceWithNameDescriptionAndFileForTheSubject(String name, String description, String title, int subject) {
-        Note resource = new Note();
-        resource.setName(name);
-        resource.setDescription(description);
+
     }
 }
