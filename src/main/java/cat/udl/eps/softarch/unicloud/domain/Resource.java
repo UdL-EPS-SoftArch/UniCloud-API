@@ -43,9 +43,17 @@ public class Resource extends UriEntity<Long> {
     private List<Subject> subjects;
 
     public enum ResourceType {
-        ASSIGNMENT,
-        TEST,
-        NOTE
+        assignment ("ASSIGNMENT"),
+        test ("TEST"),
+        note ("NOTE");
+
+        private String type;
+
+        private ResourceType(String type) {
+            this.type = type;
+        }
+
+        public String toString() { return this.type; }
     }
 
 }
