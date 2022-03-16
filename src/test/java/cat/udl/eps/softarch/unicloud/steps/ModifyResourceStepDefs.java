@@ -103,4 +103,26 @@ public class ModifyResourceStepDefs {
         List<Resource> resources = resourceRepository.findByName(name);
         assert resources.size() == 1;
     }
+
+    @When("I modify the resource with name {string} and the new resource type {string}")
+    public void iModifyTheResourceWithNameAndTheNewResourceType(String name, String new_type) throws Throwable {
+        JSONObject modifyData = new JSONObject();
+        modifyData.put("file", new_type);
+
+        List<Resource> resources = resourceRepository.findByName(name);
+        String id = resources.size() > 0 ? resources.get(0).getId().toString():"666";
+
+        stepDefs.result = stepDefs.mockMvc.perform(patch("/resources/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(modifyData.toString())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @And("The resource named {string} is type {string}")
+    public void theResourceNamedIsType(String name, String type) {
+        Resource resource = resourceRepository.findByName(name).get(0);
+        assert resource.getResourceType().toString().equals(type);
+    }
 }
