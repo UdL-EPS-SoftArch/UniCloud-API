@@ -32,17 +32,6 @@ class Subject{
 class Resources{
     Name: String
     Description: String
-}
-
-class Notes extends Resources{
-    File: String
-}
-
-class Tests extends Resources{
-    File: String
-}
-
-class Assignments extends Resources{
     File: String
 }
 
