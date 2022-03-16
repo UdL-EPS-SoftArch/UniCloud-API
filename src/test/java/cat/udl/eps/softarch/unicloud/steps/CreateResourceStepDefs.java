@@ -1,5 +1,7 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
+import cat.udl.eps.softarch.unicloud.domain.Resource;
+import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
