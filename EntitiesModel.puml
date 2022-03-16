@@ -62,5 +62,5 @@ Admin "*" -- "*" Rating: Deletes >
 Rating "*" -- "1" Resources: Belongs >
 Resources "*" -- "1-*" Subject: Belongs >
 Subject "*" -- "*" Degree: Belongs >
-Degree "*" -- "*" University: Belongs >
+Degree "*" -- "1" University: Belongs >
 @enduml
