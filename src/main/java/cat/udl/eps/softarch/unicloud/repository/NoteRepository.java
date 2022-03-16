@@ -16,12 +16,12 @@ public interface NoteRepository extends PagingAndSortingRepository<Note, Long> {
     List<Note> findByName(@Param("name") String name);
     List<Note> findByNameContaining(@Param("name") String name);
 
-    List<Note> findBySubjectsName(@Param("subject") String subject);
+    /*List<Note> findBySubjectsName(@Param("subject") String subject);
     List<Note> findBySubjectsNameContaining(@Param("subject") String subject);
 
     List<Note> findBySubjectsDegreeName(@Param("degree") String degree);
     List<Note> findBySubjectsDegreeNameContaining(@Param("degree") String degree);
 
     List<Note> findBySubjectsDegreeUniversityName(@Param("university") String university);
-    List<Note> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);
+    List<Note> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);*/
 }

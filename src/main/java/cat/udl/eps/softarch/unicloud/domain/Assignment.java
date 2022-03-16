@@ -12,4 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class Assignment extends Resource{
     @NotBlank
     private String file;
+
+    @NotBlank
+    private String contentType;
 }

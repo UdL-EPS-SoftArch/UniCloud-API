@@ -13,37 +13,37 @@ Feature: Create Resource
 
   Scenario: Create a new resource as a student
     Given I login as "student" with password "password"
-    When I create a resource with name "name", description "description" and file "file" for the subject id "1"
+    When I create a Note with name "name", description "description" and file with title "file" for the subject id 1
     Then The response code is 201
     And The resource count is 1
     And A new resource has been created
 
   Scenario: Create a new resource as an admin
     Given I login as "admin" with password "password"
-    When I create a resource with name "name", description "description" and file "file" for the subject id "1"
+    When I create a Note with name "name", description "description" and file with title "file" for the subject id 1
     Then The response code is 403
     And The resource count is 1
 
   Scenario: Create a new resource as a student with empty name
     Given I login as "student" with password "password"
-    When I create a resource with name "", description "description" and file "file" for the subject "subject"
+    When I create a Note with name "", description "description" and file with title "file" for the subject id 1
     Then The response code is 400
 
   Scenario: Create a new resource as a student with empty file
     Given I login as "student" with password "password"
-    When I create a resource with name "name", description "description" and file "" for the subject "subject"
+    When I create a Note with name "name", description "description" and file with title "" for the subject id 1
     Then The response code is 400
 
   Scenario: Create a new resource as a student with an already existing name
     Given I login as "student" with password "password"
     And There is a registered resource with name "name" by the user "user", with description "description", file "file" and for the subject "subject"
-    When I create a resource with name "name", description "description" and file "file" for the subject "subject"
+    When I create a Note with name "name", description "description" and file with title "file" for the subject id 1
     Then The response code is 409
     And The resource count is 1
 
   Scenario: Create a new resource as a student with a non-existent subject
     Given I login as "student" with password "password"
     And There is a registered subject "subject" for the degree "degree" in the university "university"
-    When I create a resource with name "name", description "description" and file "file" for the subject "subject2"
+    When I create a Note with name "name", description "description" and file with title "file" for the subject id 1
     Then The response code is 400
     And The resource count is 1

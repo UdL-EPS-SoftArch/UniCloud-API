@@ -1,5 +1,8 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
+import cat.udl.eps.softarch.unicloud.domain.Note;
+import cat.udl.eps.softarch.unicloud.domain.Resource;
+import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -7,6 +10,7 @@ import org.junit.Assert;
 import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,7 +43,10 @@ public class CreateResourceStepDefs {
                                 .andExpect(status().isOk());
     }
 
-    @When("I create a resource with name {string}, description {string} and file {string} for the subject {string}")
-    public void iCreateAResourceWithNameDescriptionAndFileForTheSubject(String name, String description, String file, String subject) {
+    @When("I create a Note with name {string}, description {string} and file with title {string} for the subject id {int}")
+    public void iCreateAResourceWithNameDescriptionAndFileForTheSubject(String name, String description, String title, int subject) {
+        Note resource = new Note();
+        resource.setName(name);
+        resource.setDescription(description);
     }
 }
