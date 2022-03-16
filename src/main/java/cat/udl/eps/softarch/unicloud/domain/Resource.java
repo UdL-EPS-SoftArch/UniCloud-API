@@ -42,7 +42,7 @@ public class Resource extends UriEntity<Long> {
     @JsonIdentityReference(alwaysAsId = true)
     private List<Subject> subjects;
 
-    private enum ResourceType {
+    public enum ResourceType {
         ASSIGNMENT,
         TEST,
         NOTE
