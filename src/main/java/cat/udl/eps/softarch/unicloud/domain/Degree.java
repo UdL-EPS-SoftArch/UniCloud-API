@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -34,4 +35,17 @@ public class Degree extends UriEntity<Long> {
     public Long getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Degree degree = (Degree) o;
+
+        if (!Objects.equals(name, degree.name)) return false;
+        if (!Objects.equals(faculty, degree.faculty)) return false;
+        return Objects.equals(university, degree.university);
+    }
+
 }

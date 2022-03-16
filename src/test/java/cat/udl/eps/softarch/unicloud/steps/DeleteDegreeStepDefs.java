@@ -2,6 +2,7 @@ package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
 import cat.udl.eps.softarch.unicloud.domain.University;
+import cat.udl.eps.softarch.unicloud.exception.NotFoundException;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -33,7 +34,9 @@ public class DeleteDegreeStepDefs {
                 break;
             }
         }
-        assert degree.getId() != null;
+        if (degree.getId()==null)
+           throw new NotFoundException();
+
         stepDefs.result = stepDefs.mockMvc.perform(
                 delete("/degrees/" + degree.getId().toString())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -44,7 +47,7 @@ public class DeleteDegreeStepDefs {
 
     @When("I delete a non-existent degree")
     public void iDeleteNonExistentDegree() throws Exception{
-        stepDefs.result = stepDefs.mockMvc.perform(delete("/degrees/999").contentType(MediaType.APPLICATION_JSON)
+        stepDefs.result = stepDefs.mockMvc.perform(delete("/degrees/9999").contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -56,7 +59,7 @@ public class DeleteDegreeStepDefs {
         List<Degree> degreeList = degreeRepository.findByName(name);
         Degree degree = null;
         for(Degree degree1: degreeList){
-            if (degree1.getName().equals(uniName)) {
+            if (degree1.getUniversity().getName().equals(uniName)) {
                 degree = degree1;
                 break;
             }
@@ -69,7 +72,7 @@ public class DeleteDegreeStepDefs {
         List<Degree> degreeList = degreeRepository.findByName(name);
         Degree degree = null;
         for(Degree degree1: degreeList){
-            if (degree1.getName().equals(uniName)) {
+            if (degree1.getUniversity().getName().equals(uniName)) {
                 degree = degree1;
                 break;
             }
