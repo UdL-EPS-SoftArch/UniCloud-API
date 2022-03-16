@@ -12,4 +12,8 @@ import javax.validation.constraints.NotBlank;
 public class Note extends Resource {
     @NotBlank
     private String file;
+
+    @NotBlank
+    private String contentType;
+
 }

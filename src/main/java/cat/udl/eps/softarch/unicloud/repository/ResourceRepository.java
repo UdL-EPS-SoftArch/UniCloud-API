@@ -16,12 +16,12 @@ public interface ResourceRepository extends PagingAndSortingRepository<Resource,
     List<Resource> findByName(@Param("name") String name);
     List<Resource> findByNameContaining(@Param("name") String name);
 
-    List<Resource> findBySubjectsName(@Param("subject") String subject);
+    /*List<Resource> findBySubjectsName(@Param("subject") String subject);
     List<Resource> findBySubjectsNameContaining(@Param("subject") String subject);
 
     List<Resource> findBySubjectsDegreeName(@Param("degree") String degree);
     List<Resource> findBySubjectsDegreeNameContaining(@Param("degree") String degree);
 
     List<Resource> findBySubjectsDegreeUniversityName(@Param("university") String university);
-    List<Resource> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);
+    List<Resource> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);*/
 }

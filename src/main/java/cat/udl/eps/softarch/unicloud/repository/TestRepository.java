@@ -15,12 +15,12 @@ public interface TestRepository extends PagingAndSortingRepository<Test, Long> {
     List<Test> findByName(@Param("name") String name);
     List<Test> findByNameContaining(@Param("name") String name);
 
-    List<Test> findBySubjectsName(@Param("subject") String subject);
+    /*List<Test> findBySubjectsName(@Param("subject") String subject);
     List<Test> findBySubjectsNameContaining(@Param("subject") String subject);
 
     List<Test> findBySubjectsDegreeName(@Param("degree") String degree);
     List<Test> findBySubjectsDegreeNameContaining(@Param("degree") String degree);
 
     List<Test> findBySubjectsDegreeUniversityName(@Param("university") String university);
-    List<Test> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);
+    List<Test> findBySubjectsDegreeUniversityNameContaining(@Param("university") String university);*/
 }
