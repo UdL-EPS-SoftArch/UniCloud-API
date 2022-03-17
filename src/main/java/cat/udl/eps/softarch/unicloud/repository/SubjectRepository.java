@@ -10,6 +10,6 @@ import java.util.List;
 public interface SubjectRepository extends PagingAndSortingRepository<Subject, Long> {
 
     List<Subject> findByName(@Param("nameSubject") String name);
-    List<Subject> findByCourse(@Param("courseSubject") BigDecimal course);
+    List<Subject> findByCourse(@Param("courseSubject") Integer course);
     List<Subject> findByOptional(@Param("optionSubject") Boolean optional);
 }
