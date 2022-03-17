@@ -24,12 +24,10 @@ public class Subject extends UriEntity<Long>{
     @NotBlank
     private String name;
 
-    @NotBlank
     @Min(value = 1)
     @Max(value = 5)
     private BigDecimal course;
 
-    @NotBlank
     private Boolean optional;
 }
 
