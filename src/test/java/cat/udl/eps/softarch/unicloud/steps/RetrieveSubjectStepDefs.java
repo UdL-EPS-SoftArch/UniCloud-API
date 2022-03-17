@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -48,7 +47,7 @@ public class RetrieveSubjectStepDefs {
     }
 
     @And("The number of returned subjects is {int}")
-    public void theNumberOfReturnedSubjectsIs(int num) throws Exception {
+    public void theNumberOfReturnedSubjectsIs(int num) throws Exception{
         stepDefs.result.andExpect(jsonPath("$._embedded.subjects", hasSize(num)));
     }
 
