@@ -4,7 +4,6 @@ import cat.udl.eps.softarch.unicloud.domain.Subject;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface SubjectRepository extends PagingAndSortingRepository<Subject, Long> {
