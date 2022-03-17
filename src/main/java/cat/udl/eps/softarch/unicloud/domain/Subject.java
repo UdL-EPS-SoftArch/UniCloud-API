@@ -31,8 +31,6 @@ public class Subject extends UriEntity<Long>{
 
     @NotBlank
     private Boolean optional;
-
-
 }
 
 
