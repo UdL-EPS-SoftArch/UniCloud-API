@@ -6,6 +6,7 @@ import cat.udl.eps.softarch.unicloud.domain.Resource;
 import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
+import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
@@ -15,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RepositoryEventHandler
 public class RatingEventHandler {
@@ -23,12 +26,13 @@ public class RatingEventHandler {
 
     final RatingRepository ratingRepository;
 
-    public RatingEventHandler(RatingRepository ratingRepository){
+
+    public RatingEventHandler(RatingRepository ratingRepository, ResourceRepository resourceRepository) {
         this.ratingRepository = ratingRepository;
     }
 
     @HandleBeforeCreate
-    public void handleRatingPreCreate(Rating rating){
+    public void handleRatingPreCreate(Rating rating) {
         Student currentUser = (Student) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -37,8 +41,9 @@ public class RatingEventHandler {
 
 
     }
+
     @HandleAfterCreate
-    public void handleRatingAfterCreate(Rating rating){
+    public void handleRatingAfterCreate(Rating rating) {
         this.ratingRepository.save(rating);
     }
 

@@ -5,6 +5,7 @@ import cat.udl.eps.softarch.unicloud.domain.Resource;
 import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
+import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -14,6 +15,7 @@ import org.junit.Assert;
 import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,11 +28,13 @@ public class CreateRatingStepDefs {
     String newResourcesUri;
     final StepDefs stepDefs;
     final RatingRepository ratingRepository;
+    final ResourceRepository resourceRepository;
     public static String id;
 
-    public CreateRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository) {
+    public CreateRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository, ResourceRepository resourceRepository) {
         this.stepDefs = stepDefs;
         this.ratingRepository = ratingRepository;
+        this.resourceRepository = resourceRepository;
     }
 
 
@@ -83,5 +87,29 @@ public class CreateRatingStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print())
                 .andExpect(jsonPath("$.id", is(author)));
+    }
+
+    @When("I register a new rating with rating {int} and comment {string} referenced to resource with name {string}")
+    public void iRegisterANewRatingWithRatingAndCommentReferencedToResourceWithName(int arg0, String arg1, String arg2) throws Exception {
+
+        Rating rating = new Rating();
+        rating.setRating(new BigDecimal(arg0));
+        rating.setComment(arg1);
+
+        List<Resource> resource = this.resourceRepository.findByName(arg2);
+        if(resource.size()!=0)
+            rating.setResourceRated(resource.get(0));
+
+
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/ratings")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(stepDefs.mapper.writeValueAsString(rating))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+        newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
+
+
     }
 }

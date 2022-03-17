@@ -3,7 +3,7 @@ Feature: MODIFY a Rating
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
-    #Given There is a registered resource with id 5
+    And There is a registered resource with name "Exàmen Parcial 1" by the user "student", with description "Primer parcial", type "TEST" and file "Activitat 1 ..." for the subject "Estructura de dades"
 
   Scenario: Student authenticated modify his/her own rating without having rated anything before
     Given I login as "student" with password "password"
@@ -21,6 +21,7 @@ Feature: MODIFY a Rating
   Scenario: Modify rating comment as student
     Given I login as "student" with password "password"
     And I add a new rating with rating 5 and comment "Just approved"
+    And A new rating has been created as "student"
     When I modify the last rating created changing the comment to "Just approved but you did an excelent work"
     Then The response code is 200
 

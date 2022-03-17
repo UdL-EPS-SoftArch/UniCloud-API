@@ -22,11 +22,13 @@ public class Rating {
         private Long id;
 
         @ManyToOne
+        @NotNull
         @JsonIdentityReference(alwaysAsId = true)
         private Student author;
 
 
         @ManyToOne
+        @NotNull
         @JsonIdentityReference(alwaysAsId = true)
         private Resource resourceRated;
 

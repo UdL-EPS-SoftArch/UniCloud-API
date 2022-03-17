@@ -86,6 +86,4 @@ public class ModifyRatingStepDefs {
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
 
-
-
 }
