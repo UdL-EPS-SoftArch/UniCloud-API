@@ -13,6 +13,7 @@ class Student extends User{
 
 class University{
     Name: String
+    Acronym: String
     Country: String
     City: String
 }
@@ -31,18 +32,8 @@ class Subject{
 class Resources{
     Name: String
     Description: String
-}
-
-class Notes extends Resources{
     File: String
-}
-
-class Tests extends Resources{
-    File: String
-}
-
-class Assignments extends Resources{
-    File: String
+    ResourceType: ResourceType
 }
 
 class Rating{
@@ -61,5 +52,5 @@ Admin "*" -- "*" Rating: Deletes >
 Rating "*" -- "1" Resources: Belongs >
 Resources "*" -- "1-*" Subject: Belongs >
 Subject "*" -- "*" Degree: Belongs >
-Degree "*" -- "*" University: Belongs >
+Degree "*" -- "1" University: Belongs >
 @enduml

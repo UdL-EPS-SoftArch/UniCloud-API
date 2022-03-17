@@ -1,11 +1,14 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,7 +18,42 @@ public class Resource extends UriEntity<Long> {
     @GeneratedValue
     private Long id;
 
+    @NotBlank
+    @Column(unique = true)
+    @Length(min = 1, max = 100)
     private String name;
 
+    @Length(max = 2000)
     private String description;
+
+    @NotBlank
+    private String file;
+
+    @NotBlank
+    private ResourceType resourceType;
+
+    @NotBlank
+    @ManyToOne()
+    @JsonIdentityReference(alwaysAsId = true)
+    private Student owner;
+
+    @NotBlank
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Subject> subjects;
+
+    public enum ResourceType {
+        assignment ("ASSIGNMENT"),
+        test ("TEST"),
+        note ("NOTE");
+
+        private String type;
+
+        private ResourceType(String type) {
+            this.type = type;
+        }
+
+        public String toString() { return this.type; }
+    }
+
 }
