@@ -1,4 +1,4 @@
-Feature: Search Resource by University
+"""Feature: Search Resource by University
   As a user, normal or admin
   I want to find resources by university
 

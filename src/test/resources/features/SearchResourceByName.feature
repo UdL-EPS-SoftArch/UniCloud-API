@@ -1,4 +1,4 @@
-Feature: Search Resource by name
+"""Feature: Search Resource by name
   As a user, normal or admin
   I want to find resources by name
 

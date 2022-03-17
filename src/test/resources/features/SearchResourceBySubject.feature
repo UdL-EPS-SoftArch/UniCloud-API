@@ -1,4 +1,4 @@
-Feature: Search Resource by Subject
+"""Feature: Search Resource by Subject
   As a user, normal or admin
   I want to find resources by subject
 

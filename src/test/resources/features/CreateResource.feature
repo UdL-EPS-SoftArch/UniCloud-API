@@ -1,4 +1,4 @@
-Feature: Create Resource
+"""Feature: Create Resource
   As a user
   I want to create a resource
   As an admin user

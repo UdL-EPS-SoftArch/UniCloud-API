@@ -1,4 +1,4 @@
-Feature: Search Resource by Degree
+"""Feature: Search Resource by Degree
   As a user, normal or admin
   I want to find resources by degree
 

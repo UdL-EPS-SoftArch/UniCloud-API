@@ -1,4 +1,4 @@
-Feature: Modify Resource
+"""Feature: Modify Resource
   As a user
   I can only modify my own resources
   As an admin
@@ -8,7 +8,7 @@ Feature: Modify Resource
     Given There is a registered student with username "student" and password "password" and email "student@sample.app"
     And There is a registered admin with username "admin" and password "password" and email "admin@sample.app"
     And There is a university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
-    And There is a degree with name "Enginyeria informàtica", faculty "EPS", and university id "1"
+    And There is a degree created with name "GEI" and faculty "EPS"
     And There is a subject with name "Estructura de dades", course "2", optional "false", and degree id "1"
     And There is a registered resource with name "Exàmen Parcial 1" by the user "student", with description "Primer parcial", type "TEST" and file "Activitat 1 ..." for the subject "Estructura de dades"
 

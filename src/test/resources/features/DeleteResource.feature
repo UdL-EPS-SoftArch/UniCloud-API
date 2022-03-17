@@ -1,4 +1,4 @@
-Feature: Delete Resource
+"""Feature: Delete Resource
   As a user
   I can only delete my resources
   As an admin
