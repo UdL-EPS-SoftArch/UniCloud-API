@@ -33,6 +33,7 @@ class Resources{
     Name: String
     Description: String
     File: String
+    ResourceType: ResourceType
 }
 
 class Rating{
