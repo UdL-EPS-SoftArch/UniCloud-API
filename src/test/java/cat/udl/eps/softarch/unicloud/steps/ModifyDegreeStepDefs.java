@@ -23,15 +23,21 @@ public class ModifyDegreeStepDefs {
         this.degreeRepository = degreeRepository;
     }
 
-    @When("I modify a degree with name {string} changing field faculty with {string}")
-    public void iModifyADegreeWithNameChangingFieldFacultyWith(String name, String faculty) throws Exception {
+    @When("I modify a degree with name {string} and university {string} changing field faculty with {string}")
+    public void iModifyADegreeWithNameChangingFieldFacultyWith(String name, String uniName, String faculty) throws Exception {
         List<Degree> degreeList = degreeRepository.findByName(name);
         Degree degree = new Degree();
         String id = "";
         if(!degreeList.isEmpty()){
-            degree = degreeList.get(0);
-            degree.setFaculty(faculty);
-            id = degree.getId().toString();
+            for (Degree d : degreeList) {
+                if(d.getUniversity().getName().equals(uniName)){
+                    degree = d;
+                    degree.setFaculty(faculty);
+                    assert degree.getId() != null;
+                    id = degree.getId().toString();
+                    break;
+                }
+            }
         }
         stepDefs.result = stepDefs.mockMvc.perform(
                         put("/degrees/"+ id)
@@ -48,15 +54,21 @@ public class ModifyDegreeStepDefs {
         assert degree.getFaculty().equals(faculty);
     }
 
-    @When("I modify a degree with faculty {string} changing field name with {string}")
-    public void iModifyADegreeWithFacultyChangingFieldNameWith(String faculty, String name) throws Exception{
+    @When("I modify a degree with faculty {string} and university {string} changing field name with {string}")
+    public void iModifyADegreeWithFacultyChangingFieldNameWith(String faculty, String uniName, String name) throws Exception{
         List<Degree> degreeList = degreeRepository.findByFaculty(faculty);
         Degree degree = new Degree();
         String id = "";
         if(!degreeList.isEmpty()){
-            degree = degreeList.get(0);
-            degree.setName(name);
-            id = degree.getId().toString();
+            for (Degree d : degreeList) {
+                if(d.getUniversity().getName().equals(uniName)){
+                    degree = d;
+                    degree.setName(name);
+                    assert degree.getId() != null;
+                    id = degree.getId().toString();
+                    break;
+                }
+            }
         }
         stepDefs.result = stepDefs.mockMvc.perform(
                         put("/degrees/"+ id)

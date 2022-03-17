@@ -1,11 +1,14 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
+import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.springframework.http.MediaType;
+
+import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,7 +35,11 @@ public class CreateDegreeStepDefs {
         Degree degree = new Degree();
         degree.setName(name);
         degree.setFaculty(faculty);
-        degree.setUniversity(universityRepository.findByName(uniName).get(0));
+        List<University> universityList = universityRepository.findByName(uniName);
+        if(!universityList.isEmpty()){
+            degree.setUniversity(universityList.get(0));
+        }
+
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/degrees")
                                 .contentType(MediaType.APPLICATION_JSON)

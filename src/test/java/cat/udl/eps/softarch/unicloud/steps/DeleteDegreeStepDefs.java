@@ -1,8 +1,6 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
-import cat.udl.eps.softarch.unicloud.domain.University;
-import cat.udl.eps.softarch.unicloud.exception.NotFoundException;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -34,9 +32,7 @@ public class DeleteDegreeStepDefs {
                 break;
             }
         }
-        if (degree.getId()==null)
-           throw new NotFoundException();
-
+        assert degree.getId() != null;
         stepDefs.result = stepDefs.mockMvc.perform(
                 delete("/degrees/" + degree.getId().toString())
                         .contentType(MediaType.APPLICATION_JSON)

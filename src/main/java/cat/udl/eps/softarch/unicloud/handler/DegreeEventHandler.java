@@ -1,10 +1,13 @@
 package cat.udl.eps.softarch.unicloud.handler;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
+import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.exception.ConflictException;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
+import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
+import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Component;
 
@@ -15,16 +18,20 @@ public class DegreeEventHandler {
 
     final DegreeRepository degreeRepository;
 
-    public DegreeEventHandler(DegreeRepository degreeRepository){
+    final UniversityRepository universityRepository;
+
+    public DegreeEventHandler(DegreeRepository degreeRepository, UniversityRepository universityRepository){
         this.degreeRepository = degreeRepository;
+        this.universityRepository = universityRepository;
     }
 
     @HandleBeforeCreate
     public void handleDegreeBeforeCreate(Degree degree){
         for (Degree d : degreeRepository.findAll()) {
-            if(d.equals(degree)){
+            if(d.equals(degree))
                 throw new ConflictException();
-            }
+
         }
     }
+
 }
