@@ -64,7 +64,6 @@ Feature: Retrieve Subject
     And It returns the subject with name "Projecte web"
 
     # ------- tests with name -----------
-    # ------- currently failing the json path
 
   Scenario: Obtain an existing subject by name when not authenticated
     Given I'm not logged in
@@ -100,4 +99,44 @@ Feature: Retrieve Subject
     When I list the subject with name "cacauet"
     And The response code is 200
     And The number of returned subjects is 0
+    
+    # ------- tests with course -----------
+  
+  Scenario: Obtain an existing subject by course when not authenticated
+    Given I'm not logged in
+    When I list the subjects with course 1
+    Then The response code is 200
+    
+  Scenario: Obtain a non existing subject by course when not authenticated
+    Given I'm not logged in
+    When I list the subjects with course 7
+    Then The response code is 200
+    And The number of returned subjects is 0
+    
+  Scenario: Obtain an existing subject by course as a student 
+    Given I login as "student" with password "password"
+    When I list the subjects with course 1
+    Then The response code is 200
+    And The number of returned subjects is 1
+    
+  Scenario: Obtain a non existing subject by course as a student
+    Given I login as "student" with password "password"
+    When I list the subjects with course 43
+    Then The response code is 200
+    And The number of returned subjects is 0
+    
+  Scenario: Obtain an existing subject by course as an admin
+    Given I login as "admin" with password "password"
+    When I list the subjects with course 3
+    Then The response code is 200
+    And The number of returned subjects is 1
+    
+  Scenario: Obtain a non existing subject by course as an admin
+    Given I login as "admin" with password "password"
+    When I list the subjects with course 6
+    Then The response code is 200
+    And The number of returned subjects is 0
+
+
+    
 

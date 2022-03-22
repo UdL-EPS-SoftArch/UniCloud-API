@@ -22,7 +22,7 @@ public class RetrieveSubjectStepDefs {
     @When("I list all the subjects")
     public void iListAllTheSubjects() throws Exception {
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/subjects")
+                        get("/subjects/")
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -40,7 +40,16 @@ public class RetrieveSubjectStepDefs {
     @When("I list the subject with name {string}")
     public void iListTheSubjectWithName(String name) throws Exception{
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/subjects/search/findByName?name={name}", name)
+                        get("/subjects/search/findByName?nameSubject={name}", name)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @When("I list the subjects with course {int}")
+    public void iListTheSubjectWithCourse(Integer course) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/subjects/search/findByCourse?courseSubject={course}", course)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
@@ -52,7 +61,7 @@ public class RetrieveSubjectStepDefs {
     }
 
     @And("It returns the subject with name {string}")
-    public void itReturnsTheSubjectWithName(String name) throws Exception {
+    public void itReturnsTheSubjectWithName(String name) throws Exception{
         stepDefs.result.andExpect(jsonPath("$.name", equalTo(name)));
     }
 }

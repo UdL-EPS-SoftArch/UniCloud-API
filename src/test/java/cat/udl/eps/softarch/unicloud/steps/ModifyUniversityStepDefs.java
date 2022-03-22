@@ -22,7 +22,6 @@ public class ModifyUniversityStepDefs {
         this.stepDefs = stepDefs;
     }
 
-
     @When("I modify an university with name {string} changing field {string} to {string}")
     public void iModifyAnUniversityWithNameChangingFieldTo(String name,String field, String value) throws Exception {
         JSONObject modifyData = new JSONObject();
@@ -59,7 +58,7 @@ public class ModifyUniversityStepDefs {
 
     @And("A university with name {string} exists")
     public void aUniversityWithNameExists(String name){
-         assert universityRepository.findByName(name).size() == 1;
+        assert universityRepository.findByName(name).size() == 1;
     }
 
 

@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Subject extends UriEntity<Long>{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     @NotBlank
@@ -29,10 +29,17 @@ public class Subject extends UriEntity<Long>{
 
     private Boolean optional = true;
 
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Degree> degree;
+
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Resource> resources;
+
     /*@ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
-    private List<Degree> degrees;*/
-
+    private Admin owner;*/
 
 }
 

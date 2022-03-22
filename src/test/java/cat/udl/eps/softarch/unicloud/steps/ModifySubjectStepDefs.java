@@ -1,6 +1,6 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
-import cat.udl.eps.softarch.unicloud.domain.Subject;
+import cat.udl.eps.softarch.unicloud.domain.*;
 import cat.udl.eps.softarch.unicloud.repository.SubjectRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
@@ -33,7 +33,6 @@ public class ModifySubjectStepDefs {
 
         stepDefs.result = stepDefs.mockMvc.perform(patch("/subjects/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(stepDefs.mapper.writeValueAsString(subjects))
                         .content(modifyData.toString())
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
@@ -45,6 +44,7 @@ public class ModifySubjectStepDefs {
         Subject subject = subjectRepository.findByName(name).get(0);
         assert subject.getCourse().equals(course);
     }
+
 
     @When("I modify a subject with name {string} changing field optional to {string}")
     public void iModifyASubjectWithNameChangingFieldTo(String name, String optional) throws Exception {
@@ -67,5 +67,6 @@ public class ModifySubjectStepDefs {
         Subject subject = subjectRepository.findByName(name).get(0);
         assert subject.getOptional().equals(Boolean.parseBoolean(optional));
     }
+
 }
 
