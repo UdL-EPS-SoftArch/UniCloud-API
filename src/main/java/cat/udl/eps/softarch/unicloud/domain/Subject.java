@@ -39,9 +39,9 @@ public class Subject extends UriEntity<Long>{
     @JsonIdentityReference(alwaysAsId = true)
     private List<Resource> resources;
 
-    @ManyToMany
+    /*@ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
-    private Admin admin;
+    private Admin admin;*/
 
 }
 

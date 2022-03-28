@@ -92,7 +92,7 @@ public class CreateSubjectStepDefs {
         Long id = Long.parseLong(idStr);
 
         Subject subject = subjectRepository.findById(id).get();
-        subject.setAdmin(adminRepository.findById(username).get());
+        /*subject.setAdmin(adminRepository.findById(username).get());*/
 
         stepDefs.result = stepDefs.mockMvc.perform(patch(newResourcesUri)
                 .contentType(MediaType.APPLICATION_JSON)
