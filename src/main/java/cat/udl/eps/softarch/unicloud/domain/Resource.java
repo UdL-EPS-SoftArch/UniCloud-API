@@ -13,6 +13,7 @@ import javax.persistence.Id;
 public class Resource extends UriEntity<Long> {
     @Id
     @GeneratedValue
+
     private Long id;
 
     private String name;
