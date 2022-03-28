@@ -41,7 +41,16 @@ public class RetrieveSubjectStepDefs {
     @When("I list the subject with name {string}")
     public void iListTheSubjectWithName(String name) throws Exception{
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/subjects/search/findByName?name={name}", name)
+                        get("/subjects/search/findByName?nameSubject={name}", name)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @When("I list the subject with course {int}")
+    public void iListTheSubjectWithCourse(Integer course) throws Exception{
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/subjects/search/findByCourse?courseSubject={course}", course)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());

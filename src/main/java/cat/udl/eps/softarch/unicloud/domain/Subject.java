@@ -1,5 +1,6 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,6 +28,14 @@ public class Subject extends UriEntity<Long>{
     private Integer course;
 
     private Boolean optional = true;
+
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Degree> degrees;
+
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Resource> resources;
 
     /*@ManyToMany(mappedBy = "subjects")
     private List<Degree> degrees;*/
