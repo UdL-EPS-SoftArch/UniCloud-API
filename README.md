@@ -16,27 +16,24 @@ Template for a Spring Boot project including Spring REST, HATEOAS, JPA, etc. Add
 
 ## Features per Stakeholder
 
-| STUDENT                 | ADMINISTRATOR           |
-|-------------------------|-------------------------|
-| Register                | Login                   |
-| Login                   | Logout                  |
-| Logout                  | Delete Rating           |
-| Create Rating           | Create University       |
-| Modify Rating           | Modify University       |
-| Delete Rating           | Delete University       |
-| Create Notes            | Create Degree           |
-| Modify Notes            | Modify Degree           |
-| Delete Notes            | Delete Degree           |
-| Create Exam             | Create Subject          |
-| Modify Exam             | Modify Subject          |
-| Delete Exam             | Delete Subject          |
-| Create Practice         | Search by University    |
-| Modify Practice         | Search by Subject       |
-| Delete Practice         | Search by Degree        |
-| Search by University    | Search by Resource Name |
-| Search by Subject       |                         |
-| Search by Degree        |                         |
-| Search by Resource Name |                         |
+| STUDENT                  | ADMINISTRATOR           |
+|--------------------------|-------------------------|
+| Register                 | Login                   |
+| Login                    | Logout                  |
+| Logout                   | Delete Rating           |
+| Create Rating            | Create University       |
+| Modify Rating            | Modify University       |
+| Delete Rating            | Delete University       |
+| Create Resource          | Create Degree           |
+| Modify Resource          | Modify Degree           |
+| Delete Resource          | Delete Degree           |
+| Search by University     | Create Subject          |
+| Search by Subject        | Modify Subject             |
+| Search by Degree         | Delete Subject          |
+| Search by Resource Name  | Search by University    |
+|                          | Search by Subject       |
+|                          | Search by Degree        |
+|                          | Search by Resource Name |
 
 
 ## Entities Model
