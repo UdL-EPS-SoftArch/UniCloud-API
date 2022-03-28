@@ -5,8 +5,11 @@ Feature: Retrieve Subject
 
 
   Background:
-    Given There is a registered student with username "student" and password "password" and email "user@gmail.com"
-    Given There is a registered admin with username "admin" and password "password" and email "admin@gmail.com"
+    Given There is a registered user with username "student" and password "password" and email "user@gmail.com"
+    Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
+    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
+    Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
+
     And There is a Subject with name "Algebra",course 1 and optional "True"
     And There is a Subject with name "Projecte web",course 3 and optional "False"
     #And There is a subject with name "Xarxes",course 2 and optional "True"
@@ -20,6 +23,8 @@ Feature: Retrieve Subject
 
   Scenario: List all subjects as a student
     Given I login as "student" with password "password"
+  Scenario: List all subjects as a user
+    Given I login as "user" with password "password"
     When I list all the subjects
     Then The response code is 200
     And The number of returned subjects is 2
@@ -95,4 +100,5 @@ Feature: Retrieve Subject
     And The response code is 404
 
     # ------- tests with course -----------
+
 
