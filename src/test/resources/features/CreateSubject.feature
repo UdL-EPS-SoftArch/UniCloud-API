@@ -27,7 +27,8 @@ Feature: Create Subject
 
   Scenario: Create a new subject with associated degree
     Given I login as "admin" with password "password"
-    And I create a degree with name "Medicine" and faculty "Facultat de medicina"
+    Given There is a university with name "Universitat de Lleida", acronym "UDL", country "Spain", city "Lleida"
+    And I create a degree with name "Medicine" and faculty "Facultat de medicina" and university "Universitat de Lleida"
     When I create a new Subject with name "Algebra", course 1 and optional "Mandatory" associated with the name of the degree "Medicine"
     Then The response code is 201
     And A new subject has been created
