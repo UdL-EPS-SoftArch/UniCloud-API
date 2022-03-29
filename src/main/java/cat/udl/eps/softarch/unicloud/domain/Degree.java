@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -28,4 +29,5 @@ public class Degree extends UriEntity<Long> {
     public Long getId() {
         return id;
     }
+
 }
