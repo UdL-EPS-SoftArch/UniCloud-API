@@ -20,7 +20,7 @@ public class ModifyResourceStepDefs {
     final StepDefs stepDefs;
     final ResourceRepository resourceRepository;
 
-    public ModifyResourceStepDefs(StepDefs stepDefs, ResourceRepository resourceRepository, UserRepository userRepository, SubjectRepository subjectRepository) {
+    public ModifyResourceStepDefs(StepDefs stepDefs, ResourceRepository resourceRepository) {
         this.stepDefs = stepDefs;
         this.resourceRepository = resourceRepository;
     }
