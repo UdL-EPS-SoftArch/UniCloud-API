@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 import java.util.List;
 
+
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -37,8 +38,10 @@ public class Subject extends UriEntity<Long>{
     @JsonIdentityReference(alwaysAsId = true)
     private List<Resource> resources;
 
-    /*@ManyToMany(mappedBy = "subjects")
-    private List<Degree> degrees;*/
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Admin> owners;
+
 }
 
 

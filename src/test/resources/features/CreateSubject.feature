@@ -25,4 +25,15 @@ Feature: Create Subject
     Then The response code is 409
     And A new subject has not been added
 
+  Scenario: Create a new subject with associated degree
+    Given I login as "admin" with password "password"
+    And I create a degree with name "Medicine" and faculty "Facultat de medicina"
+    When I create a new Subject with name "Algebra", course 1 and optional "Mandatory" associated with the name of the degree "Medicine"
+    Then The response code is 201
+    And A new subject has been created
+    And It has been associated the degree named "Medicine" to the subject
+
+
+
+
 
