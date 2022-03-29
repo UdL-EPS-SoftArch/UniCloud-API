@@ -54,7 +54,7 @@ Feature: Create Resource
 
   Scenario: Create a new resource as a student with an already existing name
     Given I login as "student" with password "password"
-    And There is a registered resource with name "name" by the user "user", with description "description", file "example.pdf", and resource type "NOTE" for the subject id 1
+    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject id 1
     When I create a resource with name "name", description "description", filename "example.pdf", and resource type "NOTE" for the subject id 1
     Then The response code is 409
     And The resource count is 1

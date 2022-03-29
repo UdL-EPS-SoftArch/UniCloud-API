@@ -63,7 +63,7 @@ public class CreateResourceStepDefs {
                                 .andExpect(status().isOk());
     }
 
-    private Subject createSubjectect(int id){
+    private Subject createSubject(int id){
         Subject subj = new Subject();
         subj.setId((long)id);
         subj.setName("Exemple");
@@ -90,19 +90,21 @@ public class CreateResourceStepDefs {
 
     private cat.udl.eps.softarch.unicloud.domain.Resource createResourceParams(String name, String description, String filename, String resourceType, int subjectId) throws IOException {
         Resource file = wac.getResource("classpath:" + filename);
-        System.out.println(file);
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        FileCopyUtils.copy(file.getInputStream(), output);
-        ResourceType type = ResourceType.fromString(resourceType);
 
+        String fileData = "";
+        if(!filename.equals("") && file.exists()){
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            FileCopyUtils.copy(file.getInputStream(), output);
+            fileData = output.toString();
+        }
 
         cat.udl.eps.softarch.unicloud.domain.Resource newResource = new cat.udl.eps.softarch.unicloud.domain.Resource();
         newResource.setName(name);
         newResource.setDescription(description);
-        newResource.setResourceType(type);
-        newResource.setFile(output.toString());
+        newResource.setResourceType(ResourceType.fromString(resourceType));
+        newResource.setFile(fileData);
 
-        Subject subj = createSubjectect(subjectId);
+        Subject subj = createSubject(subjectId);
         List<Subject> listSubj = new ArrayList<>();
         listSubj.add(subj);
         newResource.setSubjects(listSubj);
@@ -115,5 +117,6 @@ public class CreateResourceStepDefs {
         cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectId);
         User st = userRepository.findByUsernameContaining(user).get(0);
         newResource.setOwner((Student)st);
+        resourceRepository.save(newResource);
     }
 }
