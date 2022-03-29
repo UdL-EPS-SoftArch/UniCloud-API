@@ -27,7 +27,7 @@ public class RatingEventHandler {
     final RatingRepository ratingRepository;
 
 
-    public RatingEventHandler(RatingRepository ratingRepository, ResourceRepository resourceRepository) {
+    public RatingEventHandler(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
     }
 

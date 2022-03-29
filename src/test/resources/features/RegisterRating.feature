@@ -5,11 +5,11 @@ Feature: Create Rating
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
-    #And There is a registered resource with name "Exàmen Parcial 1" by the user "student", with description "Primer parcial", type "TEST" and file "Activitat 1 ..." for the subject "Estructura de dades"
+    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject id 1
 
   Scenario: Add rating as student when already authenticated
     Given I login as "student" with password "password"
-    When I register a new rating with rating 7 and comment "Aproved" referenced to resource with name "Exàmen Parcial 1"
+    When I register a new rating with rating 7 and comment "Aproved" referenced to resource with name "name"
     Then The response code is 201
     And A new rating has been created as "student"
 
@@ -20,19 +20,19 @@ Feature: Create Rating
 
   Scenario: Add rating when not authenticated
     Given I'm not logged in
-    When I register a new rating with rating 7 and comment "Aproved"
+    When I register a new rating with rating 7 and comment "Aproved" referenced to resource with name "name"
     Then The response code is 401
     And A new rating has not been created
 
   Scenario: Add rating as admin
     Given I login as "admin" with password "password"
-    When I register a new rating with rating 7 and comment "Aproved"
+    When I register a new rating with rating 7 and comment "Aproved" referenced to resource with name "name"
     Then The response code is 403
     And A new rating has not been created
 
   Scenario: Add a negative rating as student when already authenticated
     Given I login as "student" with password "password"
-    When I register a new rating with rating -3 and comment "Aproved"
+    When I register a new rating with rating -3 and comment "Aproved" referenced to resource with name "name"
     Then The response code is 400
     And A new rating has not been created
 

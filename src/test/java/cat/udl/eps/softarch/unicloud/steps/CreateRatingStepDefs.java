@@ -1,11 +1,10 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
-import cat.udl.eps.softarch.unicloud.domain.Rating;
-import cat.udl.eps.softarch.unicloud.domain.Resource;
-import cat.udl.eps.softarch.unicloud.domain.Student;
-import cat.udl.eps.softarch.unicloud.domain.User;
+import cat.udl.eps.softarch.unicloud.domain.*;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
+import cat.udl.eps.softarch.unicloud.repository.SubjectRepository;
+import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -15,7 +14,12 @@ import org.junit.Assert;
 import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+
+import cat.udl.eps.softarch.unicloud.domain.Resource;
+import cat.udl.eps.softarch.unicloud.domain.Student;
+import cat.udl.eps.softarch.unicloud.domain.Subject;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -29,12 +33,16 @@ public class CreateRatingStepDefs {
     final StepDefs stepDefs;
     final RatingRepository ratingRepository;
     final ResourceRepository resourceRepository;
+    final UserRepository userRepository;
+    final SubjectRepository subjectRepository;
     public static String id;
 
-    public CreateRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository, ResourceRepository resourceRepository) {
+    public CreateRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository, ResourceRepository resourceRepository,UserRepository userRepository,SubjectRepository subjectRepository) {
         this.stepDefs = stepDefs;
         this.ratingRepository = ratingRepository;
         this.resourceRepository = resourceRepository;
+        this.userRepository = userRepository;
+        this.subjectRepository = subjectRepository;
     }
 
 
@@ -97,6 +105,7 @@ public class CreateRatingStepDefs {
         rating.setComment(arg1);
 
         List<Resource> resource = this.resourceRepository.findByName(arg2);
+        //System.out.print("\nHEM TROBAT EL RECURS:"+resource.get(0).getName()+"\n");
         if(resource.size()!=0)
             rating.setResourceRated(resource.get(0));
 
@@ -112,4 +121,5 @@ public class CreateRatingStepDefs {
 
 
     }
+
 }
