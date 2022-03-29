@@ -33,7 +33,12 @@ Feature: Create Subject
     And A new subject has been created
     And It has been associated the degree named "Medicine" to the subject
 
-
+  #Scenario: Create a new subject with associated resource
+    #Given I login as "admin" with password "password"
+    #When I create a new Subject with name "Algebra", course 1 and optional "Mandatory" associated with name of the resources "name"
+    #Then The response code is 201
+    #And A new subject has been created
+    #And It has been associated the resource name "name" to the subject
 
 
 
