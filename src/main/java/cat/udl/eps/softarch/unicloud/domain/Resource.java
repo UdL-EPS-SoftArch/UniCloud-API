@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -27,17 +28,16 @@ public class Resource extends UriEntity<Long> {
     private String description;
 
     @NotBlank
+    @Size(max = 5 * 1024 * 1024) //5 MB
     private String file;
 
-    @NotBlank
+    @NotNull
     private ResourceType resourceType;
 
-    @NotBlank
     @ManyToOne()
     @JsonIdentityReference(alwaysAsId = true)
     private Student owner;
 
-    @NotBlank
     @ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
     private List<Subject> subjects;
@@ -49,11 +49,17 @@ public class Resource extends UriEntity<Long> {
 
         private String type;
 
-        private ResourceType(String type) {
+        ResourceType(String type) {
             this.type = type;
         }
 
-        public String toString() { return this.type; }
+        public static ResourceType fromString(String type) {
+            for(ResourceType rt : ResourceType.values()){
+                if(rt.type.equalsIgnoreCase(type))
+                    return rt;
+            }
+            return null;
+        }
     }
 
 }
