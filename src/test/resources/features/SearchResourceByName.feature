@@ -14,13 +14,13 @@ Feature: Search Resource by name
     Given I login as "student" with password "password"
     When I search a resource by its exact name "Exàmen Parcial 1"
     Then The response code is 200
-    And "1" resources have been retrieved and his name is "Exàmen Parcial 1"
+    And 1 resource has been retrieved and its name is "Exàmen Parcial 1"
 
   Scenario: Search for resources containing a name
     Given I login as "student" with password "password"
     When I search for resources containing the name "Exàmen"
     Then The response code is 200
-    And "2" resources have been retrieved and their names contain "Exàmen"
+    And 2 resources have been retrieved and their name contain "Exàmen"
 
   Scenario: Search a resource by the exact name and not finding any result
     Given I login as "student" with password "password"
