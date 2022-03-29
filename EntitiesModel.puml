@@ -25,7 +25,7 @@ class Degree{
 
 class Subject{
     Name: String
-    Course: BigDecimal
+    Course: Integer
     Optional: Boolean
 }
 
