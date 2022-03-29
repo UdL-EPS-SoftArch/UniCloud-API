@@ -33,7 +33,6 @@ public class ModifySubjectStepDefs {
 
         stepDefs.result = stepDefs.mockMvc.perform(patch("/subjects/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(stepDefs.mapper.writeValueAsString(subjects))
                         .content(modifyData.toString())
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
