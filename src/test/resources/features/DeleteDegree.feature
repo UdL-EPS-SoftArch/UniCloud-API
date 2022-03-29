@@ -1,7 +1,6 @@
 Feature: Delete degree
 
   Background:
-    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
     And There is a degree created with name "Disseny Grafic" and faculty "EPS"
 
@@ -24,4 +23,3 @@ Feature: Delete degree
     And The degree with name "Disseny Grafic" exist
 
     #ToDo Intent de eliminar un degree com a user
-

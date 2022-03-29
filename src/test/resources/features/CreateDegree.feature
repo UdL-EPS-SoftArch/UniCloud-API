@@ -1,8 +1,8 @@
 Feature: Create a Degree
   In order to control who can create a degree
   Administrator is the only who can create a degree
-
-  Background:
+  
+  Background: 
     Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
 

@@ -3,7 +3,6 @@ Feature: Modify a Degree
   Administrator is the only who can modify a degree
 
   Background:
-    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     Given There is a registered user with username "admin" and password "password" and email "admin@gmail.com"
     And There is a degree created with name "Grau en Enginyeria Informatica" and faculty "EPS"
 
