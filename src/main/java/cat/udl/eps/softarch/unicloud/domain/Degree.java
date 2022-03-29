@@ -13,11 +13,11 @@ import java.util.Objects;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true)
+
 public class Degree extends UriEntity<Long> {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -50,4 +50,8 @@ public class Degree extends UriEntity<Long> {
         return Objects.equals(university, degree.university);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, faculty, university);
+    }
 }

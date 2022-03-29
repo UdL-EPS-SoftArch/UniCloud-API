@@ -5,10 +5,7 @@ import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.exception.ConflictException;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
-import org.springframework.data.rest.core.annotation.HandleAfterCreate;
-import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
-import org.springframework.data.rest.core.annotation.HandleBeforeSave;
-import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
+import org.springframework.data.rest.core.annotation.*;
 import org.springframework.stereotype.Component;
 
 
