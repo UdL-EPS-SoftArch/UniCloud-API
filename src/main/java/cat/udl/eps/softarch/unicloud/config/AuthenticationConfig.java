@@ -1,7 +1,11 @@
 package cat.udl.eps.softarch.unicloud.config;
 
+import cat.udl.eps.softarch.unicloud.domain.Admin;
+import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
 import cat.udl.eps.softarch.unicloud.repository.UserRepository;
+import cat.udl.eps.softarch.unicloud.repository.AdminRepository;
+import cat.udl.eps.softarch.unicloud.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,10 +19,14 @@ public class AuthenticationConfig extends GlobalAuthenticationConfigurerAdapter 
 
   final BasicUserDetailsService basicUserDetailsService;
   final UserRepository userRepository;
+  final AdminRepository adminRepository;
+  final StudentRepository studentRepository;
 
-  public AuthenticationConfig(BasicUserDetailsService basicUserDetailsService, UserRepository userRepository) {
+  public AuthenticationConfig(BasicUserDetailsService basicUserDetailsService, UserRepository userRepository, AdminRepository adminRepository, StudentRepository studentRepository) {
     this.basicUserDetailsService = basicUserDetailsService;
     this.userRepository = userRepository;
+    this.adminRepository = adminRepository;
+    this.studentRepository = studentRepository;
   }
 
   @Override
@@ -36,5 +44,25 @@ public class AuthenticationConfig extends GlobalAuthenticationConfigurerAdapter 
       player.encodePassword();
       userRepository.save(player);
     }
+    // Sample admin
+    if(!adminRepository.existsById("adminDemo")){
+      Admin admin = new Admin();
+      admin.setEmail("adminDemo@sample.app");
+      admin.setUsername("AdminDemo");
+      admin.setPassword(defaultPassword);
+      admin.encodePassword();
+      adminRepository.save(admin);
+    }
+    // Sample student
+    if(!studentRepository.existsById("Deme")){
+      Student student = new Student();
+      student.setEmail("studentDemo@sample.app");
+      student.setUsername("studentDemo");
+      student.setPassword(defaultPassword);
+      student.encodePassword();
+      studentRepository.save(student);
+    }
+
+
   }
 }
