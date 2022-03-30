@@ -10,7 +10,11 @@ import java.util.List;
 @RepositoryRestResource
 public interface DegreeRepository extends PagingAndSortingRepository<Degree, Long> {
 
-    List<Degree> findByFaculty(@Param("nameFaculty") String nameFaculty);
+    List<Degree> findByFaculty(String nameFaculty);
 
-    List<Degree> findByName(@Param("nameDegree") String nameDegree);
+    List<Degree> findByFacultyContaining(String nameFaculty);
+
+    List<Degree> findByName(String nameDegree);
+
+    List<Degree> findByNameContaining(String nameDegree);
 }
