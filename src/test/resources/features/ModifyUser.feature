@@ -26,18 +26,14 @@ Feature: Modify User
     Given I login as "user" with password "password"
     When I change the email of user "user" to "newemailaaa"
     Then The response code is 400
-    And The error message is "must be a well-formed email address"
 
   Scenario: User modifies email of a user that does not exist
     Given I login as "user" with password "password"
     When I change the email of user "unknown" to "new@gmail.com"
     Then The response code is 404
-    And The error message is "you can not change the email. user does not exist"
 
     # Password update scenarios
   Scenario: User modifies password without being logged in
     Given I'm not logged in
     When I change the password of user "user" to "password"
     Then The response code is 401
-    And The error message is "You must be logged in in order to change the password"
-
