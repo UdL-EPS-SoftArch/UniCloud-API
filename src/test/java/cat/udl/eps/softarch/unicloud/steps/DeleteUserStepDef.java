@@ -1,7 +1,6 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.repository.UserRepository;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
