@@ -5,16 +5,19 @@ import cat.udl.eps.softarch.unicloud.domain.Rating;
 import cat.udl.eps.softarch.unicloud.domain.Resource;
 import cat.udl.eps.softarch.unicloud.domain.Student;
 import cat.udl.eps.softarch.unicloud.domain.User;
+import cat.udl.eps.softarch.unicloud.exception.UnauthorizedException;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
+import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -42,10 +45,20 @@ public class RatingEventHandler {
 
     }
 
+    @HandleBeforeDelete
+    public void handleRatingBeforeDelete(Rating rating) {
+        Student currentUser = (Student) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        if (!rating.getAuthor().equals(currentUser))
+            throw new UnauthorizedException();
+
+    }
+
     @HandleAfterCreate
     public void handleRatingAfterCreate(Rating rating) {
         this.ratingRepository.save(rating);
     }
-
 
 }
