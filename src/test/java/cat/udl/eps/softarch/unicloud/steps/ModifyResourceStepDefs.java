@@ -7,8 +7,10 @@ import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.springframework.http.MediaType;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -43,11 +45,10 @@ public class ModifyResourceStepDefs {
 
     @And("A resource named {string} does not exist but a resource named {string} does")
     public void aResourceNamedDoesNotExistButAResourceNamedDoes(String name1, String name2) {
-        Resource resource = resourceRepository.findByName(name1).get(0);
-        assert resource == null;
+        Assert.assertTrue(resourceRepository.findByName(name1).isEmpty());
 
-        resource = resourceRepository.findByName(name2).get(0);
-        assert resource != null && resource.getName().equals(name2);
+        Resource resource = resourceRepository.findByName(name2).get(0);
+        Assert.assertEquals(resource.getName(), name2);
     }
 
     @When("I modify the resource with name {string} and the new description {string}")
@@ -70,7 +71,7 @@ public class ModifyResourceStepDefs {
     @And("The resource named {string} has a description {string}")
     public void theResourceNamedHasADescription(String name, String new_description) {
         Resource resource = resourceRepository.findByName(name).get(0);
-        assert resource.getDescription().equals(new_description);
+        Assert.assertEquals(resource.getDescription(), new_description);
     }
 
 
@@ -94,20 +95,20 @@ public class ModifyResourceStepDefs {
     @And("The resource named {string} has a file {string}")
     public void theResourceNamedHasAFile(String name, String new_file) {
         Resource resource = resourceRepository.findByName(name).get(0);
-        assert resource.getDescription().equals(new_file);
+        Assert.assertEquals(resource.getFile(), new_file);
     }
 
 
     @And("There is only one resource with name {string}")
     public void thereIsOnlyOneResourceWithName(String name) {
         List<Resource> resources = resourceRepository.findByName(name);
-        assert resources.size() == 1;
+        Assert.assertTrue(resources.size() == 1);
     }
 
     @When("I modify the resource with name {string} and the new resource type {string}")
     public void iModifyTheResourceWithNameAndTheNewResourceType(String name, String new_type) throws Throwable {
         JSONObject modifyData = new JSONObject();
-        modifyData.put("file", new_type);
+        modifyData.put("resourceType", new_type);
 
         List<Resource> resources = resourceRepository.findByName(name);
         String id = resources.size() > 0 ? resources.get(0).getId().toString():"666";
@@ -121,8 +122,9 @@ public class ModifyResourceStepDefs {
     }
 
     @And("The resource named {string} is type {string}")
+    @Transactional
     public void theResourceNamedIsType(String name, String type) {
         Resource resource = resourceRepository.findByName(name).get(0);
-        assert resource.getResourceType().toString().equals(type);
+        Assert.assertEquals(resource.getResourceType().toString(), type);
     }
 }
