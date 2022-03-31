@@ -1,6 +1,7 @@
 package cat.udl.eps.softarch.unicloud.repository;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
+import cat.udl.eps.softarch.unicloud.domain.University;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -15,7 +16,9 @@ public interface DegreeRepository extends PagingAndSortingRepository<Degree, Lon
 
     List<Degree> findByName(String nameDegree);
 
-    List<Degree> findByUniversityName(String string);
+    List<Degree> findByUniversityNameContaining(String string);
 
     List<Degree> findByNameContaining(String nameDegree);
+
+    List<Degree> findByUniversity(University university);
 }
