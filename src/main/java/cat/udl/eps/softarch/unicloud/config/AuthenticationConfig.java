@@ -1,7 +1,8 @@
 package cat.udl.eps.softarch.unicloud.config;
 
-import cat.udl.eps.softarch.unicloud.domain.Student;
+import cat.udl.eps.softarch.unicloud.domain.Admin;
 import cat.udl.eps.softarch.unicloud.domain.User;
+import cat.udl.eps.softarch.unicloud.repository.AdminRepository;
 import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,12 @@ public class AuthenticationConfig extends GlobalAuthenticationConfigurerAdapter 
 
   final BasicUserDetailsService basicUserDetailsService;
   final UserRepository userRepository;
+  final AdminRepository adminRepository;
 
-  public AuthenticationConfig(BasicUserDetailsService basicUserDetailsService, UserRepository userRepository) {
+  public AuthenticationConfig(BasicUserDetailsService basicUserDetailsService, UserRepository userRepository, AdminRepository adminRepository) {
     this.basicUserDetailsService = basicUserDetailsService;
     this.userRepository = userRepository;
+    this.adminRepository = adminRepository;
   }
 
   @Override
@@ -36,6 +39,16 @@ public class AuthenticationConfig extends GlobalAuthenticationConfigurerAdapter 
       player.setPassword(defaultPassword);
       player.encodePassword();
       userRepository.save(player);
+    }
+
+    // Sample admin
+    if (!adminRepository.existsById("admin")) {
+      Admin admin = new Admin();
+      admin.setEmail("admin@sample.app");
+      admin.setUsername("admin");
+      admin.setPassword(defaultPassword);
+      admin.encodePassword();
+      adminRepository.save(admin);
     }
   }
 }

@@ -17,6 +17,7 @@ import java.util.List;
 public class Resource extends UriEntity<Long> {
     @Id
     @GeneratedValue
+
     private Long id;
 
     @NotBlank
