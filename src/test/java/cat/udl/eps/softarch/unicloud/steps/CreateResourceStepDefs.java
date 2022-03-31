@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -68,15 +69,14 @@ public class CreateResourceStepDefs {
         subj.setId((long)id);
         subj.setName("Exemple");
         subj.setOptional(true);
-        BigDecimal bd = new BigDecimal(2);
-        subj.setCourse(bd);
+        subj.setCourse(2);
         subjectRepository.save(subj);
         return subj;
     }
 
-    @When("I create a resource with name {string}, description {string}, filename {string}, and resource type {string} for the subject id {int}")
-    public void iCreateAResourceWithNameDescriptionFilenameAndResourceTypeForTheSubjectId(String name, String description, String filename, String resourceType, int subjectId) throws Exception {
-        cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectId);
+    @When("I create a resource with name {string}, description {string}, filename {string}, and resource type {string} for the subject name {string}")
+    public void iCreateAResourceWithNameDescriptionFilenameAndResourceTypeForTheSubjectId(String name, String description, String filename, String resourceType, String subjectName) throws Exception {
+        cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectName);
 
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/resources")
@@ -88,7 +88,7 @@ public class CreateResourceStepDefs {
         newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
 
-    private cat.udl.eps.softarch.unicloud.domain.Resource createResourceParams(String name, String description, String filename, String resourceType, int subjectId) throws IOException {
+    private cat.udl.eps.softarch.unicloud.domain.Resource createResourceParams(String name, String description, String filename, String resourceType, String subjectName) throws IOException {
         Resource file = wac.getResource("classpath:" + filename);
 
         String fileData = "";
@@ -104,17 +104,15 @@ public class CreateResourceStepDefs {
         newResource.setResourceType(ResourceType.fromString(resourceType));
         newResource.setFile(fileData);
 
-        Subject subj = createSubject(subjectId);
-        List<Subject> listSubj = new ArrayList<>();
-        listSubj.add(subj);
+        List<Subject> listSubj = subjectRepository.findByName(subjectName);
         newResource.setSubjects(listSubj);
 
         return newResource;
     }
 
-    @And("There is a registered resource with name {string} by the user {string}, with description {string}, file {string}, and resource type {string} for the subject id {int}")
-    public void thereIsARegisteredResourceWithNameByTheUserWithDescriptionFileAndResourceTypeForTheSubject(String name, String user, String description, String filename, String resourceType, int subjectId) throws IOException {
-        cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectId);
+    @And("There is a registered resource with name {string} by the user {string}, with description {string}, file {string}, and resource type {string} for the subject name {string}")
+    public void thereIsARegisteredResourceWithNameByTheUserWithDescriptionFileAndResourceTypeForTheSubject(String name, String user, String description, String filename, String resourceType, String subjectName) throws IOException {
+        cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectName);
         User st = userRepository.findByUsernameContaining(user).get(0);
         newResource.setOwner((Student)st);
         resourceRepository.save(newResource);

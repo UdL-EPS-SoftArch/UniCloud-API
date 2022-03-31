@@ -24,7 +24,6 @@ public class Subject extends UriEntity<Long>{
     @Column(unique = true)
     private String name;
 
-    @NotBlank
     @Min(value = 1)
     @Max(value = 5)
     private Integer course;

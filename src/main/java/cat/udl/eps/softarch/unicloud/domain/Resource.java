@@ -41,6 +41,8 @@ public class Resource extends UriEntity<Long> {
 
     @ManyToMany
     @JsonIdentityReference(alwaysAsId = true)
+    @NotNull
+    @Size(min = 1)
     private List<Subject> subjects;
 
     public enum ResourceType {
