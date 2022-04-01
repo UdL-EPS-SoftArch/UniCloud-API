@@ -1,5 +1,10 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
+import cat.udl.eps.softarch.unicloud.domain.Student;
+import cat.udl.eps.softarch.unicloud.domain.Subject;
+import cat.udl.eps.softarch.unicloud.domain.User;
+import cat.udl.eps.softarch.unicloud.repository.SubjectRepository;
+import cat.udl.eps.softarch.unicloud.repository.UserRepository;
 import org.springframework.core.io.Resource;
 import cat.udl.eps.softarch.unicloud.domain.University;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
@@ -13,6 +18,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,13 +33,17 @@ public class CreateResourceStepDefs {
     String newResourcesUri;
     final StepDefs stepDefs;
     final ResourceRepository resourceRepository;
+    final SubjectRepository subjectRepository;
+    final UserRepository userRepository;
     public static String id;
     final WebApplicationContext wac;
 
 
-    CreateResourceStepDefs(StepDefs stepDefs, ResourceRepository resourceRepository, WebApplicationContext wac) {
+    CreateResourceStepDefs(StepDefs stepDefs, ResourceRepository resourceRepository, SubjectRepository subjectRepository, UserRepository userRepository, WebApplicationContext wac) {
         this.stepDefs = stepDefs;
         this.resourceRepository = resourceRepository;
+        this.subjectRepository = subjectRepository;
+        this.userRepository = userRepository;
         this.wac = wac;
     }
 
@@ -51,24 +64,57 @@ public class CreateResourceStepDefs {
                                 .andExpect(status().isOk());
     }
 
-    @When("I create a resource with name {string}, description {string} and filename {string}, and resource type {string} for the subject id {int}")
-    public void iCreateAResourceWithNameDescriptionAndFilenameAndResourceTypeForTheSubjectId(String name, String description, String filename, ResourceType resourceType, int subjectId) throws IOException {
+    private Subject createSubject(int id){
+        Subject subj = new Subject();
+        subj.setId((long)id);
+        subj.setName("Exemple");
+        subj.setOptional(true);
+        subj.setCourse(2);
+        subjectRepository.save(subj);
+        return subj;
+    }
+
+    @When("I create a resource with name {string}, description {string}, filename {string}, and resource type {string} for the subject name {string}")
+    public void iCreateAResourceWithNameDescriptionFilenameAndResourceTypeForTheSubjectId(String name, String description, String filename, String resourceType, String subjectName) throws Exception {
+        cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectName);
+
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        post("/resources")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(stepDefs.mapper.writeValueAsString(newResource))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+        newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
+    }
+
+    private cat.udl.eps.softarch.unicloud.domain.Resource createResourceParams(String name, String description, String filename, String resourceType, String subjectName) throws IOException {
         Resource file = wac.getResource("classpath:" + filename);
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        FileCopyUtils.copy(file.getInputStream(), output);
+
+        String fileData = "";
+        if(!filename.equals("") && file.exists()){
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            FileCopyUtils.copy(file.getInputStream(), output);
+            fileData = output.toString();
+        }
 
         cat.udl.eps.softarch.unicloud.domain.Resource newResource = new cat.udl.eps.softarch.unicloud.domain.Resource();
         newResource.setName(name);
         newResource.setDescription(description);
-        newResource.setResourceType(resourceType);
+        newResource.setResourceType(ResourceType.fromString(resourceType));
+        newResource.setFile(fileData);
 
+        List<Subject> listSubj = subjectRepository.findByName(subjectName);
+        newResource.setSubjects(listSubj);
 
-        /*stepDefs.result = stepDefs.mockMvc.perform(
-                        patch("/resources/{id}", datasetFile == null ? 0 : datasetFile.getId())
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(message)
-                                .accept(MediaType.APPLICATION_JSON)
-                                .with(AuthenticationStepDefs.authenticate()))
-                .andDo(print());*/
+        return newResource;
+    }
+
+    @And("There is a registered resource with name {string} by the user {string}, with description {string}, file {string}, and resource type {string} for the subject name {string}")
+    public void thereIsARegisteredResourceWithNameByTheUserWithDescriptionFileAndResourceTypeForTheSubject(String name, String user, String description, String filename, String resourceType, String subjectName) throws IOException {
+        cat.udl.eps.softarch.unicloud.domain.Resource newResource = createResourceParams(name, description, filename, resourceType, subjectName);
+        User st = userRepository.findByUsernameContaining(user).get(0);
+        newResource.setOwner((Student)st);
+        resourceRepository.save(newResource);
     }
 }
