@@ -86,5 +86,6 @@ public class DeleteRatingStepDefs {
                 .andDo(print());
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
 
+
     }
 }

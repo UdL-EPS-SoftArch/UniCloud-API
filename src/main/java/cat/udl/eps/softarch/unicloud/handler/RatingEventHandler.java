@@ -47,11 +47,13 @@ public class RatingEventHandler {
 
     @HandleBeforeDelete
     public void handleRatingBeforeDelete(Rating rating) {
+
         Student currentUser = (Student) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
-        if (!rating.getAuthor().equals(currentUser))
+
+        if (!currentUser.getUsername().equals(rating.getAuthor().getUsername()))
             throw new UnauthorizedException();
 
     }

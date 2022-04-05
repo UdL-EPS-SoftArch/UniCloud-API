@@ -3,7 +3,7 @@ Feature: MODIFY a Rating
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
-    And There is a registered resource with name "Exàmen Parcial 1" by the user "student", with description "Primer parcial", type "TEST" and file "Activitat 1 ..." for the subject "Estructura de dades"
+    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject id 1
 
   Scenario: Student authenticated modify his/her own rating without having rated anything before
     Given I login as "student" with password "password"

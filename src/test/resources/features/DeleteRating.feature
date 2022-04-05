@@ -4,7 +4,9 @@ Feature: DELETE a Rating
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered student with username "student2" and password "password" and email "student2@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
-    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject id 1
+    Given There is a Subject with name "Programacio",course 1 and optional "True"
+    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject name "Programacio"
+
 
   Scenario: Student authenticated deletes an uncreated rating
     Given I login as "student" with password "password"
@@ -12,7 +14,6 @@ Feature: DELETE a Rating
     Given I login as "student2" with password "password2"
     When I delete the last created rating
     Then The response code is 401
-    #And This user doesn't have any rating in the resource with name "name"
 
   Scenario: Delete rating as student
     Given I login as "student" with password "password"
