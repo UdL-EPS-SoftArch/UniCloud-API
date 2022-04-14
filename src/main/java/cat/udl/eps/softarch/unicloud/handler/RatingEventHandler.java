@@ -1,10 +1,7 @@
 package cat.udl.eps.softarch.unicloud.handler;
 
 
-import cat.udl.eps.softarch.unicloud.domain.Rating;
-import cat.udl.eps.softarch.unicloud.domain.Resource;
-import cat.udl.eps.softarch.unicloud.domain.Student;
-import cat.udl.eps.softarch.unicloud.domain.User;
+import cat.udl.eps.softarch.unicloud.domain.*;
 import cat.udl.eps.softarch.unicloud.exception.UnauthorizedException;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
 import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
@@ -16,6 +13,7 @@ import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserCache;
+import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -48,15 +46,14 @@ public class RatingEventHandler {
     @HandleBeforeDelete
     public void handleRatingBeforeDelete(Rating rating) {
 
-        Student currentUser = (Student) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        if (!currentUser.getUsername().equals(rating.getAuthor().getUsername()))
-            throw new UnauthorizedException();
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Student){
+            Student currentUser = (Student) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (!currentUser.getUsername().equals(rating.getAuthor().getUsername()))
+                throw new UnauthorizedException();
+        }
 
     }
+
 
     @HandleAfterCreate
     public void handleRatingAfterCreate(Rating rating) {

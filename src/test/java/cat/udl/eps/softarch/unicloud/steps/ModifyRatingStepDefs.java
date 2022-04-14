@@ -1,7 +1,9 @@
 package cat.udl.eps.softarch.unicloud.steps;
 
 import cat.udl.eps.softarch.unicloud.domain.Rating;
+import cat.udl.eps.softarch.unicloud.domain.Resource;
 import cat.udl.eps.softarch.unicloud.repository.RatingRepository;
+import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -21,12 +23,14 @@ public class ModifyRatingStepDefs {
     String newResourceUri;
     final StepDefs stepDefs;
     final RatingRepository ratingRepository;
+    final ResourceRepository resourceRepository;
     public static String id;
 
 
-    ModifyRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository) {
+    ModifyRatingStepDefs(StepDefs stepDefs, RatingRepository ratingRepository, ResourceRepository resourceRepository) {
         this.stepDefs = stepDefs;
         this.ratingRepository = ratingRepository;
+        this.resourceRepository = resourceRepository;
     }
 
 
@@ -48,6 +52,7 @@ public class ModifyRatingStepDefs {
         JSONObject modifyData = new JSONObject();
         modifyData.put("comment", comment);
 
+        System.out.println(newResourceUri);
         stepDefs.result = stepDefs.mockMvc.perform(patch(newResourceUri)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(modifyData.toString())
@@ -70,11 +75,16 @@ public class ModifyRatingStepDefs {
     }
 
 
-    @Given("I add a new rating with rating {int} and comment {string}")
-    public void iAddANewRatingWithRatingAndComment(int newRating, String comment) throws Exception {
+    @Given("I add a new rating with rating {int} and comment {string} referenced to resource with name {string}")
+    public void iAddANewRatingWithRatingAndComment(int newRating, String comment, String arg2) throws Exception {
         Rating rating = new Rating();
         rating.setRating(new BigDecimal(newRating));
         rating.setComment(comment);
+
+        List<Resource> resource = this.resourceRepository.findByName(arg2);
+        //System.out.print("\nHEM TROBAT EL RECURS:"+resource.get(0).getName()+"\n");
+        if(resource.size()!=0)
+            rating.setResourceRated(resource.get(0));
 
         stepDefs.result = stepDefs.mockMvc.perform(
                         post("/ratings")
@@ -84,6 +94,7 @@ public class ModifyRatingStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
+        System.out.println("PRINT DE ADD RESOURCE: "+newResourceUri);
     }
 
 }

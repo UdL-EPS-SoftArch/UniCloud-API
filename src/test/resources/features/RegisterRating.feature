@@ -5,7 +5,8 @@ Feature: Create Rating
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
-    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject id 1
+    And There is a Subject with name "Maths",course 2 and optional "name"
+    And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject name "Maths"
 
   Scenario: Add rating as student when already authenticated
     Given I login as "student" with password "password"
