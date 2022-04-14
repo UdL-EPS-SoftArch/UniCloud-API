@@ -33,7 +33,6 @@ public class DeleteRatingStepDefs {
 
     @When("I delete a Rating with id {int}")
     public void iDeleteARatingWithId(int arg0) throws Exception {
-        System.out.println("RESOURCE URI 2:"+newResourceUri);
         stepDefs.result = stepDefs.mockMvc.perform(delete("/rating/{id}", arg0).contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(AuthenticationStepDefs.authenticate()))
@@ -57,14 +56,12 @@ public class DeleteRatingStepDefs {
     @When("I delete the last created rating")
     public void iDeleteTheLastCreatedRating() throws Throwable {
         System.out.println("vai a provar de borrar");
-        System.out.println(newResourceUri);
         stepDefs.result = stepDefs.mockMvc.perform(
                         delete(newResourceUri)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
-        System.out.println("despres " + newResourceUri);
     }
 
     @And("The rating was deleted")
@@ -79,11 +76,6 @@ public class DeleteRatingStepDefs {
         rating.setRating(new BigDecimal(arg0));
         rating.setComment(arg1);
 
-        /*
-        Resource resource = resourceRepository.findByName(arg2).get(0);
-        rating.setResourceRated(resource);
-
-         */
 
         List<Resource> resource = this.resourceRepository.findByName(arg2);
         //System.out.print("\nHEM TROBAT EL RECURS:"+resource.get(0).getName()+"\n");
@@ -98,8 +90,6 @@ public class DeleteRatingStepDefs {
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
         newResourceUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
-        System.out.println(newResourceUri+"1111111111111111111111111");
-
 
     }
 }

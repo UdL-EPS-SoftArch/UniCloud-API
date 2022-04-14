@@ -46,10 +46,13 @@ public class RatingEventHandler {
     @HandleBeforeDelete
     public void handleRatingBeforeDelete(Rating rating) {
 
-        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Student){
-            Student currentUser = (Student) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (!currentUser.getUsername().equals(rating.getAuthor().getUsername()))
-                throw new UnauthorizedException();
+        System.out.println("ENTRO AL HANDLER BEFORE DELETE");
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (currentUser instanceof Admin){
+        }else if(currentUser instanceof Student){
+            if (!currentUser.getUsername().equals(rating.getAuthor().getUsername())){
+                System.out.println("NOT EQUALS STUDENTS");
+                throw new UnauthorizedException();}
         }
 
     }
