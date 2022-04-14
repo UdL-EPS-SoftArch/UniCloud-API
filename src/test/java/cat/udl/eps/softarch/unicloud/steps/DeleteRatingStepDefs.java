@@ -55,7 +55,6 @@ public class DeleteRatingStepDefs {
 
     @When("I delete the last created rating")
     public void iDeleteTheLastCreatedRating() throws Throwable {
-        System.out.println("vai a provar de borrar");
         stepDefs.result = stepDefs.mockMvc.perform(
                         delete(newResourceUri)
                                 .contentType(MediaType.APPLICATION_JSON)

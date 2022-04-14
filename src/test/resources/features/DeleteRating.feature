@@ -2,7 +2,7 @@ Feature: DELETE a Rating
 
   Background:
     Given There is a registered student with username "student" and password "password" and email "student@local.com"
-    Given There is a registered student with username "student2" and password "password" and email "student2@local.com"
+    Given There is a registered student with username "student2" and password "password2" and email "student2@local.com"
     Given There is a registered admin with username "admin" and password "password" and email "admin@local.com"
     Given There is a Subject with name "Programacio",course 1 and optional "True"
     And There is a registered resource with name "name" by the user "student", with description "description", file "example.pdf", and resource type "NOTE" for the subject name "Programacio"

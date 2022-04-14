@@ -25,7 +25,6 @@ public class AuthenticationStepDefs {
 
     @Given("^I login as \"([^\"]*)\" with password \"([^\"]*)\"$")
     public void iLoginAsWithPassword(String username, String password) {
-        System.out.println("autentico ");
         AuthenticationStepDefs.currentUsername = username;
         AuthenticationStepDefs.currentPassword = password;
     }
