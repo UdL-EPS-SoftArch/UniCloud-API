@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import cat.udl.eps.softarch.unicloud.UniCloudApplication;
+import cat.udl.eps.softarch.unicloud.repository.ResourceRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.cucumber.java.Before;
@@ -27,6 +28,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ContextConfiguration(
 	classes = {UniCloudApplication.class},
 	loader = SpringBootContextLoader.class
@@ -37,6 +41,8 @@ import org.springframework.web.context.WebApplicationContext;
 @ActiveProfiles("Test")
 @CucumberContextConfiguration
 public class StepDefs {
+
+    ResourceRepository repo;
 
     @Autowired
     protected WebApplicationContext wac;
@@ -68,4 +74,6 @@ public class StepDefs {
         else
             result.andExpect(jsonPath("$..message", hasItem(containsString(message))));
     }
+
+
 }

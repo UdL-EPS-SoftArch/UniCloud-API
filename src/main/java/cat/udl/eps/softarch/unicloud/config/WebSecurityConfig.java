@@ -43,6 +43,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
                     .antMatchers(HttpMethod.DELETE, "/degrees/*").hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/ratings").hasRole("STUDENT")
                     .antMatchers(HttpMethod.PATCH, "/ratings/*").hasRole("STUDENT")
+                    .antMatchers(HttpMethod.DELETE, "/ratings/*").hasAnyRole("ADMIN", "STUDENT")
                     .antMatchers(HttpMethod.POST, "/resources").hasRole("STUDENT")
                     .antMatchers(HttpMethod.PUT, "/resources/*").hasRole("STUDENT")
                     .antMatchers(HttpMethod.PATCH, "/resources/*").hasRole("STUDENT")
