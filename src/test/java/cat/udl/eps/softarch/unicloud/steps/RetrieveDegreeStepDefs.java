@@ -6,7 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.springframework.http.MediaType;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -19,6 +18,8 @@ public class RetrieveDegreeStepDefs {
     final DegreeRepository degreeRepository;
 
     Degree degree;
+
+    int num_degrees;
 
     public RetrieveDegreeStepDefs(StepDefs stepDefs, DegreeRepository degreeRepository){
         this.stepDefs = stepDefs;
@@ -57,7 +58,7 @@ public class RetrieveDegreeStepDefs {
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
-
+       num_degrees = degreeRepository.findByName(name).size();
     }
 
     @And("It returns the degree with id {long}")
@@ -68,6 +69,6 @@ public class RetrieveDegreeStepDefs {
     }
     @And("The number of returned degrees are {int}")
     public void theNumberOfReturnedDegreesAre(int num) throws Exception {
-        stepDefs.result.andExpect(jsonPath("$._embedded.degrees", hasSize(num)));
+        assert num_degrees == num;
     }
 }
