@@ -61,6 +61,16 @@ public class RetrieveDegreeStepDefs {
        num_degrees = degreeRepository.findByName(name).size();
     }
 
+    @When("I list the degree with faculty {string}")
+    public void iListTheDegreeWithFaculty(String faculty) throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/degrees/search/findByFaculty?name={name}", faculty)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+        num_degrees = degreeRepository.findByFaculty(faculty).size();
+    }
+
     @And("It returns the degree with id {long}")
     public void itReturnsTheDegreeWithId(Long id) {
         Degree degreeTemp = degreeRepository.findById(id).get();
@@ -71,4 +81,6 @@ public class RetrieveDegreeStepDefs {
     public void theNumberOfReturnedDegreesAre(int num) throws Exception {
         assert num_degrees == num;
     }
+
+
 }

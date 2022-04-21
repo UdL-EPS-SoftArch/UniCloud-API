@@ -119,29 +119,32 @@ Feature: Retrieve Degree
   Scenario: Obtain a non existing degree by name when not authenticated
     Given I'm not logged in
     When I list the degree with name "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by name as a user
     Given I login as "user" with password "password"
-    When I list the degree with name "Ciencies de"
+    When I list the degree with name "Engi"
     Then The response code is 200
-    And It returns the degree with name "Ciencies de l'Activitat Fisica i del Esport"
+    And The number of returned degrees are 2
 
   Scenario: Obtain a non existing degree by name as a user
     Given I login as "user" with password "password"
     When I list the degree with name "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by name as an admin
     Given I login as "admin" with password "password"
     When I list the degree with name "Medi"
     Then The response code is 200
-    And It returns the degree with name "Medicina"
+    And The number of returned degrees are 1
 
   Scenario: Obtain a non existing degree by name as an admin
     Given I login as "admin" with password "password"
     When I list the degree with name "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   #<--------------FACULTY-------------->
   Scenario: Obtain an existing degree by faculty when not authenticated
@@ -152,29 +155,32 @@ Feature: Retrieve Degree
   Scenario: Obtain a non existing degree by faculty when not authenticated
     Given I'm not logged in
     When I list the degree with faculty "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as a user
     Given I login as "user" with password "password"
     When I list the degree with faculty "Ciencies de l'Activitat Física i del Esport"
     Then The response code is 200
-    And It returns the degree with faculty "Ciencies de l'Activitat Fisica i del Esport"
+    And The number of returned degrees are 1
 
   Scenario: Obtain a non existing degree by faculty as a user
     Given I login as "user" with password "password"
     When I list the degree with faculty "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as an admin
     Given I login as "admin" with password "password"
     When I list the degree with faculty "Medicina"
     Then The response code is 200
-    And It returns the degree with faculty "Medicina"
+    And The number of returned degrees are 1
 
   Scenario: Obtain a non existing degree by faculty as an admin
     Given I login as "admin" with password "password"
     When I list the degree with faculty "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   #<--------------CONTAININGFACULTY-------------->
   Scenario: Obtain an existing degree by faculty when not authenticated
@@ -185,26 +191,29 @@ Feature: Retrieve Degree
   Scenario: Obtain a non existing degree by faculty when not authenticated
     Given I'm not logged in
     When I list the degree with faculty "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as a user
     Given I login as "user" with password "password"
-    When I list the degree with faculty "Ciencies de"
+    When I list the degree with faculty "Engi"
     Then The response code is 200
-    And It returns the degree with faculty "Ciencies de l'Activitat Fisica i del Esport"
+    And The number of returned degrees are 2
 
   Scenario: Obtain a non existing degree by faculty as a user
     Given I login as "user" with password "password"
     When I list the degree with faculty "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as an admin
     Given I login as "admin" with password "password"
     When I list the degree with faculty "Med"
     Then The response code is 200
-    And It returns the degree with faculty "Medicina"
+    And The number of returned degrees are 1
 
   Scenario: Obtain a non existing degree by faculty as an admin
     Given I login as "admin" with password "password"
     When I list the degree with faculty "WRONG"
-    Then The response code is 404
+    Then The response code is 200
+    And The number of returned degrees are 0
