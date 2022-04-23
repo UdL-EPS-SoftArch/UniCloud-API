@@ -49,14 +49,27 @@ public class RetrieveDegreeStepDefs {
             degree = degreeRepository.findById(id).get();
     }
 
+    //NAME
+
     @When("I list the degree with name {string}")
     public void iListTheDegreeWithName(String name) throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/degrees/search/findByName?nameDegree={name}", name)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @When("I list the degree with containing name {string}")
+    public void iListTheDegreeWithContainingName(String name) throws Exception {
         stepDefs.result = stepDefs.mockMvc.perform(
                         get("/degrees/search/findByNameContaining?nameDegree={name}", name)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
     }
+
+    //FACULTY NAME
 
     @When("I list the degree with faculty name {string}")
     public void iListTheDegreeWithFaculty(String faculty) throws Exception {
@@ -76,8 +89,19 @@ public class RetrieveDegreeStepDefs {
                 .andDo(print());
     }
 
+    //UNIVERSITY NAME
+
     @When("I list the degree with university name {string}")
     public void iListTheDegreeWithUniversityName(String uniName) throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/degrees/search/findByUniversityName?nameUni={uniName}", uniName)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @When("I list the degree with containing university name {string}")
+    public void iListTheDegreeWithContainingUniversityName(String uniName) throws Exception {
         stepDefs.result = stepDefs.mockMvc.perform(
                         get("/degrees/search/findByUniversityNameContaining?nameUni={uniName}", uniName)
                                 .accept(MediaType.APPLICATION_JSON)

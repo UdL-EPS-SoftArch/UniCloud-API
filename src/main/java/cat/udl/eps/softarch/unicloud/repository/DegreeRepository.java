@@ -16,9 +16,11 @@ public interface DegreeRepository extends PagingAndSortingRepository<Degree, Lon
 
     List<Degree> findByName(String nameDegree);
 
-    List<Degree> findByUniversityNameContaining(String nameUni);
-
     List<Degree> findByNameContaining(String nameDegree);
+
+    List<Degree> findByUniversityName(String nameUni);
+
+    List<Degree> findByUniversityNameContaining(String nameUni);
 
     List<Degree> findByUniversity(University university);
 }
