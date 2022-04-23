@@ -149,71 +149,108 @@ Feature: Retrieve Degree
   #<--------------FACULTY-------------->
   Scenario: Obtain an existing degree by faculty when not authenticated
     Given I'm not logged in
-    When I list the degree with faculty "Medicina"
+    When I list the degree with faculty name "Medicina"
     Then The response code is 200
 
   Scenario: Obtain a non existing degree by faculty when not authenticated
     Given I'm not logged in
-    When I list the degree with faculty "WRONG"
+    When I list the degree with faculty name "WRONG"
     Then The response code is 200
     And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as a user
     Given I login as "user" with password "password"
-    When I list the degree with faculty "Ciencies de l'Activitat Física i del Esport"
+    When I list the degree with faculty name "EPS"
     Then The response code is 200
-    And The number of returned degrees are 1
+    And The number of returned degrees are 3
 
   Scenario: Obtain a non existing degree by faculty as a user
     Given I login as "user" with password "password"
-    When I list the degree with faculty "WRONG"
+    When I list the degree with faculty name "WRONG"
     Then The response code is 200
     And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as an admin
     Given I login as "admin" with password "password"
-    When I list the degree with faculty "Medicina"
+    When I list the degree with faculty name "Medicina"
     Then The response code is 200
     And The number of returned degrees are 1
 
   Scenario: Obtain a non existing degree by faculty as an admin
     Given I login as "admin" with password "password"
-    When I list the degree with faculty "WRONG"
+    When I list the degree with faculty name "WRONG"
     Then The response code is 200
     And The number of returned degrees are 0
 
   #<--------------CONTAININGFACULTY-------------->
   Scenario: Obtain an existing degree by faculty when not authenticated
     Given I'm not logged in
-    When I list the degree with faculty "Medi"
+    When I list the degree with containing faculty name "Medi"
     Then The response code is 200
 
   Scenario: Obtain a non existing degree by faculty when not authenticated
     Given I'm not logged in
-    When I list the degree with faculty "WRONG"
+    When I list the degree with containing faculty name "WRONG"
     Then The response code is 200
     And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as a user
     Given I login as "user" with password "password"
-    When I list the degree with faculty "Engi"
+    When I list the degree with containing faculty name "EP"
     Then The response code is 200
-    And The number of returned degrees are 2
+    And The number of returned degrees are 3
 
   Scenario: Obtain a non existing degree by faculty as a user
     Given I login as "user" with password "password"
-    When I list the degree with faculty "WRONG"
+    When I list the degree with containing faculty name "WRONG"
     Then The response code is 200
     And The number of returned degrees are 0
 
   Scenario: Obtain a existing degree by faculty as an admin
     Given I login as "admin" with password "password"
-    When I list the degree with faculty "Med"
+    When I list the degree with containing faculty name "Med"
     Then The response code is 200
     And The number of returned degrees are 1
 
   Scenario: Obtain a non existing degree by faculty as an admin
     Given I login as "admin" with password "password"
-    When I list the degree with faculty "WRONG"
+    When I list the degree with containing faculty name "WRONG"
+    Then The response code is 200
+    And The number of returned degrees are 0
+
+
+  #<--------------UNIVERSITY NAME-------------->
+  Scenario: Obtain an existing degree by university name when not authenticated
+    Given I'm not logged in
+    When I list the degree with university name "Lleida"
+    Then The response code is 200
+
+  Scenario: Obtain a non existing degree by university name when not authenticated
+    Given I'm not logged in
+    When I list the degree with university name "WRONG"
+    Then The response code is 200
+    And The number of returned degrees are 0
+
+  Scenario: Obtain a existing degree by university name as a user
+    Given I login as "user" with password "password"
+    When I list the degree with university name "Lleida"
+    Then The response code is 200
+    And The number of returned degrees are 4
+
+  Scenario: Obtain a non existing degree by university name as a user
+    Given I login as "user" with password "password"
+    When I list the degree with university name "WRONG"
+    Then The response code is 200
+    And The number of returned degrees are 0
+
+  Scenario: Obtain a existing degree by university name as an admin
+    Given I login as "admin" with password "password"
+    When I list the degree with university name "Girona"
+    Then The response code is 200
+    And The number of returned degrees are 1
+
+  Scenario: Obtain a non existing degree by university name as an admin
+    Given I login as "admin" with password "password"
+    When I list the degree with university name "WRONG"
     Then The response code is 200
     And The number of returned degrees are 0

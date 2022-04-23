@@ -19,8 +19,6 @@ public class RetrieveDegreeStepDefs {
 
     Degree degree;
 
-    int num_degrees;
-
     public RetrieveDegreeStepDefs(StepDefs stepDefs, DegreeRepository degreeRepository){
         this.stepDefs = stepDefs;
         this.degreeRepository = degreeRepository;
@@ -54,21 +52,37 @@ public class RetrieveDegreeStepDefs {
     @When("I list the degree with name {string}")
     public void iListTheDegreeWithName(String name) throws Exception {
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/degrees/search/findByName?name={name}", name)
+                        get("/degrees/search/findByNameContaining?nameDegree={name}", name)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
-       num_degrees = degreeRepository.findByName(name).size();
     }
 
-    @When("I list the degree with faculty {string}")
+    @When("I list the degree with faculty name {string}")
     public void iListTheDegreeWithFaculty(String faculty) throws Exception {
         stepDefs.result = stepDefs.mockMvc.perform(
-                        get("/degrees/search/findByFaculty?name={name}", faculty)
+                        get("/degrees/search/findByFaculty?nameFaculty={faculty}", faculty)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .with(AuthenticationStepDefs.authenticate()))
                 .andDo(print());
-        num_degrees = degreeRepository.findByFaculty(faculty).size();
+    }
+
+    @When("I list the degree with containing faculty name {string}")
+    public void iListTheDegreeWithContainingFacultyName(String faculty) throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/degrees/search/findByFacultyContaining?nameFaculty={faculty}", faculty)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
+    }
+
+    @When("I list the degree with university name {string}")
+    public void iListTheDegreeWithUniversityName(String uniName) throws Exception {
+        stepDefs.result = stepDefs.mockMvc.perform(
+                        get("/degrees/search/findByUniversityNameContaining?nameUni={uniName}", uniName)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(AuthenticationStepDefs.authenticate()))
+                .andDo(print());
     }
 
     @And("It returns the degree with id {long}")
@@ -79,8 +93,7 @@ public class RetrieveDegreeStepDefs {
     }
     @And("The number of returned degrees are {int}")
     public void theNumberOfReturnedDegreesAre(int num) throws Exception {
-        assert num_degrees == num;
+        stepDefs.result.andExpect(jsonPath("$._embedded.degrees", hasSize(num)));
     }
-
 
 }
