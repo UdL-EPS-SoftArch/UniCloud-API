@@ -25,8 +25,8 @@ public class UniversityEventHandler {
 
     @HandleBeforeDelete
     public void handleDegreeBeforeDelete(University university) {
-        for (Degree degree: degreeRepository.findAll()) {
-            if (degree.getUniversity().getId()!=null && degree.getUniversity().getId().equals(university.getId()))
+        for (Degree degree: degreeRepository.findByUniversity(university)) {
+                assert degree.getId() != null;
                 degreeRepository.deleteById(degree.getId());
         }
     }
