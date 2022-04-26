@@ -9,7 +9,6 @@ Feature: Delete User
     Given There is a registered user with username "user2" and password "password2" and email "user2@gmail.com"
 
   Scenario: User deletes its own account
-    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     And I login as "user" with password "password"
     When I delete the user with username "user"
     Then The response code is 204
@@ -21,14 +20,12 @@ Feature: Delete User
     Then The response code is 403
 
   Scenario: Delete a user that does not exist
-    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     And I login as "user" with password "password"
     When I delete the user with username "unknown"
     Then The response code is 404
 
 
   Scenario: Delete a user when not authenticated
-    Given There is a registered user with username "user" and password "password" and email "user@gmail.com"
     When I delete the user with username "user"
     Then The response code is 401
     And I can login with username "user" and password "password"
