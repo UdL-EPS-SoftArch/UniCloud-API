@@ -26,7 +26,6 @@ Feature: Modify User
     Given I login as "user" with password "password"
     When I change the email of user "user" to "newemailaaa"
     Then The response code is 400
-    And The error message is "must be a well-formed email address"
 
   Scenario: User modifies email of a user that does not exist
     Given I login as "user" with password "password"
@@ -38,4 +37,3 @@ Feature: Modify User
     Given I'm not logged in
     When I change the password of user "user" to "password"
     Then The response code is 401
-
