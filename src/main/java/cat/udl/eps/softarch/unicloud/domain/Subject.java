@@ -1,16 +1,15 @@
 package cat.udl.eps.softarch.unicloud.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.math.BigDecimal;
+
+import java.util.List;
 
 
 @Entity
@@ -22,17 +21,30 @@ public class Subject extends UriEntity<Long>{
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     private String name;
 
-    @NotBlank
     @Min(value = 1)
     @Max(value = 5)
-    private BigDecimal course;
+    private Integer course;
 
-    @NotBlank
-    private Boolean optional;
+    private Boolean optional = true;
 
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Degree> degrees;
+
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Resource> resources;
+
+    @ManyToMany
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Admin> owners;
 
 }
+
+
+
 
 
