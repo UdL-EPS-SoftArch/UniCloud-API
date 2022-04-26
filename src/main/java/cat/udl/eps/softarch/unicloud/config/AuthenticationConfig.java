@@ -48,7 +48,7 @@ public class AuthenticationConfig extends GlobalAuthenticationConfigurerAdapter 
     if(!adminRepository.existsById("adminDemo")){
       Admin admin = new Admin();
       admin.setEmail("adminDemo@sample.app");
-      admin.setUsername("AdminDemo");
+      admin.setUsername("admin");
       admin.setPassword(defaultPassword);
       admin.encodePassword();
       adminRepository.save(admin);
@@ -57,7 +57,7 @@ public class AuthenticationConfig extends GlobalAuthenticationConfigurerAdapter 
     if(!studentRepository.existsById("Deme")){
       Student student = new Student();
       student.setEmail("studentDemo@sample.app");
-      student.setUsername("studentDemo");
+      student.setUsername("student");
       student.setPassword(defaultPassword);
       student.encodePassword();
       studentRepository.save(student);
