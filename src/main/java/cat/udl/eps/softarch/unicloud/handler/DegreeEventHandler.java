@@ -1,12 +1,15 @@
 package cat.udl.eps.softarch.unicloud.handler;
 
 import cat.udl.eps.softarch.unicloud.domain.Degree;
-import cat.udl.eps.softarch.unicloud.domain.University;
+import cat.udl.eps.softarch.unicloud.domain.Subject;
 import cat.udl.eps.softarch.unicloud.exception.ConflictException;
 import cat.udl.eps.softarch.unicloud.repository.DegreeRepository;
+import cat.udl.eps.softarch.unicloud.repository.SubjectRepository;
 import cat.udl.eps.softarch.unicloud.repository.UniversityRepository;
 import org.springframework.data.rest.core.annotation.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -17,9 +20,12 @@ public class DegreeEventHandler {
 
     final UniversityRepository universityRepository;
 
-    public DegreeEventHandler(DegreeRepository degreeRepository, UniversityRepository universityRepository){
+    final SubjectRepository subjectRepository;
+
+    public DegreeEventHandler(DegreeRepository degreeRepository, UniversityRepository universityRepository, SubjectRepository subjectRepository){
         this.degreeRepository = degreeRepository;
         this.universityRepository = universityRepository;
+        this.subjectRepository = subjectRepository;
     }
 
     @HandleBeforeCreate
@@ -29,6 +35,18 @@ public class DegreeEventHandler {
                 throw new ConflictException();
 
         }
+    }
+
+    @HandleBeforeDelete
+    public void handleDegreeBeforeDelete(Degree degree){
+        for(Subject subject: subjectRepository.findAll()){
+            List<Degree> degrees = subject.getDegrees();
+            degrees.remove(degree);
+            if(degrees.isEmpty()){
+                subjectRepository.delete(subject);
+            }
+        }
+
     }
 
 }
