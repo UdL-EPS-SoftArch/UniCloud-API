@@ -54,6 +54,20 @@ public class BBDDInitialization {
         university2.setCountry("Spain");
         universityRepository.save(university2);
 
+        University university3 = new University();
+        university3.setName("Universidad Politecnica de Catalunya");
+        university3.setAcronym("UPC");
+        university3.setCity("Barcelona");
+        university3.setCountry("Spain");
+        universityRepository.save(university3);
+
+        University university4 = new University();
+        university4.setName("Universidad de Barcelona");
+        university4.setAcronym("UAB");
+        university4.setCity("Barcelona");
+        university4.setCountry("Spain");
+        universityRepository.save(university4);
+
     }
 }
 
