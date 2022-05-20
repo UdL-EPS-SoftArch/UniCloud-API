@@ -39,7 +39,7 @@ public class DegreeEventHandler {
 
     @HandleBeforeDelete
     public void handleDegreeBeforeDelete(Degree degree){
-        for(Subject subject: subjectRepository.findAll()){
+        for(Subject subject: subjectRepository.findByDegrees(degree)){
             List<Degree> degrees = subject.getDegrees();
             degrees.remove(degree);
             if(degrees.isEmpty()){
