@@ -60,7 +60,7 @@ public class BBDDInitialization {
             userRepository.save(player);
         }
         // Sample admin
-        if(!adminRepository.existsById("adminDemo")){
+        if(!adminRepository.existsById("admin")){
             Admin admin = new Admin();
             admin.setEmail("adminDemo@sample.app");
             admin.setUsername("admin");
@@ -69,7 +69,7 @@ public class BBDDInitialization {
             adminRepository.save(admin);
         }
         // Sample student
-        if(!studentRepository.existsById("Deme")){
+        if(!studentRepository.existsById("student")){
             Student student = new Student();
             student.setEmail("studentDemo@sample.app");
             student.setUsername("student");
