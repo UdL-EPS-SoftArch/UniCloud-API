@@ -10,5 +10,6 @@ public class ExposeIdConfig implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry regs) {
         config.exposeIdsFor(University.class);
+
     }
 }
