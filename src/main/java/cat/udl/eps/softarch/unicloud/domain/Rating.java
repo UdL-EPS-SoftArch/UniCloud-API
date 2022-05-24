@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 
-public class Rating {
+public class Rating extends UriEntity<Long>{
 
         @GeneratedValue(strategy = GenerationType.AUTO)
         @Id

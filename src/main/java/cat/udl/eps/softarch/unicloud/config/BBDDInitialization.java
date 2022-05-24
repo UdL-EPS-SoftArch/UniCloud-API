@@ -1,12 +1,17 @@
 package cat.udl.eps.softarch.unicloud.config;
 
-import cat.udl.eps.softarch.unicloud.domain.Admin;
-import cat.udl.eps.softarch.unicloud.domain.University;
+import cat.udl.eps.softarch.unicloud.domain.*;
 import cat.udl.eps.softarch.unicloud.repository.*;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @Profile("test")
@@ -68,6 +73,33 @@ public class BBDDInitialization {
         university4.setCountry("Spain");
         universityRepository.save(university4);
 
+        Degree degree1 = new  Degree();
+        degree1.setName("lleida");
+        degree1.setUniversity(university4);
+        degree1.setFaculty("eps");
+        degreeRepository.save(degree1);
+
+        List<Degree> degree_list = new ArrayList<>();
+        degree_list.add(degree1);
+
+        Subject subject1 = new  Subject();
+        subject1.setName("arqui");
+        subject1.setOptional(true);
+        subject1.setCourse(3);
+        subject1.setDegrees(degree_list);
+        subjectRepository.save(subject1);
+
+        List<Subject> subjects_list = new ArrayList<>();
+        subjects_list.add(subject1);
+
+        Resource resource = new Resource();
+        resource.setName("gei");
+        resource.setDescription("Aixo es una prova");
+        resource.setFile("file");
+        resource.setOwner(new Student());
+        resource.setSubjects(subjects_list);
+        resource.setResourceType(Resource.ResourceType.note);
+        resourceRepository.save(resource);
+
     }
 }
-
