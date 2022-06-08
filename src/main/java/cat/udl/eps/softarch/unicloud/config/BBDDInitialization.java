@@ -115,11 +115,18 @@ public class BBDDInitialization {
         degree_list.add(degree1);
 
         Subject subject1 = new  Subject();
-        subject1.setName("arqui");
+        subject1.setName("Algebra");
+        subject1.setCourse(1);
         subject1.setOptional(true);
-        subject1.setCourse(3);
         subject1.setDegrees(degree_list);
         subjectRepository.save(subject1);
+
+        Subject subject2 = new Subject();
+        subject2.setName("IA");
+        subject2.setCourse(3);
+        subject2.setOptional(true);
+        subject2.setDegrees(degree_list);
+        subjectRepository.save(subject2);
 
         List<Subject> subjects_list = new ArrayList<>();
         subjects_list.add(subject1);
