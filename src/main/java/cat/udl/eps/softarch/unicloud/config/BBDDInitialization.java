@@ -92,14 +92,26 @@ public class BBDDInitialization {
         List<Subject> subjects_list = new ArrayList<>();
         subjects_list.add(subject1);
 
+
+
+        Student student = new Student();
+        student.setUsername("Marc");
+        student.setEmail("hola@hola.com");
+        student.setPassword("aaaaaaa");
+        student.encodePassword();
+        studentRepository.save(student);
+
+
         Resource resource = new Resource();
         resource.setName("gei");
         resource.setDescription("Aixo es una prova");
         resource.setFile("file");
-        resource.setOwner(new Student());
+        resource.setOwner(student);
         resource.setSubjects(subjects_list);
         resource.setResourceType(Resource.ResourceType.note);
         resourceRepository.save(resource);
+
+
 
     }
 }
