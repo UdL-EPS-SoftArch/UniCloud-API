@@ -111,7 +111,6 @@ public class CreateSubjectStepDefs {
         subject.setName(name);
         subject.setCourse(course);
         subject.setOptional(Boolean.parseBoolean(optional));
-        subject.setResources(resourceRepository.findByName(nameResource));
         stepDefs.result = stepDefs.mockMvc.perform(
                 post("/subjects")
                         .contentType(MediaType.APPLICATION_JSON)

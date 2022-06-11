@@ -4,6 +4,7 @@ import cat.udl.eps.softarch.unicloud.domain.*;
 import cat.udl.eps.softarch.unicloud.repository.*;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
@@ -24,8 +25,11 @@ public class BBDDInitialization {
     final SubjectRepository subjectRepository;
     final ResourceRepository resourceRepository;
     final RatingRepository ratingRepository;
+    final UserRepository userRepository;
 
 
+    @Value("${default-password}")
+    String defaultPassword;
 
     public BBDDInitialization(AdminRepository adminRepository,
                               StudentRepository studentRepository,
@@ -33,7 +37,8 @@ public class BBDDInitialization {
                               DegreeRepository degreeRepository,
                               SubjectRepository subjectRepository,
                               ResourceRepository resourceRepository,
-                              RatingRepository ratingRepository) {
+                              RatingRepository ratingRepository,
+                              UserRepository userRepository) {
         this.adminRepository = adminRepository;
         this.studentRepository = studentRepository;
         this.universityRepository = universityRepository;
@@ -41,11 +46,38 @@ public class BBDDInitialization {
         this.subjectRepository = subjectRepository;
         this.resourceRepository = resourceRepository;
         this.ratingRepository = ratingRepository;
+        this.userRepository = userRepository;
     }
 
     @PostConstruct
     public void initializeDatabase() {
-
+        // Sample user
+        if (!userRepository.existsById("demo")) {
+            User player = new User();
+            player.setEmail("demo@sample.app");
+            player.setUsername("demo");
+            player.setPassword(defaultPassword);
+            player.encodePassword();
+            userRepository.save(player);
+        }
+        // Sample admin
+        if(!adminRepository.existsById("admin")){
+            Admin admin = new Admin();
+            admin.setEmail("adminDemo@sample.app");
+            admin.setUsername("admin");
+            admin.setPassword(defaultPassword);
+            admin.encodePassword();
+            adminRepository.save(admin);
+        }
+        // Sample student
+        if(!studentRepository.existsById("student")){
+            Student student = new Student();
+            student.setEmail("studentDemo@sample.app");
+            student.setUsername("student");
+            student.setPassword(defaultPassword);
+            student.encodePassword();
+            studentRepository.save(student);
+        }
         University university = new University();
         university.setName("Universitat Lleida");
         university.setAcronym("ULL");
@@ -84,11 +116,18 @@ public class BBDDInitialization {
         degree_list.add(degree1);
 
         Subject subject1 = new  Subject();
-        subject1.setName("arqui");
+        subject1.setName("Algebra");
+        subject1.setCourse(1);
         subject1.setOptional(true);
-        subject1.setCourse(3);
         subject1.setDegrees(degree_list);
         subjectRepository.save(subject1);
+
+        Subject subject2 = new Subject();
+        subject2.setName("IA");
+        subject2.setCourse(3);
+        subject2.setOptional(true);
+        subject2.setDegrees(degree_list);
+        subjectRepository.save(subject2);
 
         List<Subject> subjects_list = new ArrayList<>();
         subjects_list.add(subject1);
@@ -107,7 +146,7 @@ public class BBDDInitialization {
         resource.setName("gei");
         resource.setDescription("Aixo es una prova");
         resource.setFile("file");
-        resource.setOwner(student);
+        resource.setOwner(studentRepository.findById("student").get());
         resource.setSubjects(subjects_list);
         resource.setResourceType(Resource.ResourceType.note);
         resourceRepository.save(resource);
