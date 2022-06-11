@@ -104,7 +104,7 @@ public class CreateSubjectStepDefs {
                 .andExpect(jsonPath("$._embedded.degrees",hasSize(1)));
 
     }
-
+/*
     @When("I create a new Subject with name {string}, course {int} and optional {string} associated with name of the resources {string}")
     public void iCreateANewSubjectAssociatedWithResources(String name, Integer course, String optional, String nameResource) throws Exception{
         Subject subject = new Subject();
@@ -120,6 +120,8 @@ public class CreateSubjectStepDefs {
                 .andDo(print());
         newResourcesUri = stepDefs.result.andReturn().getResponse().getHeader("Location");
     }
+
+ */
 
     @And("It has been associated the resource name {string} to the subject")
     public void itHasBeenAssignedAResourceToSubject(String nameResource) throws Exception{

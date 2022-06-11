@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,6 +132,16 @@ public class BBDDInitialization {
         List<Subject> subjects_list = new ArrayList<>();
         subjects_list.add(subject1);
 
+
+
+        Student student = new Student();
+        student.setUsername("Marc");
+        student.setEmail("hola@hola.com");
+        student.setPassword("password");
+        student.encodePassword();
+        studentRepository.save(student);
+
+
         Resource resource = new Resource();
         resource.setName("gei");
         resource.setDescription("Aixo es una prova");
@@ -139,6 +150,22 @@ public class BBDDInitialization {
         resource.setSubjects(subjects_list);
         resource.setResourceType(Resource.ResourceType.note);
         resourceRepository.save(resource);
+
+        Rating rating = new Rating();
+        rating.setRating(new BigDecimal(2));
+        rating.setResourceRated(resource);
+        rating.setComment("el magic");
+        rating.setAuthor(student);
+        ratingRepository.save(rating);
+
+        Rating rating2 = new Rating();
+        rating2.setRating(new BigDecimal(3));
+        rating2.setResourceRated(resource);
+        rating2.setComment("deletable rating");
+        rating2.setAuthor(student);
+        ratingRepository.save(rating2);
+
+
 
     }
 }
