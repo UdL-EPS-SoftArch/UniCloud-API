@@ -119,6 +119,13 @@ public class BBDDInitialization {
         rating.setAuthor(student);
         ratingRepository.save(rating);
 
+        Rating rating2 = new Rating();
+        rating2.setRating(new BigDecimal(3));
+        rating2.setResourceRated(resource);
+        rating2.setComment("deletable rating");
+        rating2.setAuthor(student);
+        ratingRepository.save(rating2);
+
 
 
     }
